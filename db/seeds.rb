@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+seed_users = User.create([{ username: 'sys_admin', email: 'sys_admin@ctpt.io', password: 12345678, password_confirmation: 12345678 }]) if User.count == 0
