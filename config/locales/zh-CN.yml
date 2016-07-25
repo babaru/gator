@@ -1,0 +1,21 @@
+zh-CN:
+  welcome: '欢迎来到 PMS'
+  copyright: 版权所有
+  app_name: PMS
+  company_name: CTPT
+  button:
+    save: 保存
+  activerecord:
+    text:
+      back_to_list: '回到%{model}列表'
+      new_instance: '新建%{model}'
+      edit_instance: '编辑%{model}'
+      instances_list: '%{model}列表'
+    success:
+      messages:
+        created: '%{model}创建成功'
+        updated: '%{model}更新成功'
+        destroyed: "%{model}删除成功"
+    errors:
+      messages:
+        record_invalid: 无效记录
