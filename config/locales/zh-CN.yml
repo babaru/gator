@@ -5,6 +5,10 @@ zh-CN:
   company_name: CTPT
   button:
     save: 保存
+    edit: 编辑
+    delete: 删除
+  label:
+    last_modified_at: 最后编辑于
   activerecord:
     text:
       back_to_list: '回到%{model}列表'
@@ -19,3 +23,50 @@ zh-CN:
     errors:
       messages:
         record_invalid: 无效记录
+    models:
+      asset: 资管产品
+    attributes:
+      asset:
+        name: 委托资产名称
+        client_code: 客户编号
+        short_name: 产品简称
+        manager_name: 产品经理
+        code: 产品编码
+        running_status: 运行状态
+        dev_type: 产品研发类别
+        type: 产品类别
+        initial_fund: 初始委托资产金额
+        trustor_name: 托管人
+        trustor_account_name: 托管户名称
+        trustor_bank_name: 托管账户开户行
+        trustor_bank_account: 托管户账号
+        securities_account_name: 证券户名称
+        securities_bank_name: 证券户开户行
+        securities_capital_account: 证券资金账号
+        valuation_out_sourcing: 估值外包
+        deposited_at: 募集户入金日期
+        delegation_started_at: 委托资产委托起始日
+        delegation_ended_at: 委托资产委托终止日
+        delegation_duration: 管理期限（年）
+        fee_calculation_standard: 费用计提基准
+        management_fee_ratio: 管理费率（年）
+        year_day_count: 全年天数
+        management_fee_flour: 管理费下限
+        trustor_fee_ratio: 托管费率
+        operation_fee_ratio: 运营服务费
+        investment_consultant_fee_ratio: 投顾费率
+        investment_consultant_fee_flour: 投顾费下限
+        bonus: 业绩报酬
+        sales_fee_ratio: 销售费比例
+        sse_gateway: 上交所席位
+        szse_gateway: 深交所席位
+        sse_account_code: 上证所股东代码
+        szse_account_code: 深交所股东代码
+        cffex_account_code: 中金所交易编码
+        zce_account_code: 郑商所交易编码
+        dce_account_code: 大商所交易编码
+        shfe_account_code: 上期所交易编码
+        sales_department: 委托资产销售单位
+        investment_consultant_reference_department: 投顾引进部门
+        operation_department: 产品运作部门
+        investment_consultant_name: 投顾名称

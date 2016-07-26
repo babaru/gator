@@ -1,0 +1,87 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  client_code: MyString
+  short_name: MyString
+  manager_name: MyString
+  code: MyString
+  running_status: 1
+  type: 
+  dev_type: MyString
+  initial_fund: 9.99
+  trustor_name: MyString
+  trustor_account_name: MyString
+  trustor_bank_name: MyString
+  trustor_bank_account: MyString
+  securities_account_name: MyString
+  securities_bank_name: MyString
+  securities_capital_account: MyString
+  valuation_out_sourcing: MyString
+  deposited_at: 2016-07-26 11:28:34
+  delegation_started_at: 2016-07-26 11:28:34
+  delegation_ended_at: 2016-07-26 11:28:34
+  delegation_duration: 9.99
+  fee_calculation_standard: MyString
+  management_fee_ratio: 9.99
+  year_day_count: MyString
+  management_fee_flour: 9.99
+  trustor_fee_ratio: 9.99
+  operation_fee_ratio: 9.99
+  investment_consultant_fee_ratio: 9.99
+  investment_consultant_fee_flour: 9.99
+  bonus: MyString
+  sales_fee_ratio: 9.99
+  sse_account_code: MyString
+  szse_account_code: MyString
+  cffex_account_code: MyString
+  zce_account_code: MyString
+  dce_account_code: MyString
+  shfe_account_code: MyString
+  sales_department: MyString
+  investment_consultant_reference_department: MyString
+  operation_department: MyString
+  investment_consultant_name: MyString
+
+two:
+  name: MyString
+  client_code: MyString
+  short_name: MyString
+  manager_name: MyString
+  code: MyString
+  running_status: 1
+  type: 
+  dev_type: MyString
+  initial_fund: 9.99
+  trustor_name: MyString
+  trustor_account_name: MyString
+  trustor_bank_name: MyString
+  trustor_bank_account: MyString
+  securities_account_name: MyString
+  securities_bank_name: MyString
+  securities_capital_account: MyString
+  valuation_out_sourcing: MyString
+  deposited_at: 2016-07-26 11:28:34
+  delegation_started_at: 2016-07-26 11:28:34
+  delegation_ended_at: 2016-07-26 11:28:34
+  delegation_duration: 9.99
+  fee_calculation_standard: MyString
+  management_fee_ratio: 9.99
+  year_day_count: MyString
+  management_fee_flour: 9.99
+  trustor_fee_ratio: 9.99
+  operation_fee_ratio: 9.99
+  investment_consultant_fee_ratio: 9.99
+  investment_consultant_fee_flour: 9.99
+  bonus: MyString
+  sales_fee_ratio: 9.99
+  sse_account_code: MyString
+  szse_account_code: MyString
+  cffex_account_code: MyString
+  zce_account_code: MyString
+  dce_account_code: MyString
+  shfe_account_code: MyString
+  sales_department: MyString
+  investment_consultant_reference_department: MyString
+  operation_department: MyString
+  investment_consultant_name: MyString

@@ -40,5 +40,6 @@ SimpleNavigation::Configuration.run do |navigation|
   # Define the primary navigation
   navigation.items do |primary|
     primary.item :dashboard, 'Dashbaord', root_url
+    primary.item :assets, 'Assets', assets_path
   end
 end

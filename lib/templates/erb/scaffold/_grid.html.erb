@@ -1,0 +1,30 @@
+<%%= grid(@<%= table_name %>_grid, :show_filters => :when_filtered) do |g|
+<% for attribute in class_name.constantize.columns -%>
+  <% if attribute.name == 'id' %>
+  g.column name: '#' do |<%= singular_table_name %>|
+    <%= singular_table_name %>.<%= attribute.name %>
+  end
+  <% elsif attribute.name == 'name' %>
+  g.column name: t('activerecord.attributes.<%= singular_table_name %>.name'), class: 'project-title' do |<%= singular_table_name %>|
+    [
+      link_to(<%= singular_table_name %>.<%= attribute.name %>, <%= singular_table_name %>_path(<%= singular_table_name %>)),
+      content_tag(:small, "#{t('label.last_modified_at')} #{<%= singular_table_name %>.updated_at.strftime('%Y-%m-%d %H:%M:%S')}")
+    ].join('<br/>').html_safe
+  end
+  <% elsif attribute.name == 'created_at' || attribute.name == 'updated_at' %>
+  g.column name: t('activerecord.attributes.time_stamp.<%= attribute.name %>') do |<%= singular_table_name %>|
+    <%= singular_table_name %>.<%= attribute.name %>.strftime('%Y-%m-%d %H:%M:%S')
+  end
+  <% else %>
+  g.column name: t('activerecord.attributes.<%= singular_table_name %>.<%= attribute.name %>') do |<%= singular_table_name %>|
+    <%= singular_table_name %>.<%= attribute.name %>
+  end
+<% end %>
+<% end %>
+  g.column html: {class: 'project-actions'} do |<%= singular_table_name %>|
+    [
+      link_to(fa_icon("pencil"), edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-white btn-sm', remote: true, data: {toggle: 'tooltip'}, title: t('button.edit')),
+      link_to(fa_icon("trash"), <%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-white btn-sm', method: :delete, remote: true, data: {toggle: 'tooltip'}, title: t('button.delete'))
+    ].join(' ').html_safe
+  end
+end -%>

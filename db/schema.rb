@@ -11,7 +11,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725051105) do
+ActiveRecord::Schema.define(version: 20160726061607) do
+
+  create_table "assets", force: :cascade do |t|
+    t.string   "name",                                       limit: 255
+    t.string   "client_code",                                limit: 255
+    t.string   "short_name",                                 limit: 255
+    t.string   "manager_name",                               limit: 255
+    t.string   "code",                                       limit: 255
+    t.integer  "running_status",                             limit: 4
+    t.string   "type",                                       limit: 255
+    t.string   "dev_type",                                   limit: 255
+    t.decimal  "initial_fund",                                           precision: 10
+    t.string   "trustor_name",                               limit: 255
+    t.string   "trustor_account_name",                       limit: 255
+    t.string   "trustor_bank_name",                          limit: 255
+    t.string   "trustor_bank_account",                       limit: 255
+    t.string   "securities_account_name",                    limit: 255
+    t.string   "securities_bank_name",                       limit: 255
+    t.string   "securities_capital_account",                 limit: 255
+    t.string   "valuation_out_sourcing",                     limit: 255
+    t.datetime "deposited_at"
+    t.datetime "delegation_started_at"
+    t.datetime "delegation_ended_at"
+    t.decimal  "delegation_duration",                                    precision: 10
+    t.string   "fee_calculation_standard",                   limit: 255
+    t.decimal  "management_fee_ratio",                                   precision: 10
+    t.string   "year_day_count",                             limit: 255
+    t.decimal  "management_fee_flour",                                   precision: 10
+    t.decimal  "trustor_fee_ratio",                                      precision: 10
+    t.decimal  "operation_fee_ratio",                                    precision: 10
+    t.decimal  "investment_consultant_fee_ratio",                        precision: 10
+    t.decimal  "investment_consultant_fee_flour",                        precision: 10
+    t.string   "bonus",                                      limit: 255
+    t.decimal  "sales_fee_ratio",                                        precision: 10
+    t.string   "sse_account_code",                           limit: 255
+    t.string   "szse_account_code",                          limit: 255
+    t.string   "cffex_account_code",                         limit: 255
+    t.string   "zce_account_code",                           limit: 255
+    t.string   "dce_account_code",                           limit: 255
+    t.string   "shfe_account_code",                          limit: 255
+    t.string   "sales_department",                           limit: 255
+    t.string   "investment_consultant_reference_department", limit: 255
+    t.string   "operation_department",                       limit: 255
+    t.string   "investment_consultant_name",                 limit: 255
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
+    t.string   "sse_gateway",                                limit: 255
+    t.string   "szse_gateway",                               limit: 255
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
