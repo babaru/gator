@@ -40,3 +40,43 @@ seed_assets = Asset.create([
     investment_consultant_name: ""
   }
   ]) if Asset.count == 0
+
+  seed_departments = Department.create(
+  [
+    { name: "杭州营业部" },
+    { name: "郑州营业部" },
+    { name: "IB业务部" },
+    { name: "大连发展中心" },
+    { name: "期货大厦营业部" },
+    { name: "资产管理部" },
+    { name: "宁波营业部" },
+    { name: "浙江发展中心" },
+    { name: "南京营业部" },
+    { name: "大连营业部" },
+    { name: "银行开发部" },
+    { name: "新昌路营业部" },
+    { name: "化工事业部" },
+    { name: "广州营业部" },
+    { name: "福州营业部" },
+    { name: "北京营业部" },
+    { name: "有色金属事业部" },
+    { name: "油脂油料事业部" },
+    { name: "深圳发展中心" },
+    { name: "上海期货大厦营业部" },
+    { name: "青岛营业部" },
+    { name: "黄金事业部" },
+    { name: "重庆营业部" },
+    { name: "西安营业部" },
+    { name: "零售业务总部" },
+    { name: "上海东体育会路营业部" },
+    { name: "农产品事业部" },
+    { name: "机构业务部" },
+    { name: "钢材事业部" },
+    { name: "成都营业部" },
+    { name: "北京发展中心" },
+    { name: "白糖事业部" },
+    { name: "西安营业部" },
+    { name: "研究所" },
+    { name: "证券基金开发部" }
+  ]
+  ) if Department.count == 0

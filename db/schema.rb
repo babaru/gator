@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726061607) do
+ActiveRecord::Schema.define(version: 20160726064927) do
 
   create_table "assets", force: :cascade do |t|
     t.string   "name",                                       limit: 255
@@ -60,6 +60,14 @@ ActiveRecord::Schema.define(version: 20160726061607) do
     t.string   "sse_gateway",                                limit: 255
     t.string   "szse_gateway",                               limit: 255
   end
+
+  create_table "departments", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "departments", ["name"], name: "index_departments_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

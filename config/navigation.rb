@@ -41,5 +41,8 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item :dashboard, 'Dashbaord', root_url
     primary.item :assets, 'Assets', assets_path
+    primary.item :data_maintance, '基础数据维护', nil do |data_maintance|
+      data_maintance.item :departments, Department.model_name.human, departments_path
+    end
   end
 end
