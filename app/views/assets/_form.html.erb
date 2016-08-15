@@ -1,10 +1,17 @@
 <%= simple_form_for(@asset) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-  </div>
+  <%= f.input :application_number %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :code %>
+  <div class="hr-line-dashed"></div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-2">
+          <%= f.submit t('button.save'), class: 'btn btn-primary btn-sm', id: 'project-save-btn' %>
+          or
+          <%= link_to t('activerecord.text.back_to_list', model: Project.model_name.human),
+          projects_path %>
+      </div>
   </div>
 <% end %>

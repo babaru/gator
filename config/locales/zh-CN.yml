@@ -25,6 +25,8 @@ zh-CN:
         record_invalid: 无效记录
     models:
       asset: 资管产品
+      client: 客户
+      department: 部门
     attributes:
       asset:
         name: 委托资产名称
@@ -70,3 +72,18 @@ zh-CN:
         investment_consultant_reference_department: 投顾引进部门
         operation_department: 产品运作部门
         investment_consultant_name: 投顾名称
+      client:
+        application_number: 申请单编号
+        id_number_type: 个人证件类型及机构证件类型
+        id_number: 投资人证件号码
+        name: 投资人户名
+        is_individual: 个人/机构标志
+        traded_at: 交易发生时间
+        person_in_charge_id_number_type: 经办人证件类型
+        person_in_charge_id_number: 经办人证件号码
+        person_in_charge_name: 经办人姓名
+        fund_trading_account_number: 投资人基金交易账号
+        sales_man_code: 销售人代码
+        business_code: 业务代码
+        branch_store_number: 网点号码
+        fund_account_number: 投资人基金帐号

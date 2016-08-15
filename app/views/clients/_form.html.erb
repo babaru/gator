@@ -1,0 +1,44 @@
+<%= simple_form_for(@client.becomes(Client), html: { class: 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :application_number %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :id_number_type %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :id_number %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :name %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :is_individual %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :person_in_charge_id_number_type %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :person_in_charge_id_number %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :person_in_charge_name %>
+  <div class="hr-line-dashed"></div>
+
+  <%= f.input :fund_trading_account_number %>
+  <div class="hr-line-dashed"></div>
+
+  <%= f.input :sales_man_code %>
+  <div class="hr-line-dashed"></div>
+
+  <%= f.input :business_code %>
+  <div class="hr-line-dashed"></div>
+
+  <%= f.input :branch_store_number %>
+  <div class="hr-line-dashed"></div>
+
+  <%= f.input :fund_account_number %>
+  <div class="hr-line-dashed"></div>
+
+  <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-2">
+          <%= f.submit t('button.save'), class: 'btn btn-primary btn-sm', id: 'client-save-btn' %>
+          or
+          <%= link_to t('activerecord.text.back_to_list', model: Client.model_name.human),
+          clients_path %>
+      </div>
+  </div>
+<% end %>

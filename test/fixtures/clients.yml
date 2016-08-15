@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  application_number: MyString
+  id_number_type: 1
+  id_number: MyString
+  name: MyString
+  is_individual: false
+  traded_at: 2016-08-15 14:05:47
+  person_in_charge_id_number_type: 1
+  person_in_charge_id_number: MyString
+  person_in_charge_name: MyString
+  fund_trading_account_number: MyString
+  sales_man_code: MyString
+  business_code: MyString
+  branch_store_number: MyString
+  fund_account_number: MyString
+
+two:
+  type: 
+  application_number: MyString
+  id_number_type: 1
+  id_number: MyString
+  name: MyString
+  is_individual: false
+  traded_at: 2016-08-15 14:05:47
+  person_in_charge_id_number_type: 1
+  person_in_charge_id_number: MyString
+  person_in_charge_name: MyString
+  fund_trading_account_number: MyString
+  sales_man_code: MyString
+  business_code: MyString
+  branch_store_number: MyString
+  fund_account_number: MyString
