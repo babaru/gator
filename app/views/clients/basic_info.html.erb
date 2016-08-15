@@ -22,13 +22,13 @@
                 </div>
                 <div class="ibox-content">
 
-                    <div id="wizard" role="application" class="wizard clearfix">
+                    <div role="application" class="wizard clearfix">
                         <div class="steps clearfix">
                             <ul role="tablist">
-                                <li role="tab" class="first current" aria-disabled="false" aria-selected="true">
+                                <li role="tab" class="first disabled">
                                     <a id="wizard-t-0" href="#" aria-controls="wizard-p-0"><span class="current-info audible">current step: </span><span class="number">1.</span> First Step</a>
                                 </li>
-                                <li role="tab" class="disabled" aria-disabled="true">
+                                <li role="tab" class="current">
                                     <a id="wizard-t-1" href="#wizard-h-1" aria-controls="wizard-p-1"><span class="number">2.</span> Second Step</a>
                                 </li>
                                 <li role="tab" class="disabled last" aria-disabled="true">
@@ -37,20 +37,14 @@
                             </ul>
                         </div><div class="content clearfix">
 
-                        <h1 id="wizard-h-0" tabindex="-1" class="title current">First Step</h1>
-                        <div class="step-content body current" id="wizard-p-0" role="tabpanel" aria-labelledby="wizard-h-0" aria-hidden="false">
-                            <div class="text-center m-t-md">
-                            <h2>选择客户类型</h2>
-                            <p>
-                              <%= link_to '个人', basic_info_path(:is_individual => 1), class: 'btn btn-default btn-lg' %>
-                              <%= link_to '机构', basic_info_path(:is_individual => 0), class: 'btn btn-default btn-lg' %>
-                            </p>
-                            </div>
-                        </div>
-
-                        <h1 tabindex="-1" class="title">Second Step</h1>
-                        <h1 tabindex="-1" class="title">Third Step</h1>
-
+                          <div class="step-content body current" id="wizard-p-0" role="tabpanel" aria-labelledby="wizard-h-0" aria-hidden="false">
+                              <div class="text-center m-t-md">
+                                <h2>选择客户类型</h2>
+                                <p>
+                                    <%= render 'form' %>
+                                </p>
+                              </div>
+                          </div>
                     </div>
 
                     <div class="actions clearfix">

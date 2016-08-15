@@ -17,6 +17,13 @@ class ClientsController < ApplicationController
 
   # GET /clients/new
   def new
+    @client = Client.new
+  end
+
+  def choose_client_type
+  end
+
+  def basic_info
     is_individual = true
     unless params[:is_individual].nil?
       unless params[:is_individual].to_i == 1
@@ -26,12 +33,11 @@ class ClientsController < ApplicationController
 
     if is_individual
       @client = IndividualClient.new
+      @client.is_individual = is_individual
     else
       @client = InstitutionClient.new
+      @client.is_individual = is_individual
     end
-  end
-
-  def choose_client_type
   end
 
   # GET /clients/1/edit
