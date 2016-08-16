@@ -74,7 +74,7 @@ zh-CN:
         investment_consultant_name: 投顾名称
       client:
         application_number: 申请单编号
-        id_number_type: 个人证件类型及机构证件类型
+        id_number_type: 投资人证件类型
         id_number: 投资人证件号码
         name: 投资人户名
         is_individual: 个人/机构标志

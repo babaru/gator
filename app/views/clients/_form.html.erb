@@ -1,15 +1,16 @@
 <%= simple_form_for(@client.becomes(Client), html: { class: 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
 
+  <div class="hr-line-dashed"></div>
   <%= f.input :application_number %>
   <div class="hr-line-dashed"></div>
-  <%= f.input :id_number_type %>
+  <%= f.input :id_number_type, required: true, hint: '个人或机构证件类型' %>
   <div class="hr-line-dashed"></div>
   <%= f.input :id_number %>
   <div class="hr-line-dashed"></div>
   <%= f.input :name %>
   <div class="hr-line-dashed"></div>
-  <%= f.input :is_individual %>
+  <%= f.input :is_individual, collection: [['个人': 1], ['机构': 0]] %>
   <div class="hr-line-dashed"></div>
   <%= f.input :person_in_charge_id_number_type %>
   <div class="hr-line-dashed"></div>
