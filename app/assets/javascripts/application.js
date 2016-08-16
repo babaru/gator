@@ -25,6 +25,5 @@
 $(document).ready(function() {
 
   $('.datetime-picker').datetimepicker();
-  $('.date-picker').datetimepicker();
 
 });

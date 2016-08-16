@@ -29,7 +29,7 @@
   end
 
   g.column name: t('activerecord.attributes.client.traded_at') do |client|
-    client.traded_at
+    client.traded_at.strftime('%Y-%m-%d %H:%M:%S') if client.traded_at
   end
 
   g.column name: t('activerecord.attributes.client.fund_trading_account_number') do |client|

@@ -51,7 +51,7 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if @client.update(client_params)
         set_clients_grid
-        format.html { redirect_to @client, notice: t('activerecord.success.messages.updated', model: Client.model_name.human) }
+        format.html { redirect_to @client.becomes(Client), notice: t('activerecord.success.messages.updated', model: Client.model_name.human) }
         format.js
       else
         format.html { render :edit }
