@@ -17,26 +17,10 @@ class ClientsController < ApplicationController
 
   # GET /clients/new
   def new
-    @client = Client.new
-  end
-
-  def choose_client_type
-  end
-
-  def basic_info
-    is_individual = true
-    unless params[:is_individual].nil?
-      unless params[:is_individual].to_i == 1
-        is_individual = false
-      end
-    end
-
-    if is_individual
+    if !!params[:individual]
       @client = IndividualClient.new
-      @client.is_individual = is_individual
     else
       @client = InstitutionClient.new
-      @client.is_individual = is_individual
     end
   end
 
@@ -52,7 +36,7 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if @client.save
         set_clients_grid
-        format.html { redirect_to @client, notice: t('activerecord.success.messages.created', model: Client.model_name.human) }
+        format.html { redirect_to @client.becomes(Client), notice: t('activerecord.success.messages.created', model: Client.model_name.human) }
         format.js
       else
         format.html { render :new }
@@ -103,7 +87,6 @@ class ClientsController < ApplicationController
       :id_number_type,
       :id_number,
       :name,
-      :is_individual,
       :traded_at,
       :person_in_charge_id_number_type,
       :person_in_charge_id_number,

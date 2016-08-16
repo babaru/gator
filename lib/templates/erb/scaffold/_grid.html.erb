@@ -24,7 +24,7 @@
   g.column html: {class: 'project-actions'} do |<%= singular_table_name %>|
     [
       link_to(fa_icon("pencil"), edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-white btn-sm', remote: true, data: {toggle: 'tooltip'}, title: t('button.edit')),
-      link_to(fa_icon("trash"), <%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-white btn-sm', method: :delete, remote: true, data: {toggle: 'tooltip'}, title: t('button.delete'))
+      link_to(fa_icon("trash"), <%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-danger btn-sm', method: :delete, confirm: t('confirms.delete'), data: {toggle: 'tooltip'}, title: t('button.delete'))
     ].join(' ').html_safe
   end
 end -%>

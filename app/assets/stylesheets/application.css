@@ -13,6 +13,7 @@
  *= require_self
  *= require wice_grid
  *= require font-awesome
+ *= require bootstrap-datetimepicker
  *= require animate/animate
  *= require steps/jquery.steps
  *= require style

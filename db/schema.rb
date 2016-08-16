@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815124609) do
+ActiveRecord::Schema.define(version: 20160816065823) do
 
   create_table "assets", force: :cascade do |t|
     t.string   "name",                                       limit: 255
@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 20160815124609) do
     t.integer  "id_number_type",                  limit: 4
     t.string   "id_number",                       limit: 255
     t.string   "name",                            limit: 255
-    t.boolean  "is_individual",                               default: true
     t.datetime "traded_at"
     t.integer  "person_in_charge_id_number_type", limit: 4
     t.string   "person_in_charge_id_number",      limit: 255
@@ -77,8 +76,8 @@ ActiveRecord::Schema.define(version: 20160815124609) do
     t.string   "business_code",                   limit: 255
     t.string   "branch_store_number",             limit: 255
     t.string   "fund_account_number",             limit: 255
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "status",                          limit: 255
   end
 

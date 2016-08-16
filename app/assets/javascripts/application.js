@@ -18,4 +18,13 @@
 //= require metisMenu/jquery.metisMenu.js
 //= require pace/pace.min.js
 //= require slimscroll/jquery.slimscroll.min.js
+//= require moment
+//= require bootstrap-datetimepicker.min
 //= require_tree .
+
+$(document).ready(function() {
+
+  $('.datetime-picker').datetimepicker();
+  $('.date-picker').datetimepicker();
+
+});

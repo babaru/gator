@@ -10,15 +10,17 @@
   <div class="hr-line-dashed"></div>
   <%= f.input :name %>
   <div class="hr-line-dashed"></div>
-  <%= f.input :is_individual, collection: Client.individual_institution, as: :radio_buttons %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :person_in_charge_id_number_type %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :person_in_charge_id_number %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :person_in_charge_name %>
-  <div class="hr-line-dashed"></div>
 
+  <%- if @client.institution? %>
+  <%= f.input :person_in_charge_id_number_type, required: true, collection: Client.id_number_types, as: :radio_buttons %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :person_in_charge_id_number, required: true %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :person_in_charge_name, required: true %>
+  <div class="hr-line-dashed"></div>
+  <% end -%>
+  <%= f.input :traded_at, as: :date_time_picker %>
+  <div class="hr-line-dashed"></div>
   <%= f.input :fund_trading_account_number %>
   <div class="hr-line-dashed"></div>
 
@@ -33,6 +35,8 @@
 
   <%= f.input :fund_account_number, hint: '开户时暂不填写' %>
   <div class="hr-line-dashed"></div>
+
+  <%= f.input :type, as: :hidden %>
 
   <div class="form-group">
       <div class="col-sm-4 col-sm-offset-2">

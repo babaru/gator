@@ -1,7 +1,7 @@
 defaults: &defaults
   individual_institution:
-    institution: 0
-    individual: 1
+    institution: false
+    individual: true
 
 development:
   <<: *defaults

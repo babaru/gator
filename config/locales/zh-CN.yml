@@ -7,6 +7,8 @@ zh-CN:
     save: 保存
     edit: 编辑
     delete: 删除
+  confirms:
+    delete: 确定要删除这一条记录吗？
   label:
     last_modified_at: 最后编辑于
   id_number_types:
@@ -22,15 +24,15 @@ zh-CN:
     individual: 个人
     institution: 机构
   business_codes:
-    kaihu: 开户
-    zhuxiao: 注销
-    xiugai: 修改
-    dongjie: 冻结
-    jiedong: 解冻
-    guashi: 挂失
-    jiegua: 解挂
-    zengjiajiaoyizhanghu: 增加交易账户
-    biangengchexiaojiaoyizhanghu: 变更/撤销交易账户
+    kaihu: 开户（001）
+    zhuxiao: 注销（002）
+    xiugai: 修改（003）
+    dongjie: 冻结（004）
+    jiedong: 解冻（005）
+    guashi: 挂失（006）
+    jiegua: 解挂（007）
+    zengjiajiaoyizhanghu: 增加交易账户（008）
+    biangengchexiaojiaoyizhanghu: 变更/撤销交易账户（009）
   activerecord:
     text:
       back_to_list: '回到%{model}列表'
@@ -50,6 +52,9 @@ zh-CN:
       client: 客户
       department: 部门
     attributes:
+      time_stamp:
+        created_at: 创建于
+        updated_at: 最后修改于
       asset:
         name: 委托资产名称
         client_code: 客户编号
@@ -100,6 +105,7 @@ zh-CN:
         id_number: 投资人证件号码
         name: 投资人户名
         is_individual: 个人/机构标志
+        individual_institution: 个人/机构
         traded_at: 交易发生时间
         person_in_charge_id_number_type: 经办人证件类型
         person_in_charge_id_number: 经办人证件号码

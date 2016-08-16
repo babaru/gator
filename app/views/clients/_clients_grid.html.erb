@@ -1,120 +1,66 @@
 <%= grid(@clients_grid, :show_filters => :when_filtered) do |g|
 
-  
   g.column name: '#' do |client|
     client.id
   end
-  
 
-  
-  g.column name: t('activerecord.attributes.client.type') do |client|
-    client.type
+  g.column name: t('activerecord.attributes.client.individual_institution') do |client|
+    if client.individual?
+      content_tag(:span, '个人', class: 'label label-info')
+    else
+      content_tag(:span, '机构', class: 'label label-info')
+    end
   end
 
-
-  
   g.column name: t('activerecord.attributes.client.application_number') do |client|
     client.application_number
   end
 
+  g.column name: t('activerecord.attributes.client.name') do |client|
+    link_to(client.name, client_path(client))
+  end
 
-  
   g.column name: t('activerecord.attributes.client.id_number_type') do |client|
     client.id_number_type
   end
 
-
-  
   g.column name: t('activerecord.attributes.client.id_number') do |client|
     client.id_number
   end
 
-
-  
-  g.column name: t('activerecord.attributes.client.name'), class: 'project-title' do |client|
-    [
-      link_to(client.name, client_path(client)),
-      content_tag(:small, "#{t('label.last_modified_at')} #{client.updated_at.strftime('%Y-%m-%d %H:%M:%S')}")
-    ].join('<br/>').html_safe
-  end
-  
-
-  
-  g.column name: t('activerecord.attributes.client.is_individual') do |client|
-    client.is_individual
-  end
-
-
-  
   g.column name: t('activerecord.attributes.client.traded_at') do |client|
     client.traded_at
   end
 
-
-  
-  g.column name: t('activerecord.attributes.client.person_in_charge_id_number_type') do |client|
-    client.person_in_charge_id_number_type
-  end
-
-
-  
-  g.column name: t('activerecord.attributes.client.person_in_charge_id_number') do |client|
-    client.person_in_charge_id_number
-  end
-
-
-  
-  g.column name: t('activerecord.attributes.client.person_in_charge_name') do |client|
-    client.person_in_charge_name
-  end
-
-
-  
   g.column name: t('activerecord.attributes.client.fund_trading_account_number') do |client|
     client.fund_trading_account_number
   end
 
-
-  
   g.column name: t('activerecord.attributes.client.sales_man_code') do |client|
     client.sales_man_code
   end
 
-
-  
   g.column name: t('activerecord.attributes.client.business_code') do |client|
     client.business_code
   end
 
-
-  
   g.column name: t('activerecord.attributes.client.branch_store_number') do |client|
     client.branch_store_number
   end
 
-
-  
   g.column name: t('activerecord.attributes.client.fund_account_number') do |client|
     client.fund_account_number
   end
 
-
-  
-  g.column name: t('activerecord.attributes.time_stamp.created_at') do |client|
-    client.created_at.strftime('%Y-%m-%d %H:%M:%S')
-  end
-  
-
-  
   g.column name: t('activerecord.attributes.time_stamp.updated_at') do |client|
     client.updated_at.strftime('%Y-%m-%d %H:%M:%S')
   end
-  
+
 
   g.column html: {class: 'project-actions'} do |client|
     [
-      link_to(fa_icon("pencil"), edit_client_path(client), class: 'btn btn-white btn-sm', remote: true, data: {toggle: 'tooltip'}, title: t('button.edit')),
-      link_to(fa_icon("trash"), client_path(client), class: 'btn btn-white btn-sm', method: :delete, remote: true, data: {toggle: 'tooltip'}, title: t('button.delete'))
+      link_to(fa_icon("pencil"), edit_client_path(client), class: 'btn btn-white btn-sm', data: {toggle: 'tooltip'}, title: t('button.edit')),
+      link_to(fa_icon("trash"), client_path(client), class: 'btn btn-danger btn-sm', method: :delete, data: {confirm: t('confirms.delete'), toggle: 'tooltip'}, title: t('button.delete'))
     ].join(' ').html_safe
   end
 end -%>

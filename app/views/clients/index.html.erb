@@ -20,7 +20,8 @@
                 <div class="ibox-title">
                     <h5><%= t('activerecord.text.instances_list', model: Client.model_name.human) %></h5>
                     <div class="ibox-tools">
-                        <%= link_to t('activerecord.text.new_instance', model: Client.model_name.human), new_client_path, class: 'btn btn-primary btn-xs' %>
+                        <%= link_to '个人开户', new_client_path(individual: true), class: 'btn btn-primary btn-xs' %>
+                        <%= link_to '机构开户', new_client_path(institution: true), class: 'btn btn-primary btn-xs' %>
                     </div>
                 </div>
                 <div class="ibox-content">
