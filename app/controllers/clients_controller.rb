@@ -1,13 +1,34 @@
-
-
-
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   # GET /clients
   # GET /clients.json
   def index
-    set_clients_grid
+    if request.post?
+      @conditions = []
+      @conditions << Client.arel_table[:application_number].matches("%#{params[:client][:application_number]}%") if params[:client][:application_number] && !params[:client][:application_number].empty?
+      @conditions << Client.arel_table[:name].matches("%#{params[:client][:name]}%") if params[:client][:name] && !params[:client][:name].empty?
+      @conditions << Client.arel_table[:id_number].matches("%#{params[:client][:id_number]}%") if params[:client][:id_number] && !params[:client][:id_number].empty?
+
+      if @conditions.length > 0
+        conditions = @conditions[0]
+        @conditions.each_with_index do |item, index|
+          conditions = conditions.or(item) if index > 0
+        end
+        @conditions = conditions
+      end
+    else
+      if params[:type] == 'individual'
+        type = IndividualClient.name
+      elsif params[:type] == 'institution'
+        type = InstitutionClient.name
+      else
+        type = nil
+      end
+      @conditions = {}
+      @conditions[:type] = type unless type.nil?
+    end
+    set_clients_grid(@conditions)
   end
 
   # GET /clients/1
@@ -99,7 +120,7 @@ class ClientsController < ApplicationController
       )
   end
 
-  def set_clients_grid
-    @clients_grid = initialize_grid(Client)
+  def set_clients_grid(conditions)
+    @clients_grid = initialize_grid(Client.where(conditions))
   end
 end

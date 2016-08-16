@@ -59,8 +59,8 @@
 
   g.column html: {class: 'project-actions'} do |client|
     [
-      link_to(fa_icon("pencil"), edit_client_path(client), class: 'btn btn-white btn-sm', data: {toggle: 'tooltip'}, title: t('button.edit')),
-      link_to(fa_icon("trash"), client_path(client), class: 'btn btn-danger btn-sm', method: :delete, data: {confirm: t('confirms.delete'), toggle: 'tooltip'}, title: t('button.delete'))
+      link_to(fa_icon("pencil"), edit_client_path(client), class: 'btn btn-white btn-sm', data: {toggle: 'tooltip'}, title: t('buttons.edit')),
+      link_to(fa_icon("trash"), client_path(client), class: 'btn btn-danger btn-sm', method: :delete, data: {confirm: t('confirms.delete'), toggle: 'tooltip'}, title: t('buttons.delete'))
     ].join(' ').html_safe
   end
 end -%>

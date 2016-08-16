@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'clients/choose_client_type' => 'clients#choose_client_type', as: :choose_client_type
   get 'clients/basic_info' => 'clients#basic_info', as: :basic_info
+  post 'clients/search' => 'clients#index', as: :search_client
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
