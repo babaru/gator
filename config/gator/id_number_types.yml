@@ -1,0 +1,19 @@
+defaults: &defaults
+  id_number_types:
+    shenfenzheng: 0
+    huzhao: 1
+    junguanzheng: 2
+    shibingzheng: 3
+    huixiangzheng: 4
+    hukouben: 5
+    waiguohuzhao: 6
+    other: 7
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

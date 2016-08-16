@@ -4,13 +4,13 @@
   <div class="hr-line-dashed"></div>
   <%= f.input :application_number %>
   <div class="hr-line-dashed"></div>
-  <%= f.input :id_number_type, required: true, hint: '个人或机构证件类型' %>
+  <%= f.input :id_number_type, required: true, collection: Client.id_number_types, as: :radio_buttons %>
   <div class="hr-line-dashed"></div>
   <%= f.input :id_number %>
   <div class="hr-line-dashed"></div>
   <%= f.input :name %>
   <div class="hr-line-dashed"></div>
-  <%= f.input :is_individual, collection: [['个人': 1], ['机构': 0]] %>
+  <%= f.input :is_individual, collection: Client.individual_institution, as: :radio_buttons %>
   <div class="hr-line-dashed"></div>
   <%= f.input :person_in_charge_id_number_type %>
   <div class="hr-line-dashed"></div>
@@ -25,13 +25,13 @@
   <%= f.input :sales_man_code %>
   <div class="hr-line-dashed"></div>
 
-  <%= f.input :business_code %>
+  <%= f.input :business_code, collection: Client.business_codes, as: :radio_buttons %>
   <div class="hr-line-dashed"></div>
 
   <%= f.input :branch_store_number %>
   <div class="hr-line-dashed"></div>
 
-  <%= f.input :fund_account_number %>
+  <%= f.input :fund_account_number, hint: '开户时暂不填写' %>
   <div class="hr-line-dashed"></div>
 
   <div class="form-group">

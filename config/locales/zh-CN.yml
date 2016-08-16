@@ -9,6 +9,28 @@ zh-CN:
     delete: 删除
   label:
     last_modified_at: 最后编辑于
+  id_number_types:
+    shenfenzheng: 身份证
+    huzhao: 护照
+    junguanzheng: 军官证
+    shibingzheng: 士兵证
+    huixiangzheng: 港澳居民来往内地通行证
+    hukouben: 户口本
+    waiguohuzhao: 外国护照
+    other: 其他
+  individual_institution:
+    individual: 个人
+    institution: 机构
+  business_codes:
+    kaihu: 开户
+    zhuxiao: 注销
+    xiugai: 修改
+    dongjie: 冻结
+    jiedong: 解冻
+    guashi: 挂失
+    jiegua: 解挂
+    zengjiajiaoyizhanghu: 增加交易账户
+    biangengchexiaojiaoyizhanghu: 变更/撤销交易账户
   activerecord:
     text:
       back_to_list: '回到%{model}列表'

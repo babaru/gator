@@ -1,0 +1,20 @@
+defaults: &defaults
+  business_codes:
+    kaihu: '001'
+    zhuxiao: '002'
+    xiugai: '003'
+    dongjie: '004'
+    jiedong: '005'
+    guashi: '006'
+    jiegua: '007'
+    zengjiajiaoyizhanghu: '008'
+    biangengchexiaojiaoyizhanghu: '009'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
