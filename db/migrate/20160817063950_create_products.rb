@@ -1,6 +1,6 @@
-class CreateAssets < ActiveRecord::Migration
+class CreateProducts < ActiveRecord::Migration
   def change
-    create_table :assets do |t|
+    create_table :products do |t|
       t.string :name
       t.string :client_code
       t.string :short_name

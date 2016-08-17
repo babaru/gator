@@ -8,7 +8,7 @@
 
 seed_users = User.create([{ username: 'sys_admin', email: 'sys_admin@ctpt.io', password: 12345678, password_confirmation: 12345678 }]) if User.count == 0
 
-seed_assets = Asset.create([
+seed_products = Product.create([
   { name: "申银万国期货有限公司-嘉诚一号集合资产管理计划", short_name: "嘉诚一号",
     client_code: "9090000310", code: "S24786", initial_fund: 6000000.00,
     trustor_name: "招商银行", trustor_bank_name: "交通银行",

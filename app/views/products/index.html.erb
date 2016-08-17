@@ -1,12 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2><%= t('activerecord.text.instances_list', model: Asset.model_name.human) %></h2>
+        <h2><%= t('activerecord.text.instances_list', model: Product.model_name.human) %></h2>
         <ol class="breadcrumb">
             <li>
                 <%= link_to t('text.home'), root_path %>
             </li>
             <li class="active">
-                <strong><%= t('activerecord.text.instances_list', model: Asset.model_name.human) %></strong>
+                <strong><%= t('activerecord.text.instances_list', model: Product.model_name.human) %></strong>
             </li>
         </ol>
     </div>
@@ -18,9 +18,26 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5><%= t('activerecord.text.instances_list', model: Asset.model_name.human) %></h5>
+                    <h5>搜索</h5>
                     <div class="ibox-tools">
-                        <%= link_to t('activerecord.text.new_instance', model: Asset.model_name.human), new_asset_path, class: 'btn btn-primary btn-xs' %>
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" style="display: block;">
+                    <%= render 'search_form' %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5><%= t('activerecord.text.instances_list', model: Product.model_name.human) %></h5>
+                    <div class="ibox-tools">
+                        <%= link_to t('activerecord.text.new_instance', model: Product.model_name.human), new_product_path, class: 'btn btn-primary btn-xs' %>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -57,14 +74,14 @@
                                 </button>
                             </div>
 
-                            <strong>Found <%= @assets_grid.count %> assets.</strong>
+                            <strong>Found <%= @products_grid.count %> products.</strong>
 
                         </div>
 
                     </div>
 
                     <div class="table-responsive">
-                        <%= render partial: 'assets_grid' %>
+                        <%= render partial: 'products_grid' %>
                     </div>
                 </div>
 

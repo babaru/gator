@@ -50,14 +50,14 @@ zh-CN:
       messages:
         record_invalid: 无效记录
     models:
-      asset: 资管产品
+      product: 资管产品
       client: 投资人
       department: 部门
     attributes:
       time_stamp:
         created_at: 创建于
         updated_at: 最后修改于
-      asset:
+      product:
         name: 委托资产名称
         client_code: 客户编号
         short_name: 产品简称

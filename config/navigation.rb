@@ -40,7 +40,7 @@ SimpleNavigation::Configuration.run do |navigation|
   # Define the primary navigation
   navigation.items do |primary|
     primary.item :dashboard, 'Dashbaord', root_url
-    primary.item :assets, 'Assets', assets_path
+    primary.item :products, Product.model_name.human, products_path
     primary.item :clients, Client.model_name.human, clients_path
     primary.item :data_maintance, '基础数据维护', nil do |data_maintance|
       data_maintance.item :departments, Department.model_name.human, departments_path

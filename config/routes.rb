@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post 'clients/search' => 'clients#index', as: :search_clients
   get 'clients/upload_original_document' => 'clients#upload_original_document', as: :upload_client_original_document
 
+  post 'products/search' => 'products#index', as: :search_products
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -18,7 +20,7 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :assets, :departments, :clients
+  resources :products, :departments, :clients
 
   # Example resource route with options:
   #   resources :products do

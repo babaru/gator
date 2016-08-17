@@ -1,0 +1,192 @@
+<%= grid(@products_grid, :show_filters => :when_filtered) do |g|
+  g.column name: '#' do |product|
+    product.id
+  end
+
+  g.column name: t('activerecord.attributes.product.name'), class: 'project-title' do |product|
+    link_to(product.name, product_path(product))
+  end
+
+  g.column name: t('activerecord.attributes.product.client_code') do |product|
+    product.client_code
+  end
+
+  g.column name: t('activerecord.attributes.product.short_name') do |product|
+    product.short_name
+  end
+
+  g.column name: t('activerecord.attributes.product.manager_name') do |product|
+    product.manager_name
+  end
+
+  g.column name: t('activerecord.attributes.product.code') do |product|
+    product.code
+  end
+
+  g.column name: t('activerecord.attributes.product.running_status') do |product|
+    product.running_status
+  end
+
+  g.column name: t('activerecord.attributes.product.type') do |product|
+    product.type
+  end
+
+  g.column name: t('activerecord.attributes.product.dev_type') do |product|
+    product.dev_type
+  end
+
+  g.column name: t('activerecord.attributes.product.initial_fund') do |product|
+    product.initial_fund
+  end
+
+  g.column name: t('activerecord.attributes.product.trustor_name') do |product|
+    product.trustor_name
+  end
+
+  g.column name: t('activerecord.attributes.product.trustor_account_name') do |product|
+    product.trustor_account_name
+  end
+
+  g.column name: t('activerecord.attributes.product.trustor_bank_name') do |product|
+    product.trustor_bank_name
+  end
+
+  g.column name: t('activerecord.attributes.product.trustor_bank_account') do |product|
+    product.trustor_bank_account
+  end
+
+  g.column name: t('activerecord.attributes.product.securities_account_name') do |product|
+    product.securities_account_name
+  end
+
+  g.column name: t('activerecord.attributes.product.securities_bank_name') do |product|
+    product.securities_bank_name
+  end
+
+  g.column name: t('activerecord.attributes.product.securities_capital_account') do |product|
+    product.securities_capital_account
+  end
+
+  g.column name: t('activerecord.attributes.product.valuation_out_sourcing') do |product|
+    product.valuation_out_sourcing
+  end
+
+  g.column name: t('activerecord.attributes.product.deposited_at') do |product|
+    product.deposited_at
+  end
+
+  g.column name: t('activerecord.attributes.product.delegation_started_at') do |product|
+    product.delegation_started_at
+  end
+
+  g.column name: t('activerecord.attributes.product.delegation_ended_at') do |product|
+    product.delegation_ended_at
+  end
+
+  g.column name: t('activerecord.attributes.product.delegation_duration') do |product|
+    product.delegation_duration
+  end
+
+  g.column name: t('activerecord.attributes.product.fee_calculation_standard') do |product|
+    product.fee_calculation_standard
+  end
+
+  g.column name: t('activerecord.attributes.product.management_fee_ratio') do |product|
+    product.management_fee_ratio
+  end
+
+  g.column name: t('activerecord.attributes.product.year_day_count') do |product|
+    product.year_day_count
+  end
+
+  g.column name: t('activerecord.attributes.product.management_fee_flour') do |product|
+    product.management_fee_flour
+  end
+
+  g.column name: t('activerecord.attributes.product.trustor_fee_ratio') do |product|
+    product.trustor_fee_ratio
+  end
+
+  g.column name: t('activerecord.attributes.product.operation_fee_ratio') do |product|
+    product.operation_fee_ratio
+  end
+
+  g.column name: t('activerecord.attributes.product.investment_consultant_fee_ratio') do |product|
+    product.investment_consultant_fee_ratio
+  end
+
+  g.column name: t('activerecord.attributes.product.investment_consultant_fee_flour') do |product|
+    product.investment_consultant_fee_flour
+  end
+
+  g.column name: t('activerecord.attributes.product.bonus') do |product|
+    product.bonus
+  end
+
+  g.column name: t('activerecord.attributes.product.sales_fee_ratio') do |product|
+    product.sales_fee_ratio
+  end
+
+  g.column name: t('activerecord.attributes.product.sse_account_code') do |product|
+    product.sse_account_code
+  end
+
+  g.column name: t('activerecord.attributes.product.szse_account_code') do |product|
+    product.szse_account_code
+  end
+
+  g.column name: t('activerecord.attributes.product.cffex_account_code') do |product|
+    product.cffex_account_code
+  end
+
+  g.column name: t('activerecord.attributes.product.zce_account_code') do |product|
+    product.zce_account_code
+  end
+
+  g.column name: t('activerecord.attributes.product.dce_account_code') do |product|
+    product.dce_account_code
+  end
+
+  g.column name: t('activerecord.attributes.product.shfe_account_code') do |product|
+    product.shfe_account_code
+  end
+
+  g.column name: t('activerecord.attributes.product.sales_department') do |product|
+    product.sales_department
+  end
+
+  g.column name: t('activerecord.attributes.product.investment_consultant_reference_department') do |product|
+    product.investment_consultant_reference_department
+  end
+
+  g.column name: t('activerecord.attributes.product.operation_department') do |product|
+    product.operation_department
+  end
+
+  g.column name: t('activerecord.attributes.product.investment_consultant_name') do |product|
+    product.investment_consultant_name
+  end
+
+  g.column name: t('activerecord.attributes.time_stamp.created_at') do |product|
+    product.created_at.strftime('%Y-%m-%d %H:%M:%S')
+  end
+
+  g.column name: t('activerecord.attributes.time_stamp.updated_at') do |product|
+    product.updated_at.strftime('%Y-%m-%d %H:%M:%S')
+  end
+
+  g.column name: t('activerecord.attributes.product.sse_gateway') do |product|
+    product.sse_gateway
+  end
+
+  g.column name: t('activerecord.attributes.product.szse_gateway') do |product|
+    product.szse_gateway
+  end
+
+  g.column html: {class: 'project-actions'} do |product|
+    [
+      link_to(fa_icon("pencil"), edit_product_path(product), class: 'btn btn-white btn-sm', remote: true, data: {toggle: 'tooltip'}, title: t('button.edit')),
+      link_to(fa_icon("trash"), product_path(product), class: 'btn btn-white btn-sm', method: :delete, remote: true, data: {toggle: 'tooltip'}, title: t('button.delete'))
+    ].join(' ').html_safe
+  end
+end -%>
