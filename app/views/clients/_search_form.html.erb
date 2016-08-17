@@ -1,9 +1,10 @@
-<%= simple_form_for(:client, url: search_client_path, html: { class: 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@query_client_params, url: search_clients_path, as: :client, html: { class: 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :application_number, label: t('activerecord.attributes.client.application_number') %>
   <%= f.input :name, label: t('activerecord.attributes.client.name') %>
   <%= f.input :id_number, label: t('activerecord.attributes.client.id_number') %>
+  <%= f.input :type, label: t('activerecord.attributes.client.type'), collection: [['个人', IndividualClient.name], ['机构', InstitutionClient.name]] %>
 
   <div class="form-group">
       <div class="col-sm-4 col-sm-offset-2">

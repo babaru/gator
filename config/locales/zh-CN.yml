@@ -101,6 +101,7 @@ zh-CN:
         operation_department: 产品运作部门
         investment_consultant_name: 投顾名称
       client:
+        type: 投资人类型
         application_number: 申请单编号
         id_number_type: 投资人证件类型
         id_number: 投资人证件号码

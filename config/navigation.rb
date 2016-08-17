@@ -27,7 +27,7 @@ SimpleNavigation::Configuration.run do |navigation|
   #navigation.name_generator = Proc.new {|name, item| "<span>#{name}</span>"}
 
   # Specify if the auto highlight feature is turned on (globally, for the whole navigation). Defaults to true
-  #navigation.auto_highlight = true
+  navigation.auto_highlight = true
 
   # Specifies whether auto highlight should ignore query params and/or anchors when
   # comparing the navigation items with the current URL. Defaults to true
