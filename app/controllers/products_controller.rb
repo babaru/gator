@@ -145,7 +145,7 @@ class ProductsController < ApplicationController
       )
   end
 
-  def set_products_grid(conditions)
+  def set_products_grid(conditions = [])
     @products_grid = initialize_grid(Product.where(conditions))
   end
 end
