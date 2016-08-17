@@ -40,6 +40,7 @@ zh-CN:
       new_instance: '新建%{model}'
       edit_instance: '编辑%{model}'
       instances_list: '%{model}列表'
+      show_instance: '%{model}详细资料'
     success:
       messages:
         created: '%{model}创建成功'
@@ -50,7 +51,7 @@ zh-CN:
         record_invalid: 无效记录
     models:
       asset: 资管产品
-      client: 客户
+      client: 投资人
       department: 部门
     attributes:
       time_stamp:

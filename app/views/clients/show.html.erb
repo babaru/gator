@@ -18,15 +18,87 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="m-b-md">
-                        <%= link_to t('activerecord.text.edit_instance', model: Client.model_name.human), edit_client_path(@client), class: 'btn btn-white btn-xs pull-right' %>
-                        <h2>#Instance Name</h2>
+                        <div class="pull-right">
+                          <%= link_to fa_icon('pencil', text: t('buttons.edit')), edit_client_path(@client), class: 'btn btn-white btn-sm' %>
+                          <%= link_to fa_icon('upload', text: '上传开户原始资料'), upload_client_original_document_path(@client), class: 'btn btn-white btn-sm' %>
+                        </div>
+
+                        <h2>投资人 <%= @client.name %></h2>
                     </div>
+                    <dl class="dl-horizontal">
+                        <dt><%= t('activerecord.attributes.client.type') %>:</dt>
+                        <dd><span class="label label-primary"><%= @client.is_a?(IndividualClient) ? t('individual_institution.individual') : t('individual_institution.institution') %></span></dd>
+                    </dl>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <dl class="dl-horizontal">
+
+                        <dt><%= t('activerecord.attributes.client.application_number') %>:</dt>
+                        <dd><%= @client.application_number %></dd>
+                        <dt><%= t('activerecord.attributes.client.id_number_type') %>:</dt>
+                        <dd><%= Client.id_number_type_names[@client.id_number_type] %></dd>
+                        <dt><%= t('activerecord.attributes.client.id_number') %>:</dt>
+                        <dd><%= @client.id_number %> </dd>
+                        <dt><%= t('activerecord.attributes.client.sales_man_code') %>:</dt>
+                        <dd> <%= @client.sales_man_code %></dd>
+                    </dl>
+                </div>
+                <div class="col-lg-7" id="cluster_info">
+                    <dl class="dl-horizontal">
+
+                        <dt><%= t('activerecord.attributes.client.traded_at') %>:</dt>
+                        <dd><%= @client.traded_at.strftime('%Y-%m-%d %H:%M:%S') if @client.traded_at %></dd>
+                        <dt><%= t('activerecord.attributes.client.fund_trading_account_number') %>:</dt>
+                        <dd> <%= @client.fund_trading_account_number %></dd>
+                        <dt><%= t('activerecord.attributes.client.fund_account_number') %>:</dt>
+                        <dd> <%= @client.fund_account_number %></dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <dl class="dl-horizontal">
+
+                        <dt><%= t('activerecord.attributes.client.person_in_charge_name') %>:</dt>
+                        <dd><%= @client.person_in_charge_name %></dd>
+                        <dt><%= t('activerecord.attributes.client.person_in_charge_id_number_type') %>:</dt>
+                        <dd><%= Client.id_number_type_names[@client.person_in_charge_id_number_type] %></dd>
+                        <dt><%= t('activerecord.attributes.client.person_in_charge_id_number') %>:</dt>
+                        <dd><%= @client.person_in_charge_id_number %> </dd>
+                    </dl>
+                </div>
+                <div class="col-lg-7" id="cluster_info">
+                    <dl class="dl-horizontal">
+
+
+                    </dl>
+                </div>
+            </div>
+
             <div class="row m-t-sm">
                 <div class="col-lg-12">
-                    <div class="m-b-md">
-                        <!-- your content here -->
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab-1" data-toggle="tab">投资人其他信息</a></li>
+                                    <li class=""><a href="#tab-2" data-toggle="tab">最近操作</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab-1">
+                                </div>
+                                <div class="tab-pane" id="tab-2">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

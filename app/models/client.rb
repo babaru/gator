@@ -34,7 +34,7 @@ class Client < ActiveRecord::Base
     end
 
     def id_number_type_names
-      Gator::IdNumberTypes.id_number_types.map{ |k,v| [v, I18n.t("id_number_types.#{k}")] }
+      Gator::IdNumberTypes.id_number_types.map{ |k,v| [v, I18n.t("id_number_types.#{k}")] }.to_h
     end
 
     def individual_institution

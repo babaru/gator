@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   post 'clients/search' => 'clients#index', as: :search_clients
+  get 'clients/upload_original_document' => 'clients#upload_original_document', as: :upload_client_original_document
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
