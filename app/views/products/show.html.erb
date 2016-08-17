@@ -18,15 +18,208 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="m-b-md">
-                        <%= link_to t('activerecord.text.edit_instance', model: Product.model_name.human), edit_product_path(@product), class: 'btn btn-white btn-xs pull-right' %>
-                        <h2>#Instance Name</h2>
+                        <div class="pull-right">
+                          <%= link_to fa_icon('pencil', text: t('buttons.edit')), edit_product_path(@product), class: 'btn btn-white btn-sm' %>
+                        </div>
+
+                        <h2><%= @product.name %></h2>
                     </div>
+                    <dl class="dl-horizontal">
+                        <dt><%= t('activerecord.attributes.product.running_status') %>:</dt>
+                        <dd><span class="label label-primary"><%= @product.running_status %></span></dd>
+                    </dl>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <dl class="dl-horizontal">
+
+                        <dt><%= t('activerecord.attributes.product.manager_name') %>:</dt>
+                        <dd><%= @product.manager_name %> </dd>
+                        <dt><%= t('activerecord.attributes.product.name') %>:</dt>
+                        <dd><%= @product.name %></dd>
+                        <dt><%= t('activerecord.attributes.product.short_name') %>:</dt>
+                        <dd><%= @product.short_name %></dd>
+                        <dt><%= t('activerecord.attributes.product.code') %>:</dt>
+                        <dd> <%= @product.code %></dd>
+                    </dl>
+                </div>
+                <div class="col-lg-7" id="cluster_info">
+                    <dl class="dl-horizontal">
+
+                        <dt><%= t('activerecord.attributes.product.type') %>:</dt>
+                        <dd><%= @product.type %></dd>
+                        <dt><%= t('activerecord.attributes.product.dev_type') %>:</dt>
+                        <dd> <%= @product.dev_type %></dd>
+                        <dt><%= t('activerecord.attributes.product.initial_fund') %>:</dt>
+                        <dd> <%= @product.initial_fund %></dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <dl class="dl-horizontal">
+
+                        <dt><%= t('activerecord.attributes.product.trustor_name') %>:</dt>
+                        <dd><%= @product.trustor_name %></dd>
+                        <dt><%= t('activerecord.attributes.product.trustor_bank_name') %>:</dt>
+                        <dd><%= @product.trustor_bank_name %></dd>
+                        <dt><%= t('activerecord.attributes.product.trustor_bank_account') %>:</dt>
+                        <dd><%= @product.trustor_bank_account %> </dd>
+                        <dt><%= t('activerecord.attributes.product.trustor_account_name') %>:</dt>
+                        <dd><%= @product.trustor_account_name %> </dd>
+
+                    </dl>
+                </div>
+                <div class="col-lg-7" id="cluster_info">
+                    <dl class="dl-horizontal">
+
+                        <dt><%= t('activerecord.attributes.product.securities_account_name') %>:</dt>
+                        <dd><%= @product.securities_account_name %></dd>
+                        <dt><%= t('activerecord.attributes.product.securities_bank_name') %>:</dt>
+                        <dd><%= @product.securities_bank_name %></dd>
+                        <dt><%= t('activerecord.attributes.product.securities_capital_account') %>:</dt>
+                        <dd><%= @product.securities_capital_account %> </dd>
+                        <dt><%= t('activerecord.attributes.product.deposited_at') %>:</dt>
+                        <dd><%= @product.deposited_at.strftime('%Y-%m-%d') if @product.deposited_at %></dd>
+
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <dl class="dl-horizontal">
+
+                        <dt><%= t('activerecord.attributes.product.delegation_started_at') %>:</dt>
+                        <dd><%= @product.delegation_started_at.strftime('%Y-%m-%d') if @product.delegation_started_at %></dd>
+                        <dt><%= t('activerecord.attributes.product.delegation_ended_at') %>:</dt>
+                        <dd><%= @product.delegation_ended_at.strftime('%Y-%m-%d') if @product.delegation_ended_at %></dd>
+
+                    </dl>
+                </div>
+                <div class="col-lg-7" id="cluster_info">
+                    <dl class="dl-horizontal">
+
+                      <dt><%= t('activerecord.attributes.product.delegation_duration') %>:</dt>
+                      <dd><%= @product.delegation_duration %> </dd>
+                      <dt><%= t('activerecord.attributes.product.year_day_count') %>:</dt>
+                      <dd><%= @product.year_day_count %> </dd>
+
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <dl class="dl-horizontal">
+
+                        <dt><%= t('activerecord.attributes.product.sales_department') %>:</dt>
+                        <dd><%= @product.sales_department %></dd>
+                        <dt><%= t('activerecord.attributes.product.investment_consultant_reference_department') %>:</dt>
+                        <dd><%= @product.investment_consultant_reference_department %></dd>
+
+                    </dl>
+                </div>
+                <div class="col-lg-7" id="cluster_info">
+                    <dl class="dl-horizontal">
+
+                      <dt><%= t('activerecord.attributes.product.operation_department') %>:</dt>
+                      <dd><%= @product.operation_department %> </dd>
+                      <dt><%= t('activerecord.attributes.product.investment_consultant_name') %>:</dt>
+                      <dd><%= @product.investment_consultant_name %> </dd>
+
+                    </dl>
+                </div>
+            </div>
+
             <div class="row m-t-sm">
                 <div class="col-lg-12">
-                    <div class="m-b-md">
-                        <!-- your content here -->
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab-1" data-toggle="tab">费率</a></li>
+                                    <li class=""><a href="#tab-2" data-toggle="tab">交易账号</a></li>
+                                    <li class=""><a href="#tab-3" data-toggle="tab">投资人列表</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab-1">
+
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <dl class="dl-horizontal">
+
+                                                <dt><%= t('activerecord.attributes.product.fee_calculation_standard') %>:</dt>
+                                                <dd><%= @product.fee_calculation_standard %></dd>
+                                                <dt><%= t('activerecord.attributes.product.trustor_fee_ratio') %>:</dt>
+                                                <dd><%= @product.trustor_fee_ratio %></dd>
+                                                <dt><%= t('activerecord.attributes.product.operation_fee_ratio') %>:</dt>
+                                                <dd><%= @product.operation_fee_ratio %></dd>
+                                                <dt><%= t('activerecord.attributes.product.bonus') %>:</dt>
+                                                <dd><%= @product.bonus %></dd>
+                                                <dt><%= t('activerecord.attributes.product.sales_fee_ratio') %>:</dt>
+                                                <dd><%= @product.sales_fee_ratio %></dd>
+
+                                            </dl>
+                                        </div>
+                                        <div class="col-lg-7" id="cluster_info">
+                                            <dl class="dl-horizontal">
+
+                                              <dt><%= t('activerecord.attributes.product.management_fee_ratio') %>:</dt>
+                                              <dd><%= @product.management_fee_ratio %> </dd>
+                                              <dt><%= t('activerecord.attributes.product.management_fee_flour') %>:</dt>
+                                              <dd><%= @product.management_fee_flour %> </dd>
+                                              <dt><%= t('activerecord.attributes.product.investment_consultant_fee_ratio') %>:</dt>
+                                              <dd><%= @product.investment_consultant_fee_ratio %> </dd>
+                                              <dt><%= t('activerecord.attributes.product.investment_consultant_fee_flour') %>:</dt>
+                                              <dd><%= @product.investment_consultant_fee_flour %> </dd>
+
+                                            </dl>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane" id="tab-2">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <dl class="dl-horizontal">
+
+                                                <dt><%= t('activerecord.attributes.product.sse_account_code') %>:</dt>
+                                                <dd><%= @product.sse_account_code %></dd>
+                                                <dt><%= t('activerecord.attributes.product.szse_account_code') %>:</dt>
+                                                <dd><%= @product.szse_account_code %></dd>
+                                                <dt><%= t('activerecord.attributes.product.cffex_account_code') %>:</dt>
+                                                <dd><%= @product.cffex_account_code %></dd>
+
+                                            </dl>
+                                        </div>
+                                        <div class="col-lg-7" id="cluster_info">
+                                            <dl class="dl-horizontal">
+
+                                              <dt><%= t('activerecord.attributes.product.zce_account_code') %>:</dt>
+                                              <dd><%= @product.zce_account_code %> </dd>
+                                              <dt><%= t('activerecord.attributes.product.dce_account_code') %>:</dt>
+                                              <dd><%= @product.dce_account_code %> </dd>
+                                              <dt><%= t('activerecord.attributes.product.shfe_account_code') %>:</dt>
+                                              <dd><%= @product.shfe_account_code %> </dd>
+
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="tab-3">
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
