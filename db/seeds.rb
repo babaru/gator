@@ -39,7 +39,90 @@ seed_products = Product.create([
     investment_consultant_reference_department: "无", operation_department: "研究所",
     investment_consultant_name: ""
   }
-  ]) if Asset.count == 0
+  ]) if Product.count == 0
+
+  seed_clients = Client.create([
+  {
+    :type => IndividualClient.name,
+    :application_number => "123456780",
+    :id_number_type => 0,
+    :id_number => "123456789123456789",
+    :name => "路人甲",
+    :traded_at => Time.now,
+    :person_in_charge_id_number_type => nil,
+    :person_in_charge_id_number => nil,
+    :person_in_charge_name => nil,
+    :fund_trading_account_number => "12345678",
+    :sales_man_code => "3201",
+    :business_code => "001",
+    :branch_store_number => "001",
+    :fund_account_number => nil
+  },
+  {
+    :type => IndividualClient.name,
+    :application_number => "123456781",
+    :id_number_type => 0,
+    :id_number => "123456789123456788",
+    :name => "张三",
+    :traded_at => Time.now,
+    :person_in_charge_id_number_type => nil,
+    :person_in_charge_id_number => nil,
+    :person_in_charge_name => nil,
+    :fund_trading_account_number => "12345678",
+    :sales_man_code => "3201",
+    :business_code => "001",
+    :branch_store_number => "001",
+    :fund_account_number => nil
+  },
+  {
+    :type => IndividualClient.name,
+    :application_number => "123456782",
+    :id_number_type => 0,
+    :id_number => "123456789123456787",
+    :name => "王国强",
+    :traded_at => Time.now,
+    :person_in_charge_id_number_type => nil,
+    :person_in_charge_id_number => nil,
+    :person_in_charge_name => nil,
+    :fund_trading_account_number => "12345678",
+    :sales_man_code => "3201",
+    :business_code => "001",
+    :branch_store_number => "001",
+    :fund_account_number => nil
+  },
+  {
+    :type => InstitutionClient.name,
+    :application_number => "123456783",
+    :id_number_type => 0,
+    :id_number => "123456789123456789",
+    :name => "光蓝投资",
+    :traded_at => Time.now,
+    :person_in_charge_id_number_type => 0,
+    :person_in_charge_id_number => "123456789123456789",
+    :person_in_charge_name => "路人甲",
+    :fund_trading_account_number => "12345678",
+    :sales_man_code => "3201",
+    :business_code => "001",
+    :branch_store_number => "001",
+    :fund_account_number => nil
+  },
+  {
+    :type => IndividualClient.name,
+    :application_number => "123456784",
+    :id_number_type => 0,
+    :id_number => "123456789123456789",
+    :name => "鱼永鑫商贸",
+    :traded_at => Time.now,
+    :person_in_charge_id_number_type => 0,
+    :person_in_charge_id_number => "123456789123456786",
+    :person_in_charge_name => "张兰",
+    :fund_trading_account_number => "12345678",
+    :sales_man_code => "3201",
+    :business_code => "001",
+    :branch_store_number => "001",
+    :fund_account_number => nil
+  }
+  ])
 
   seed_departments = Department.create(
   [
