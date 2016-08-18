@@ -42,6 +42,8 @@ class CreateProducts < ActiveRecord::Migration
       t.string :investment_consultant_reference_department
       t.string :operation_department
       t.string :investment_consultant_name
+      t.string :sse_gateway
+      t.string :szse_gateway
 
       t.timestamps null: false
     end
