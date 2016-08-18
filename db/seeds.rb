@@ -107,7 +107,7 @@ seed_products = Product.create([
     :fund_account_number => nil
   },
   {
-    :type => IndividualClient.name,
+    :type => InstitutionClient.name,
     :application_number => "123456784",
     :id_number_type => 0,
     :id_number => "123456789123456789",
