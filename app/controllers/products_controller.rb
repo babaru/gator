@@ -34,6 +34,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @clients_grid = initialize_grid(Client)
   end
 
   # GET /products/new
