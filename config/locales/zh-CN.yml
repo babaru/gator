@@ -57,6 +57,8 @@ zh-CN:
       time_stamp:
         created_at: 创建于
         updated_at: 最后修改于
+      department:
+        name: 名称
       product:
         name: 委托资产名称
         client_code: 客户编号
