@@ -51,8 +51,9 @@ zh-CN:
         record_invalid: 无效记录
     models:
       product: 资管产品
-      client: 投资人
+      client: 客户
       department: 部门
+      consultant: 投顾
     attributes:
       time_stamp:
         created_at: 创建于

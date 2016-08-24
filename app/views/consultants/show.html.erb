@@ -1,0 +1,35 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2><%= t('activerecord.text.show_instance', model: Consultant.model_name.human) %></h2>
+        <ol class="breadcrumb">
+            <li>
+                <%= link_to t('text.home'), root_path %>
+            </li>
+            <li class="active">
+                <strong><%= t('activerecord.text.show_instance', model: Consultant.model_name.human) %></strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="m-b-md">
+                        <%= link_to t('activerecord.text.edit_instance', model: Consultant.model_name.human), edit_consultant_path(@consultant), class: 'btn btn-white btn-xs pull-right' %>
+                        <h2>#Instance Name</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-t-sm">
+                <div class="col-lg-12">
+                    <div class="m-b-md">
+                        <!-- your content here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

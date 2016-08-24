@@ -41,8 +41,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item :products, Product.model_name.human, products_path
     primary.item :clients, Client.model_name.human, clients_path
-    primary.item :data_maintance, '基础数据维护', nil do |data_maintance|
-      data_maintance.item :departments, Department.model_name.human, departments_path
-    end
+    primary.item :consultants, Consultant.model_name.human, consultants_path
+    primary.item :departments, Department.model_name.human, departments_path
   end
 end

@@ -1,12 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2><%%= t('activerecord.text.instances_list', model: <%= class_name.split('::').last %>.model_name.human) %></h2>
+        <h2><%= t('activerecord.text.instances_list', model: Consultant.model_name.human) %></h2>
         <ol class="breadcrumb">
             <li>
-                <%%= link_to t('text.home'), root_path %>
+                <%= link_to t('text.home'), root_path %>
             </li>
             <li class="active">
-                <strong><%%= t('activerecord.text.instances_list', model: <%= class_name.split('::').last %>.model_name.human) %></strong>
+                <strong><%= t('activerecord.text.instances_list', model: Consultant.model_name.human) %></strong>
             </li>
         </ol>
     </div>
@@ -24,7 +24,7 @@
                         <div>
 
                             <div class="pull-right">
-                                <%%= link_to t('activerecord.text.new_instance', model: <%= class_name.split('::').last %>.model_name.human), new_<%= singular_table_name %>_path, class: 'btn-primary btn-sm btn' %>
+                                <%= link_to t('activerecord.text.new_instance', model: Consultant.model_name.human), new_consultant_path, class: 'btn-primary btn-sm btn' %>
                             </div>
 
                             <div class="btn-group">
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="table-responsive">
-                        <%%= render partial: '<%= plural_table_name %>_grid' %>
+                        <%= render partial: 'consultants_grid' %>
                     </div>
                 </div>
 
