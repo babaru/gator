@@ -1,11 +1,9 @@
-<%= simple_form_for(@query_product_params, url: search_products_path, as: :product, html: { class: 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@query_product_params, url: search_products_path, as: :product, wrapper: :vertical_form) do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :name, label: t('activerecord.attributes.product.name') %>
 
   <div class="form-group">
-      <div class="col-sm-4 col-sm-offset-2">
-          <%= f.submit t('buttons.search'), class: 'btn btn-white btn-sm' %>
-      </div>
+      <%= f.submit t('buttons.search'), class: 'btn btn-white btn-sm' %>
   </div>
 <% end %>
