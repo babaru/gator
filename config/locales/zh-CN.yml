@@ -61,9 +61,9 @@ zh-CN:
       department:
         name: 名称
       product:
-        name: 委托资产名称
+        name: 名称
         client_code: 客户编号
-        short_name: 产品简称
+        short_name: 简称
         manager_name: 产品经理
         code: 产品编码
         running_status: 运行状态
