@@ -16,7 +16,7 @@
   end
 
   g.column name: t('activerecord.attributes.product.manager_name') do |product|
-    product.manager_name
+    product.product_manager.name if product.product_manager
   end
 
   g.column name: t('activerecord.attributes.product.code') do |product|

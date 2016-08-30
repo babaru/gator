@@ -67,7 +67,7 @@ zh-CN:
         manager_name: 产品经理
         code: 产品编码
         running_status: 运行状态
-        dev_type: 产品研发类别
+        dev_type: 研发类别
         type: 产品类别
         initial_fund: 初始委托资产金额
         trustor_name: 托管人

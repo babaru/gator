@@ -2,36 +2,23 @@
   <%= f.error_notification %>
 
   <%= f.input :name %>
-  <div class="hr-line-dashed"></div>
   <%= f.input :short_name %>
   <div class="hr-line-dashed"></div>
   <%= f.input :client_code %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :manager_name %>
-  <div class="hr-line-dashed"></div>
   <%= f.input :code %>
   <div class="hr-line-dashed"></div>
-  <%= f.input :running_status %>
-  <div class="hr-line-dashed"></div>
+  <%= f.simple_fields_for :product_manager do |pm| %>
+    <%= pm.input :name, input_html: {autocomplete: 'off', class: 'product_manager_name'} %>
+  <% end %>
+  <input type="text" class="typeahead" ></input>
   <%= f.input :type %>
-  <div class="hr-line-dashed"></div>
   <%= f.input :dev_type %>
   <div class="hr-line-dashed"></div>
   <%= f.input :initial_fund %>
   <div class="hr-line-dashed"></div>
-  <%= f.input :trustor_name %>
+  <%= f.input :trustor %>
   <div class="hr-line-dashed"></div>
-  <%= f.input :trustor_account_name %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :trustor_bank_name %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :trustor_bank_account %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :securities_account_name %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :securities_bank_name %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :securities_capital_account %>
+  <%= f.input :securities_broker %>
   <div class="hr-line-dashed"></div>
   <%= f.input :valuation_out_sourcing %>
   <div class="hr-line-dashed"></div>
@@ -92,3 +79,27 @@
       </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    var $input = $('.product_manager_name');
+    $input.typeahead({
+      source: [
+        {id: "1", name: "Item 1"},
+        {id: "2", name: "Item 2"},
+        {id: "3", name: "Item 3"}
+      ],
+      autoSelect: true
+    });
+
+    $input.change(function() {
+      var current = $input.typeahead("getActive");
+      if (current) {
+        if (current.name == $input.val()) {
+          console.log(current.id);
+        }
+      }
+    });
+  });
+</script>

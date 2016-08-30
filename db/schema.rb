@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824061921) do
+ActiveRecord::Schema.define(version: 20160825072410) do
+
+  create_table "banks", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string   "type",                            limit: 255
@@ -50,23 +56,21 @@ ActiveRecord::Schema.define(version: 20160824061921) do
 
   add_index "departments", ["name"], name: "index_departments_on_name", unique: true, using: :btree
 
+  create_table "product_managers", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string   "name",                                       limit: 255
     t.string   "client_code",                                limit: 255
     t.string   "short_name",                                 limit: 255
-    t.string   "manager_name",                               limit: 255
     t.string   "code",                                       limit: 255
     t.integer  "running_status",                             limit: 4
     t.string   "type",                                       limit: 255
     t.string   "dev_type",                                   limit: 255
     t.decimal  "initial_fund",                                           precision: 10
-    t.string   "trustor_name",                               limit: 255
-    t.string   "trustor_account_name",                       limit: 255
-    t.string   "trustor_bank_name",                          limit: 255
-    t.string   "trustor_bank_account",                       limit: 255
-    t.string   "securities_account_name",                    limit: 255
-    t.string   "securities_bank_name",                       limit: 255
-    t.string   "securities_capital_account",                 limit: 255
     t.string   "valuation_out_sourcing",                     limit: 255
     t.datetime "deposited_at"
     t.datetime "delegation_started_at"
@@ -96,7 +100,35 @@ ActiveRecord::Schema.define(version: 20160824061921) do
     t.datetime "updated_at",                                                            null: false
     t.string   "sse_gateway",                                limit: 255
     t.string   "szse_gateway",                               limit: 255
+    t.integer  "product_manager_id",                         limit: 4
+    t.integer  "trustor_id",                                 limit: 4
+    t.integer  "securities_broker_id",                       limit: 4
   end
+
+  add_index "products", ["product_manager_id"], name: "index_products_on_product_manager_id", using: :btree
+  add_index "products", ["securities_broker_id"], name: "index_products_on_securities_broker_id", using: :btree
+  add_index "products", ["trustor_id"], name: "index_products_on_trustor_id", using: :btree
+
+  create_table "securities_brokers", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.integer  "bank_id",        limit: 4
+    t.string   "account_number", limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "securities_brokers", ["bank_id"], name: "index_securities_brokers_on_bank_id", using: :btree
+
+  create_table "trustors", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.integer  "bank_id",        limit: 4
+    t.string   "account_name",   limit: 255
+    t.string   "account_number", limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "trustors", ["bank_id"], name: "index_trustors_on_bank_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -120,4 +152,9 @@ ActiveRecord::Schema.define(version: 20160824061921) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   add_foreign_key "consultants", "departments"
+  add_foreign_key "products", "product_managers"
+  add_foreign_key "products", "securities_brokers"
+  add_foreign_key "products", "trustors"
+  add_foreign_key "securities_brokers", "banks"
+  add_foreign_key "trustors", "banks"
 end

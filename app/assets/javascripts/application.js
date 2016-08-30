@@ -20,6 +20,7 @@
 //= require slimscroll/jquery.slimscroll.min.js
 //= require moment
 //= require bootstrap-datetimepicker.min
+//= require bootstrap3-typeahead/bootstrap3-typeahead
 //= require_tree .
 
 $(document).ready(function() {
