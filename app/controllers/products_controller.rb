@@ -39,6 +39,9 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.build_product_manager
+    @product.build_trustor_bank_account
+    @product.trustor_bank_account.build_trustor
+    @product.trustor_bank_account.build_bank
   end
 
   # GET /products/1/edit
@@ -48,7 +51,17 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
+    product_manager = ProductManager.find_or_create_by(name: product_params[:product_manager_attributes][:name])
+    trustor = Trustor.find_or_create_by(name: product_params[:trustor_bank_account_attributes][:trustor_attributes][:name])
+    bank = Bank.find_or_create_by(name: product_params[:trustor_bank_account_attributes][:bank_attributes][:name])
+    trustor_bank_account = TrustorBankAccount.find_or_create_by(name: product_params[:trustor_bank_account_attributes][:name],
+      number: product_params[:trustor_bank_account_attributes][:number],
+      trustor_id: trustor.id,
+      bank_id: bank.id)
+
+    @product = Product.new(product_params.except(:trustor_bank_account_attributes, :product_manager_attributes))
+    @product.trustor_bank_account = trustor_bank_account
+    @product.product_manager = product_manager
 
     respond_to do |format|
       if @product.save
@@ -102,16 +115,11 @@ class ProductsController < ApplicationController
       :name,
       :client_code,
       :short_name,
-      :manager_name,
       :code,
       :running_status,
       :type,
       :dev_type,
       :initial_fund,
-      :trustor_name,
-      :trustor_account_name,
-      :trustor_bank_name,
-      :trustor_bank_account,
       :securities_account_name,
       :securities_bank_name,
       :securities_capital_account,
@@ -142,6 +150,21 @@ class ProductsController < ApplicationController
       :investment_consultant_name,
       :sse_gateway,
       :szse_gateway,
+      product_manager_attributes: [
+        :id,
+        :name
+      ],
+      trustor_bank_account_attributes: [
+        :number, :name,
+        trustor_attributes: [
+          :id,
+          :name
+        ],
+        bank_attributes: [
+          :id,
+          :name
+        ]
+      ]
       )
   end
 

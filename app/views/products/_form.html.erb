@@ -16,7 +16,23 @@
   <div class="hr-line-dashed"></div>
   <%= f.input :initial_fund %>
   <div class="hr-line-dashed"></div>
-  <%= f.input :trustor %>
+  <%= f.simple_fields_for :trustor_bank_account do |tba| %>
+
+  <%= tba.simple_fields_for :trustor do |tr| %>
+  <%= tr.input :id, as: :hidden %>
+  <%= tr.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.trustor_name') %>
+  <% end %>
+
+  <%= tba.simple_fields_for :bank do |bk| %>
+  <%= bk.input :id, as: :hidden %>
+  <%= bk.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.trustor_bank_name') %>
+  <% end %>
+
+  <%= tba.input :id, as: :hidden %>
+  <%= tba.input :name, label: t('activerecord.attributes.product.trustor_bank_account_name') %>
+  <%= tba.input :number, label: t('activerecord.attributes.product.trustor_bank_account_number') %>
+
+  <% end %>
   <div class="hr-line-dashed"></div>
   <%= f.input :securities_broker %>
   <div class="hr-line-dashed"></div>
@@ -81,31 +97,68 @@
 <% end %>
 
 <script type="text/javascript">
+
   $.get('/product_managers.json', function(data) {
     $('#product_product_manager_attributes_name').typeahead({
-      source: data,
-      autoSelect: true
-    });
-  });
-  $(document).ready(function() {
-    var $input = $('#product_product_manager_attributes_name');
-    // $input.typeahead({
-    //   source: [
-    //     {id: "1", name: "Item 1"},
-    //     {id: "2", name: "Item 2"},
-    //     {id: "3", name: "Item 3"}
-    //   ],
-    //   autoSelect: true
-    // });
-
-    $input.change(function() {
+      source: data
+    }).change(function() {
       var current = $input.typeahead("getActive");
       if (current) {
         if (current.name == $input.val()) {
-          console.log(current.id);
           $('#product_product_manager_attributes_id').val(current.id);
         }
       }
     });
+  });
+
+  $.get('/trustors.json', function(data) {
+    $('#product_trustor_bank_account_attributes_trustor_attributes_name').typeahead({
+      source: data
+    }).change(function() {
+      var cur = $(this).typeahead("getActive");
+      if (cur) {
+        if (cur.name == $(this).val()) {
+          $('#product_trustor_bank_account_attributes_trustor_attributes_id').val(cur.id);
+          find_trustor_bank_accounts();
+        }
+      }
+    });
+  });
+
+  $.get('/banks.json', function(data) {
+    $('#product_trustor_bank_account_attributes_bank_attributes_name').typeahead({
+      source: data
+    }).change(function() {
+      var cur = $(this).typeahead("getActive");
+      if (cur) {
+        if (cur.name == $(this).val()) {
+          $('#product_trustor_bank_account_attributes_bank_attributes_id').val(cur.id);
+          find_trustor_bank_accounts();
+        }
+      }
+    });;
+  });
+
+  function find_trustor_bank_accounts() {
+    var trustor_id = $('#product_trustor_bank_account_attributes_trustor_attributes_id').val();
+    var bank_id = $('#product_trustor_bank_account_attributes_bank_attributes_id').val();
+    if (trustor_id && bank_id) {
+      $.get('/trustors/bank_accounts.json?trustor_id=' + trustor_id + '&bank_id' + bank_id, function(data) {
+        $('#product_trustor_bank_account_attributes_name').typeahead({
+          source: data
+        }).change(function() {
+          var cur = $(this).typeahead("getActive");
+          if (cur) {
+            if (cur.name == $(this).val()) {
+              $('#product_trustor_bank_account_attributes_number').val(cur.number);
+            }
+          }
+        });
+      });
+    }
+  };
+
+  $(document).ready(function() {
+
   });
 </script>

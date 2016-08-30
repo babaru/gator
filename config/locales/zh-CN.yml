@@ -71,9 +71,9 @@ zh-CN:
         type: 产品类别
         initial_fund: 初始委托资产金额
         trustor_name: 托管人
-        trustor_account_name: 托管户名称
+        trustor_bank_account_name: 托管户名称
         trustor_bank_name: 托管账户开户行
-        trustor_bank_account: 托管户账号
+        trustor_bank_account_number: 托管户账号
         securities_account_name: 证券户名称
         securities_bank_name: 证券户开户行
         securities_capital_account: 证券资金账号
