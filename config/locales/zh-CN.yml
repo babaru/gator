@@ -64,7 +64,7 @@ zh-CN:
         name: 名称
         client_code: 客户编号
         short_name: 简称
-        manager_name: 产品经理
+        product_manager: 产品经理
         code: 产品编码
         running_status: 运行状态
         dev_type: 研发类别

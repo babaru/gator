@@ -163,3 +163,12 @@ seed_products = Product.create([
     { name: "证券基金开发部" }
   ]
   ) if Department.count == 0
+
+  seed_product_managers = ProductManager.create(
+  [
+    { name: "肖珊" },
+    { name: "王廷璞" },
+    { name: "董海洲" },
+    { name: "强政" }
+  ]
+  ) if ProductManager.count == 0

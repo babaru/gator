@@ -3,12 +3,13 @@
 
   <%= f.input :name %>
   <%= f.input :short_name %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :client_code %>
   <%= f.input :code %>
+  <%= f.input :client_code %>
   <div class="hr-line-dashed"></div>
+
   <%= f.simple_fields_for :product_manager do |pm| %>
-    <%= pm.input :name, input_html: {autocomplete: 'off', class: 'product_manager_name'} %>
+    <%= pm.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.product_manager') %>
+    <%= pm.input :id, as: :hidden %>
   <% end %>
   <%= f.input :type %>
   <%= f.input :dev_type %>
@@ -80,23 +81,29 @@
 <% end %>
 
 <script type="text/javascript">
-
-  $(document).ready(function() {
-    var $input = $('.product_manager_name');
-    $input.typeahead({
-      source: [
-        {id: "1", name: "Item 1"},
-        {id: "2", name: "Item 2"},
-        {id: "3", name: "Item 3"}
-      ],
+  $.get('/product_managers.json', function(data) {
+    $('#product_product_manager_attributes_name').typeahead({
+      source: data,
       autoSelect: true
     });
+  });
+  $(document).ready(function() {
+    var $input = $('#product_product_manager_attributes_name');
+    // $input.typeahead({
+    //   source: [
+    //     {id: "1", name: "Item 1"},
+    //     {id: "2", name: "Item 2"},
+    //     {id: "3", name: "Item 3"}
+    //   ],
+    //   autoSelect: true
+    // });
 
     $input.change(function() {
       var current = $input.typeahead("getActive");
       if (current) {
         if (current.name == $input.val()) {
           console.log(current.id);
+          $('#product_product_manager_attributes_id').val(current.id);
         }
       }
     });
