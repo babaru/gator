@@ -10,7 +10,6 @@
   <%= f.simple_fields_for :product_manager do |pm| %>
     <%= pm.input :name, input_html: {autocomplete: 'off', class: 'product_manager_name'} %>
   <% end %>
-  <input type="text" class="typeahead" ></input>
   <%= f.input :type %>
   <%= f.input :dev_type %>
   <div class="hr-line-dashed"></div>
