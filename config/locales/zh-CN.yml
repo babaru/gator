@@ -12,6 +12,12 @@ zh-CN:
     delete: 确定要删除这一条记录吗？
   labels:
     last_modified_at: 最后编辑于
+  product_types:
+    futures: 期货类
+    mixup: 综合类
+  product_dev_types:
+    gateway: 通道类
+    self_management: 自主管理类
   id_number_types:
     shenfenzheng: 身份证
     huzhao: 护照
@@ -67,8 +73,8 @@ zh-CN:
         product_manager: 产品经理
         code: 产品编码
         running_status: 运行状态
-        dev_type: 研发类别
-        type: 产品类别
+        product_dev_type: 研发类别
+        product_type: 产品类别
         initial_fund: 初始委托资产金额
         trustor_name: 托管人
         trustor_bank_account_name: 托管户名称

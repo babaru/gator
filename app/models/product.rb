@@ -11,7 +11,7 @@ class Product < ActiveRecord::Base
     :consultant, reject_if: proc { |attrs| attrs[:name].blank? }
 
 
-  # validates :name, uniqueness: true
+  validates :name, :short_name, :code, :client_code, uniqueness: true
 
   # validates :product_manager, presence: true
 
@@ -19,30 +19,51 @@ class Product < ActiveRecord::Base
     :client_code,
     :short_name,
     :code,
-    :running_status,
-    :type,
-    :dev_type,
+    # :running_status,
+    :product_type,
+    :product_dev_type,
     :initial_fund,
-    :valuation_out_sourcing,
-    :deposited_at,
+    # :valuation_out_sourcing,
+    # :deposited_at,
     :delegation_started_at,
     :delegation_ended_at,
     :delegation_duration,
-    :fee_calculation_standard,
-    :management_fee_ratio,
-    :year_day_count,
-    :management_fee_flour,
-    :trustor_fee_ratio,
-    :operation_fee_ratio,
-    :investment_consultant_fee_ratio,
-    :investment_consultant_fee_flour,
-    :bonus,
-    :sales_fee_ratio,
-    :sse_account_code,
-    :szse_account_code,
-    :cffex_account_code,
-    :zce_account_code,
-    :dce_account_code,
-    :shfe_account_code,
-    :consultant_name, presence: true
+    # :fee_calculation_standard,
+    # :management_fee_ratio,
+    # :year_day_count,
+    # :management_fee_flour,
+    # :trustor_fee_ratio,
+    # :operation_fee_ratio,
+    # :investment_consultant_fee_ratio,
+    # :investment_consultant_fee_flour,
+    # :bonus,
+    # :sales_fee_ratio,
+    # :sse_account_code,
+    # :szse_account_code,
+    # :cffex_account_code,
+    # :zce_account_code,
+    # :dce_account_code,
+    # :shfe_account_code,
+    # :consultant_name, 
+    presence: true
+
+  class << self
+
+    def product_types
+      Gator::ProductTypes.product_types.map{ |k,v| [I18n.t("product_types.#{k}"),v] }
+    end
+
+    def product_type_names
+      Gator::ProductTypes.product_types.map{ |k,v| [v, I18n.t("product_types.#{k}")] }.to_h
+    end
+
+    def product_dev_types
+      Gator::ProductDevTypes.product_dev_types.map{ |k,v| [I18n.t("product_dev_types.#{k}"),v] }
+    end
+
+    def product_dev_type_names
+      Gator::ProductDevTypes.product_dev_types.map{ |k,v| [v, I18n.t("product_dev_types.#{k}")] }.to_h
+    end
+
+  end
 end

@@ -1,0 +1,13 @@
+defaults: &defaults
+  product_dev_types:
+    gateway: 2
+    self_management: 1
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

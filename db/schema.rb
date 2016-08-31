@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831071151) do
+ActiveRecord::Schema.define(version: 20160831080215) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20160831071151) do
     t.string   "short_name",                         limit: 255
     t.string   "code",                               limit: 255
     t.integer  "running_status",                     limit: 4
-    t.string   "type",                               limit: 255
-    t.string   "dev_type",                           limit: 255
+    t.integer  "product_type",                       limit: 4
+    t.integer  "product_dev_type",                   limit: 4
     t.decimal  "initial_fund",                                   precision: 10
     t.string   "valuation_out_sourcing",             limit: 255
     t.datetime "deposited_at"
@@ -106,12 +106,16 @@ ActiveRecord::Schema.define(version: 20160831071151) do
     t.string   "consultant_name",                    limit: 255
   end
 
+  add_index "products", ["client_code"], name: "index_products_on_client_code", unique: true, using: :btree
+  add_index "products", ["code"], name: "index_products_on_code", unique: true, using: :btree
   add_index "products", ["consultant_id"], name: "index_products_on_consultant_id", using: :btree
   add_index "products", ["consultant_reference_department_id"], name: "index_products_on_consultant_reference_department_id", using: :btree
+  add_index "products", ["name"], name: "index_products_on_name", unique: true, using: :btree
   add_index "products", ["operation_department_id"], name: "index_products_on_operation_department_id", using: :btree
   add_index "products", ["product_manager_id"], name: "index_products_on_product_manager_id", using: :btree
   add_index "products", ["sales_department_id"], name: "index_products_on_sales_department_id", using: :btree
   add_index "products", ["securities_broker_account_id"], name: "index_products_on_securities_broker_account_id", using: :btree
+  add_index "products", ["short_name"], name: "index_products_on_short_name", unique: true, using: :btree
   add_index "products", ["trustor_bank_account_id"], name: "index_products_on_trustor_bank_account_id", using: :btree
 
   create_table "securities_broker_accounts", force: :cascade do |t|

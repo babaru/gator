@@ -1,0 +1,13 @@
+defaults: &defaults
+  product_types:
+    futures: 1
+    mixup: 2
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

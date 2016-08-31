@@ -47,10 +47,10 @@
                 <div class="col-lg-7" id="cluster_info">
                     <dl class="dl-horizontal">
 
-                        <dt><%= t('activerecord.attributes.product.type') %>:</dt>
-                        <dd><%= @product.type %></dd>
-                        <dt><%= t('activerecord.attributes.product.dev_type') %>:</dt>
-                        <dd> <%= @product.dev_type %></dd>
+                        <dt><%= t('activerecord.attributes.product.product_type') %>:</dt>
+                        <dd><%= @product.product_type %></dd>
+                        <dt><%= t('activerecord.attributes.product.product_dev_type') %>:</dt>
+                        <dd> <%= @product.product_dev_type %></dd>
                         <dt><%= t('activerecord.attributes.product.initial_fund') %>:</dt>
                         <dd> <%= @product.initial_fund %></dd>
                     </dl>
@@ -62,13 +62,13 @@
                     <dl class="dl-horizontal">
 
                         <dt><%= t('activerecord.attributes.product.trustor_name') %>:</dt>
-                        <dd><%= @product.trustor_bank_account.trustor.name %></dd>
+                        <dd><%= @product.trustor_bank_account.trustor.name if @product.trustor_bank_account %></dd>
                         <dt><%= t('activerecord.attributes.product.trustor_bank_name') %>:</dt>
-                        <dd><%= @product.trustor_bank_account.bank.name %></dd>
+                        <dd><%= @product.trustor_bank_account.bank.name if @product.trustor_bank_account %></dd>
                         <dt><%= t('activerecord.attributes.product.trustor_bank_account') %>:</dt>
-                        <dd><%= @product.trustor_bank_account.name %> </dd>
+                        <dd><%= @product.trustor_bank_account.name if @product.trustor_bank_account %> </dd>
                         <dt><%= t('activerecord.attributes.product.trustor_account_name') %>:</dt>
-                        <dd><%= @product.trustor_bank_account.number %> </dd>
+                        <dd><%= @product.trustor_bank_account.number if @product.trustor_bank_account %> </dd>
 
                     </dl>
                 </div>
@@ -76,11 +76,11 @@
                     <dl class="dl-horizontal">
 
                         <dt><%= t('activerecord.attributes.product.securities_account_name') %>:</dt>
-                        <dd><%= @product.securities_broker.name if @product.securities_broker %></dd>
+                        <dd><%= @product.securities_broker_account.name if @product.securities_broker_account %></dd>
                         <dt><%= t('activerecord.attributes.product.securities_bank_name') %>:</dt>
-                        <dd><%= @product.securities_broker.bank.name if @product.securities_broker %></dd>
+                        <dd><%= @product.securities_broker_account.securities_broker.name if @product.securities_broker_account %></dd>
                         <dt><%= t('activerecord.attributes.product.securities_capital_account') %>:</dt>
-                        <dd><%= @product.securities_broker.capital_name if @product.securities_broker %> </dd>
+                        <dd><%= @product.securities_broker_account.number if @product.securities_broker_account %> </dd>
                         <dt><%= t('activerecord.attributes.product.deposited_at') %>:</dt>
                         <dd><%= @product.deposited_at.strftime('%Y-%m-%d') if @product.deposited_at %></dd>
 
@@ -116,9 +116,9 @@
                     <dl class="dl-horizontal">
 
                         <dt><%= t('activerecord.attributes.product.sales_department') %>:</dt>
-                        <dd><%= @product.sales_department %></dd>
-                        <dt><%= t('activerecord.attributes.product.investment_consultant_reference_department') %>:</dt>
-                        <dd><%= @product.investment_consultant_reference_department %></dd>
+                        <dd><%= @product.sales_department.name %></dd>
+                        <dt><%= t('activerecord.attributes.product.consultant_reference_department') %>:</dt>
+                        <dd><%= @product.consultant_reference_department.name %></dd>
 
                     </dl>
                 </div>
@@ -126,9 +126,9 @@
                     <dl class="dl-horizontal">
 
                       <dt><%= t('activerecord.attributes.product.operation_department') %>:</dt>
-                      <dd><%= @product.operation_department %> </dd>
-                      <dt><%= t('activerecord.attributes.product.investment_consultant_name') %>:</dt>
-                      <dd><%= @product.investment_consultant_name %> </dd>
+                      <dd><%= @product.operation_department.name %> </dd>
+                      <dt><%= t('activerecord.attributes.product.consultant_name') %>:</dt>
+                      <dd><%= @product.consultant.name %> </dd>
 
                     </dl>
                 </div>
