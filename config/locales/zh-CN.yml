@@ -107,9 +107,9 @@ zh-CN:
         dce_account_code: 大商所交易编码
         shfe_account_code: 上期所交易编码
         sales_department: 委托资产销售单位
-        investment_consultant_reference_department: 投顾引进部门
+        consultant_reference_department: 投顾引进部门
         operation_department: 产品运作部门
-        investment_consultant_name: 投顾名称
+        consultant_name: 投顾名称
       client:
         type: 投资人类型
         application_number: 申请单编号
@@ -127,3 +127,14 @@ zh-CN:
         business_code: 业务代码
         branch_store_number: 网点号码
         fund_account_number: 投资人基金帐号
+  simple_form:
+    "yes": '是'
+    "no": '不'
+    required:
+      text: '必填'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "请重新检查表单中的问题："

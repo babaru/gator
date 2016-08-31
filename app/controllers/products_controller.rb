@@ -52,8 +52,6 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-
-
     respond_to do |format|
       @product = Product.new(product_params.except(:product_manager_attributes,
         :sales_department_attributes,
@@ -63,7 +61,8 @@ class ProductsController < ApplicationController
       @product.product_manager = ProductManager.find_or_create_by(name: product_params[:product_manager_attributes][:name])
       @product.sales_department = Department.find_or_create_by(name: product_params[:sales_department_attributes][:name])
       @product.operation_department = Department.find_or_create_by(name: product_params[:operation_department_attributes][:name])
-      @product.consultant_reference_department = Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
+      @product.consultant_reference_department =
+        Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
       @product.consultant = Consultant.find_or_create_by(name: product_params[:consultant_attributes][:name])
 
       if @product.save
@@ -154,15 +153,19 @@ class ProductsController < ApplicationController
         :name
       ],
       sales_department_attributes: [
+        :id,
         :name
       ],
       operation_department_attributes: [
+        :id,
         :name
       ],
       consultant_reference_department_attributes: [
+        :id,
         :name
       ],
       consultant_attributes: [
+        :id,
         :name
       ],
       trustor_bank_account_attributes: [
