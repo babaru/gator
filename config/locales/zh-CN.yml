@@ -12,6 +12,7 @@ zh-CN:
     delete: 确定要删除这一条记录吗？
   labels:
     last_modified_at: 最后编辑于
+    all_required: 加上星标 * 的项目为必填项
   product_types:
     futures: 期货类
     mixup: 综合类
