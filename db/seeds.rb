@@ -39,9 +39,10 @@ seed_products = Product.create([
     investment_consultant_reference_department: "无", operation_department: "研究所",
     investment_consultant_name: ""
   }
-  ]) if Product.count == 0
+]) if Product.count == 0
 
-  seed_clients = Client.create([
+seed_clients = Client.create(
+[
   {
     :type => IndividualClient.name,
     :application_number => "123456780",
@@ -124,8 +125,8 @@ seed_products = Product.create([
   }
   ])
 
-  seed_departments = Department.create(
-  [
+seed_departments = Department.create(
+[
     { name: "杭州营业部" },
     { name: "郑州营业部" },
     { name: "IB业务部" },
@@ -162,27 +163,31 @@ seed_products = Product.create([
     { name: "研究所" },
     { name: "证券基金开发部" }
   ]
-  ) if Department.count == 0
+) if Department.count == 0
 
-  seed_product_managers = ProductManager.create(
-  [
-    { name: "肖珊" },
-    { name: "王廷璞" },
-    { name: "董海洲" },
-    { name: "强政" }
-  ]
-  ) if ProductManager.count == 0
+seed_product_managers = ProductManager.create(
+[
+  { name: "肖珊" },
+  { name: "王廷璞" },
+  { name: "董海洲" },
+  { name: "强政" }
+]
+) if ProductManager.count == 0
 
-  seed_banks = Bank.create([
-    { name: "中国工商银行" },
-    { name: "中国建设银行" },
-    { name: "中国农业银行" },
-    { name: "中国银行" },
-    { name: "招商银行" },
-    { name: "兴业银行" }
-  ]) if Bank.count == 0
+seed_banks = Bank.create([
+  { name: "中国工商银行" },
+  { name: "中国建设银行" },
+  { name: "中国农业银行" },
+  { name: "中国银行" },
+  { name: "招商银行" },
+  { name: "兴业银行" }
+]) if Bank.count == 0
 
-  seed_trustors = Trustor.create([
-    { name: "申银万国证券" },
-    { name: "招商证券" },
-  ]) if Trustor.count == 0
+seed_trustors = Trustor.create([
+  { name: "申银万国证券" },
+  { name: "招商证券" },
+]) if Trustor.count == 0
+
+seed_securities_brokers = SecuritiesBroker.create([
+  { name: "申万宏源福州鼓屏路" }
+]) if SecuritiesBroker.count == 0

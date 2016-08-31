@@ -35,7 +35,7 @@
                     <dl class="dl-horizontal">
 
                         <dt><%= t('activerecord.attributes.product.manager_name') %>:</dt>
-                        <dd><%= @product.manager_name %> </dd>
+                        <dd><%= @product.product_manager.name if @product.product_manager %> </dd>
                         <dt><%= t('activerecord.attributes.product.name') %>:</dt>
                         <dd><%= @product.name %></dd>
                         <dt><%= t('activerecord.attributes.product.short_name') %>:</dt>
@@ -62,13 +62,13 @@
                     <dl class="dl-horizontal">
 
                         <dt><%= t('activerecord.attributes.product.trustor_name') %>:</dt>
-                        <dd><%= @product.trustor_name %></dd>
+                        <dd><%= @product.trustor_bank_account.trustor.name %></dd>
                         <dt><%= t('activerecord.attributes.product.trustor_bank_name') %>:</dt>
-                        <dd><%= @product.trustor_bank_name %></dd>
+                        <dd><%= @product.trustor_bank_account.bank.name %></dd>
                         <dt><%= t('activerecord.attributes.product.trustor_bank_account') %>:</dt>
-                        <dd><%= @product.trustor_bank_account %> </dd>
+                        <dd><%= @product.trustor_bank_account.name %> </dd>
                         <dt><%= t('activerecord.attributes.product.trustor_account_name') %>:</dt>
-                        <dd><%= @product.trustor_account_name %> </dd>
+                        <dd><%= @product.trustor_bank_account.number %> </dd>
 
                     </dl>
                 </div>
@@ -76,11 +76,11 @@
                     <dl class="dl-horizontal">
 
                         <dt><%= t('activerecord.attributes.product.securities_account_name') %>:</dt>
-                        <dd><%= @product.securities_account_name %></dd>
+                        <dd><%= @product.securities_broker.name if @product.securities_broker %></dd>
                         <dt><%= t('activerecord.attributes.product.securities_bank_name') %>:</dt>
-                        <dd><%= @product.securities_bank_name %></dd>
+                        <dd><%= @product.securities_broker.bank.name if @product.securities_broker %></dd>
                         <dt><%= t('activerecord.attributes.product.securities_capital_account') %>:</dt>
-                        <dd><%= @product.securities_capital_account %> </dd>
+                        <dd><%= @product.securities_broker.capital_name if @product.securities_broker %> </dd>
                         <dt><%= t('activerecord.attributes.product.deposited_at') %>:</dt>
                         <dd><%= @product.deposited_at.strftime('%Y-%m-%d') if @product.deposited_at %></dd>
 

@@ -5,7 +5,10 @@ class DepartmentsController < ApplicationController
   # GET /departments
   # GET /departments.json
   def index
-    set_departments_grid
+    respond_to do |format|
+      format.html { set_departments_grid }
+      format.json { render json: Department.all }
+    end
   end
 
   # GET /departments/1

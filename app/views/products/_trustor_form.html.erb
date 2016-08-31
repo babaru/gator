@@ -1,0 +1,201 @@
+<%= simple_form_for(@product, html: { class: 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+<div class="row">
+  <div class="col-lg-6">
+    <%= f.input :name %>
+    <%= f.input :short_name %>
+    <%= f.input :code %>
+    <%= f.input :client_code %>
+    <%= f.input :initial_fund %>
+  </div>
+  <div class="col-lg-6">
+    <%= f.simple_fields_for :product_manager do |pm| %>
+      <%= pm.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.product_manager') %>
+      <%= pm.input :id, as: :hidden %>
+    <% end %>
+    <%= f.input :type %>
+    <%= f.input :dev_type %>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <%= f.simple_fields_for :trustor_bank_account do |tba| %>
+
+    <%= tba.simple_fields_for :trustor do |tr| %>
+    <%= tr.input :id, as: :hidden %>
+    <%= tr.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.trustor_name') %>
+    <% end %>
+
+    <%= tba.simple_fields_for :bank do |bk| %>
+    <%= bk.input :id, as: :hidden %>
+    <%= bk.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.trustor_bank_name') %>
+    <% end %>
+
+    <%= tba.input :id, as: :hidden %>
+    <%= tba.input :name, label: t('activerecord.attributes.product.trustor_bank_account_name') %>
+    <%= tba.input :number, label: t('activerecord.attributes.product.trustor_bank_account_number') %>
+
+    <% end %>
+  </div>
+  <div class="col-lg-6">
+    <%= f.simple_fields_for :securities_broker_account do |sba| %>
+
+    <%= sba.simple_fields_for :securities_broker do |sb| %>
+    <%= sb.input :id, as: :hidden %>
+    <%= sb.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.securities_broker_name') %>
+    <% end %>
+
+    <%= sba.input :id, as: :hidden %>
+    <%= sba.input :name, label: t('activerecord.attributes.product.securities_broker_account_name') %>
+    <%= sba.input :number, label: t('activerecord.attributes.product.securities_broker_account_number') %>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+  <div class="hr-line-dashed"></div>
+  <%= f.input :valuation_out_sourcing %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :deposited_at, as: :date_time_picker %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :delegation_started_at, as: :date_time_picker %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :delegation_ended_at, as: :date_time_picker %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :delegation_duration %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :fee_calculation_standard %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :management_fee_ratio %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :year_day_count %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :management_fee_flour %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :trustor_fee_ratio %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :operation_fee_ratio %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :investment_consultant_fee_ratio %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :investment_consultant_fee_flour %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :bonus %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :sales_fee_ratio %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :sse_account_code %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :szse_account_code %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :cffex_account_code %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :zce_account_code %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :dce_account_code %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :shfe_account_code %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :sales_department %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :investment_consultant_reference_department %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :operation_department %>
+  <div class="hr-line-dashed"></div>
+  <%= f.input :investment_consultant_name %>
+
+  <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-2">
+          <%= f.submit t('buttons.save'), class: 'btn btn-primary btn-sm', id: 'client-save-btn' %>
+          or
+          <%= link_to t('activerecord.text.back_to_list', model: Product.model_name.human),
+          clients_path %>
+      </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+
+  $.get('/product_managers.json', function(data) {
+    $('#product_product_manager_attributes_name').typeahead({
+      source: data
+    }).change(function() {
+      var current = $(this).typeahead("getActive");
+      if (current) {
+        if (current.name == $(this).val()) {
+          $('#product_product_manager_attributes_id').val(current.id);
+        }
+      }
+    });
+  });
+
+  $.get('/trustors.json', function(data) {
+    $('#product_trustor_bank_account_attributes_trustor_attributes_name').typeahead({
+      source: data
+    }).change(function() {
+      var cur = $(this).typeahead("getActive");
+      if (cur) {
+        if (cur.name == $(this).val()) {
+          $('#product_trustor_bank_account_attributes_trustor_attributes_id').val(cur.id);
+          find_trustor_bank_accounts();
+        }
+      }
+    });
+  });
+
+  $.get('/banks.json', function(data) {
+    $('#product_trustor_bank_account_attributes_bank_attributes_name').typeahead({
+      source: data
+    }).change(function() {
+      var cur = $(this).typeahead("getActive");
+      if (cur) {
+        if (cur.name == $(this).val()) {
+          $('#product_trustor_bank_account_attributes_bank_attributes_id').val(cur.id);
+          find_trustor_bank_accounts();
+        }
+      }
+    });
+  });
+
+  function find_trustor_bank_accounts() {
+    var trustor_id = $('#product_trustor_bank_account_attributes_trustor_attributes_id').val();
+    var bank_id = $('#product_trustor_bank_account_attributes_bank_attributes_id').val();
+    if (trustor_id && bank_id) {
+      $.get('/trustors/bank_accounts.json?trustor_id=' + trustor_id + '&bank_id' + bank_id, function(data) {
+        $('#product_trustor_bank_account_attributes_name').typeahead({
+          source: data
+        }).change(function() {
+          var cur = $(this).typeahead("getActive");
+          if (cur) {
+            if (cur.name == $(this).val()) {
+              $('#product_trustor_bank_account_attributes_number').val(cur.number);
+            }
+          }
+        });
+      });
+    }
+  };
+
+  $.get('/securities_brokers.json', function(data) {
+    $('#product_securities_broker_account_securities_broker_name').typeahead({
+      source: data
+    }).change(function() {
+      var cur = $(this).typeahead("getActive");
+      if (cur && cur.name == $(this).val()) {
+        $('#product_securities_broker_account_securities_broker_id').val(cur.id);
+      } else {
+        $('#product_securities_broker_account_securities_broker_id').val("");
+      }
+    });
+  });
+
+  $(document).ready(function() {
+
+  });
+</script>

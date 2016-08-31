@@ -39,9 +39,10 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.build_product_manager
-    @product.build_trustor_bank_account
-    @product.trustor_bank_account.build_trustor
-    @product.trustor_bank_account.build_bank
+    @product.build_sales_department
+    @product.build_operation_department
+    @product.build_consultant_reference_department
+    @product.build_consultant
   end
 
   # GET /products/1/edit
@@ -51,19 +52,20 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    product_manager = ProductManager.find_or_create_by(name: product_params[:product_manager_attributes][:name])
-    trustor = Trustor.find_or_create_by(name: product_params[:trustor_bank_account_attributes][:trustor_attributes][:name])
-    bank = Bank.find_or_create_by(name: product_params[:trustor_bank_account_attributes][:bank_attributes][:name])
-    trustor_bank_account = TrustorBankAccount.find_or_create_by(name: product_params[:trustor_bank_account_attributes][:name],
-      number: product_params[:trustor_bank_account_attributes][:number],
-      trustor_id: trustor.id,
-      bank_id: bank.id)
 
-    @product = Product.new(product_params.except(:trustor_bank_account_attributes, :product_manager_attributes))
-    @product.trustor_bank_account = trustor_bank_account
-    @product.product_manager = product_manager
 
     respond_to do |format|
+      @product = Product.new(product_params.except(:product_manager_attributes,
+        :sales_department_attributes,
+        :operation_department_attributes,
+        :consultant_reference_department_attributes,
+        :consultant_attributes))
+      @product.product_manager = ProductManager.find_or_create_by(name: product_params[:product_manager_attributes][:name])
+      @product.sales_department = Department.find_or_create_by(name: product_params[:sales_department_attributes][:name])
+      @product.operation_department = Department.find_or_create_by(name: product_params[:operation_department_attributes][:name])
+      @product.consultant_reference_department = Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
+      @product.consultant = Consultant.find_or_create_by(name: product_params[:consultant_attributes][:name])
+
       if @product.save
         set_products_grid
         format.html { redirect_to @product, notice: t('activerecord.success.messages.created', model: Product.model_name.human) }
@@ -120,9 +122,6 @@ class ProductsController < ApplicationController
       :type,
       :dev_type,
       :initial_fund,
-      :securities_account_name,
-      :securities_bank_name,
-      :securities_capital_account,
       :valuation_out_sourcing,
       :deposited_at,
       :delegation_started_at,
@@ -154,6 +153,18 @@ class ProductsController < ApplicationController
         :id,
         :name
       ],
+      sales_department_attributes: [
+        :name
+      ],
+      operation_department_attributes: [
+        :name
+      ],
+      consultant_reference_department_attributes: [
+        :name
+      ],
+      consultant_attributes: [
+        :name
+      ],
       trustor_bank_account_attributes: [
         :number, :name,
         trustor_attributes: [
@@ -162,6 +173,12 @@ class ProductsController < ApplicationController
         ],
         bank_attributes: [
           :id,
+          :name
+        ]
+      ],
+      securities_broker_account_attributes: [
+        :number, :name,
+        securities_broker_attributes: [
           :name
         ]
       ]

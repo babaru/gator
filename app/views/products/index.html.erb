@@ -24,7 +24,7 @@
                         <div class="">
 
                             <div class="pull-right">
-                                <%= link_to t('activerecord.text.new_instance', model: Product.model_name.human), new_product_path, class: 'btn btn-primary btn-sm' %>
+                                <%= link_to t('activerecord.text.new_instance', model: Product.model_name.human), new_product_path, class: 'btn btn-primary btn-sm', method: :get %>
                             </div>
 
                             <div class="btn-group">

@@ -1,13 +1,16 @@
-
-
-
 class ConsultantsController < ApplicationController
   before_action :set_consultant, only: [:show, :edit, :update, :destroy]
 
   # GET /consultants
   # GET /consultants.json
   def index
-    set_consultants_grid
+    respond_to do |format|
+      format.html do
+        set_consultants_grid
+      end
+
+      format.json { render json: Consultant.all }
+    end
   end
 
   # GET /consultants/1
@@ -87,5 +90,3 @@ class ConsultantsController < ApplicationController
     @consultants_grid = initialize_grid(Consultant)
   end
 end
-
-
