@@ -4,32 +4,18 @@
     client.id
   end
 
-  g.column name: t('activerecord.attributes.client.individual_institution') do |client|
-    if client.individual?
-      content_tag(:span, '个人', class: 'label label-info')
-    else
-      content_tag(:span, '机构', class: 'label label-info')
-    end
-  end
-
-  g.column name: t('activerecord.attributes.client.application_number') do |client|
-    client.application_number
-  end
-
-  g.column name: t('activerecord.attributes.client.name') do |client|
-    link_to(client.name, client_path(client))
-  end
-
-  g.column name: t('activerecord.attributes.client.id_number_type') do |client|
-    client.id_number_type
+  g.column name: t('activerecord.attributes.client.name'), class: 'project-title' do |client|
+    [
+      link_to(client.name, client_path(client)),
+      client.individual? ? content_tag(:span, '个人', class: 'label label-info') : content_tag(:span, '机构', class: 'label label-danger')
+    ].join('<br />').html_safe
   end
 
   g.column name: t('activerecord.attributes.client.id_number') do |client|
-    client.id_number
-  end
-
-  g.column name: t('activerecord.attributes.client.traded_at') do |client|
-    client.traded_at.strftime('%Y-%m-%d %H:%M:%S') if client.traded_at
+    [
+      content_tag(:span, Client.id_number_type_names[client.id_number_type], class: 'label'),
+      client.id_number
+    ].join(' ').html_safe
   end
 
   g.column name: t('activerecord.attributes.client.fund_trading_account_number') do |client|

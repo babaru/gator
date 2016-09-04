@@ -15,28 +15,16 @@
 
 <div class="wrapper wrapper-content">
     <div class="row">
+        <div class="col-lg-12 m-b-md">
+            <%= link_to '个人开户', new_client_path(individual: true), class: 'btn btn-primary btn-w-m' %>
+            <%= link_to '机构开户', new_client_path(institution: true), class: 'btn btn-primary btn-w-m' %>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-10">
             <div class="ibox">
 
                 <div class="ibox-content">
-
-                    <div class="m-b-lg">
-
-                        <div>
-
-                            <div class="pull-right">
-                                <%= link_to '个人开户', new_client_path(individual: true), class: 'btn btn-primary btn-sm' %>
-                                <%= link_to '机构开户', new_client_path(institution: true), class: 'btn btn-primary btn-sm' %>
-                            </div>
-
-                            <div class="btn-group">
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
                     <div class="table-responsive">
                         <%= render partial: 'clients_grid' %>
                     </div>
