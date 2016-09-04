@@ -1,7 +1,8 @@
 <%= simple_form_for(@query_product_params, url: search_products_path, as: :product, wrapper: :vertical_form) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :name, label: t('activerecord.attributes.product.name') %>
+  <%= f.input :name, required: false, label: t('activerecord.attributes.product.name') %>
+  <%= f.input :consultant_name, required: false, label: t('activerecord.attributes.product.consultant_name') %>
 
   <div class="form-group">
       <%= f.submit t('buttons.search'), class: 'btn btn-white btn-sm' %>

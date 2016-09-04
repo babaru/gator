@@ -2,21 +2,26 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  QUERY_KEYS = [:name, :consultant_name].freeze
+
   # GET /products
   # GET /products.json
   def index
     @query_params = {}
 
     if request.post?
-      @query_params[:name] = params[:product][:name] if params[:product][:name] && !params[:product][:name].empty?
+      build_query_params(params[:product])
+      redirect_to products_path(@query_params)
+    else
+      build_query_params(params)
     end
 
-    @query_product_params = Product.new
-    @query_product_params.name = @query_params[:name]
+    build_query_product_params
 
     @conditions = []
     @conditions << Product.arel_table[:name].matches("%#{@query_params[:name]}%") if @query_params[:name]
     @conditions << Product.arel_table[:short_name].matches("%#{@query_params[:name]}%") if @query_params[:name]
+    @conditions << Product.arel_table[:consultant_name].matches("%#{@query_params[:consultant_name]}%") if @query_params[:consultant_name]
 
     if @conditions.length > 0
       conditions = @conditions[0]
@@ -27,6 +32,19 @@ class ProductsController < ApplicationController
     end
 
     set_products_grid(@conditions)
+  end
+
+  def build_query_params(parameters)
+    QUERY_KEYS.each do |key|
+      @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+    end
+  end
+
+  def build_query_product_params
+    @query_product_params = Product.new
+    QUERY_KEYS.each do |key|
+      @query_product_params.send("#{key}=", @query_params[key])
+    end
   end
 
   # GET /products/1
@@ -47,6 +65,11 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    @product.build_product_manager if @product.product_manager.nil?
+    @product.build_sales_department if @product.sales_department.nil?
+    @product.build_operation_department if @product.operation_department.nil?
+    @product.build_consultant_reference_department if @product.consultant_reference_department.nil?
+    @product.build_consultant if @product.consultant.nil?
   end
 
   # POST /products
@@ -80,7 +103,18 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     respond_to do |format|
-      if @product.update(product_params)
+      @product.product_manager = ProductManager.find_or_create_by(name: product_params[:product_manager_attributes][:name])
+      @product.sales_department = Department.find_or_create_by(name: product_params[:sales_department_attributes][:name])
+      @product.operation_department = Department.find_or_create_by(name: product_params[:operation_department_attributes][:name])
+      @product.consultant_reference_department =
+        Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
+      @product.consultant = Consultant.find_or_create_by(name: product_params[:consultant_attributes][:name])
+
+      if @product.update(product_params.except(:product_manager_attributes,
+        :sales_department_attributes,
+        :operation_department_attributes,
+        :consultant_reference_department_attributes,
+        :consultant_attributes))
         set_products_grid
         format.html { redirect_to @product, notice: t('activerecord.success.messages.updated', model: Product.model_name.human) }
         format.js

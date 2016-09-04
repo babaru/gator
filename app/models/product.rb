@@ -75,5 +75,9 @@ class Product < ActiveRecord::Base
       Gator::ProductDevTypes.product_dev_types.map{ |k,v| [v, I18n.t("product_dev_types.#{k}")] }.to_h
     end
 
+    def product_running_status_names
+      'Running'
+    end
+
   end
 end

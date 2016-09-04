@@ -4,7 +4,14 @@
   end
 
   g.column name: t('activerecord.attributes.product.name'), class: 'project-title' do |product|
-    link_to(product.name, product_path(product))
+    [
+      link_to(product.name, product_path(product)),
+      content_tag(:div, [
+        content_tag(:span, Product.product_running_status_names, class: 'label label-info'),
+        content_tag(:span, "#{t('activerecord.attributes.product.code')}: "),
+        content_tag(:strong, product.code)
+      ].join(' ').html_safe)
+    ].join('').html_safe
   end
 
   g.column name: t('activerecord.attributes.product.client_code') do |product|
@@ -15,20 +22,16 @@
     product.short_name
   end
 
-  g.column name: t('activerecord.attributes.product.manager_name') do |product|
+  g.column name: t('activerecord.attributes.product.product_manager') do |product|
     product.product_manager.name if product.product_manager
   end
 
-  g.column name: t('activerecord.attributes.product.code') do |product|
-    product.code
+  g.column name: t('activerecord.attributes.product.product_type') do |product|
+    Product.product_type_names[product.product_type]
   end
 
-  g.column name: t('activerecord.attributes.product.running_status') do |product|
-    product.running_status
-  end
-
-  g.column name: t('activerecord.attributes.product.type') do |product|
-    product.product_type
+  g.column name: t('activerecord.attributes.product.product_dev_type') do |product|
+    Product.product_dev_type_names[product.product_dev_type]
   end
 
   g.column name: t('activerecord.attributes.time_stamp.updated_at') do |product|
