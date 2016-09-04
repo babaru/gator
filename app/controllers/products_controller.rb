@@ -90,6 +90,7 @@ class ProductsController < ApplicationController
       @product.consultant_reference_department =
         Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
       @product.consultant = Consultant.find_or_create_by(name: product_params[:consultant_attributes][:name])
+      @product.consultant.development = @product.consultant_reference_department
 
       if @product.save
         set_products_grid
@@ -112,6 +113,7 @@ class ProductsController < ApplicationController
       @product.consultant_reference_department =
         Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
       @product.consultant = Consultant.find_or_create_by(name: product_params[:consultant_attributes][:name])
+      @product.consultant.development = @product.consultant_reference_department
 
       if @product.update(product_params.except(:product_manager_attributes,
         :sales_department_attributes,

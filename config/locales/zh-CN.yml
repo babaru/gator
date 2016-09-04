@@ -131,6 +131,9 @@ zh-CN:
         business_code: 业务代码
         branch_store_number: 网点号码
         fund_account_number: 投资人基金帐号
+      consultant:
+        name: 名称
+        department: 推荐部门
   simple_form:
     "yes": '是'
     "no": '不'
