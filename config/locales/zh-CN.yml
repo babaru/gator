@@ -8,6 +8,9 @@ zh-CN:
     edit: 编辑
     delete: 删除
     search: 搜索
+    download_as_excel: 下载为Excel文件
+    download: 下载
+    reset: 重置
   confirms:
     delete: 确定要删除这一条记录吗？
   labels:

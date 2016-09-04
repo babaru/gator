@@ -31,7 +31,10 @@ class ProductsController < ApplicationController
       @conditions = conditions
     end
 
-    set_products_grid(@conditions)
+    respond_to do |format|
+      format.html { set_products_grid(@conditions) }
+      format.xls { @products = Product.where(@conditions) }
+    end
   end
 
   def build_query_params(parameters)
