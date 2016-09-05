@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
+  
+  
+  
   post 'banks/search' => 'banks#index', as: :search_banks
-  post 'trustors/search' => 'trustors#index', as: :search_trustors
   post 'departments/search' => 'departments#index', as: :search_departments
   post 'consultants/search' => 'consultants#index', as: :search_consultants
+  post 'trustors/search' => 'trustors#index', as: :search_trustors
+  
+  
+  
+  
+  
+  
   devise_for :users
   root 'products#index'
 

@@ -18,15 +18,64 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="m-b-md">
-                        <%= link_to t('activerecord.text.edit_instance', model: Trustor.model_name.human), edit_trustor_path(@trustor), class: 'btn btn-white btn-xs pull-right' %>
-                        <h2>#Instance Name</h2>
+                        <div class="pull-right">
+                          <%= link_to fa_icon('pencil', text: t('buttons.edit')), edit_trustor_path(@trustor), class: 'btn btn-white btn-sm' %>
+                        </div>
+
+                        <h2><%= @trustor.name %></h2>
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <dl class="dl-horizontal">
+                        <dt>Field1: </dt>
+                        <dd>Value</dd>
+                    </dl>
+                </div>
+                <div class="col-lg-7" id="cluster_info">
+                    <dl class="dl-horizontal">
+                        <dt>Field2: </dt>
+                        <dd>Value</dd>
+                    </dl>
+                </div>
+            </div>
+
             <div class="row m-t-sm">
                 <div class="col-lg-12">
-                    <div class="m-b-md">
-                        <!-- your content here -->
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                <ul class="nav nav-tabs">
+                                    <% @tabs.each do |tab| %>
+                                    <% if @current_tab == tab %>
+                                    <li class="active">
+                                    <% else %>
+                                    <li class="">
+                                    <% end %>
+                                      <%= link_to tab.to_s, trustor_path(@trustor, tab: tab) %>
+                                    </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="tab-content">
+                                <% @tabs.each do |tab| %>
+                                <% if @current_tab == tab %>
+                                <div class="tab-pane active">
+                                <% else %>
+                                <div class="tab-pane">
+                                <% end %>
+                                    <%= tab.to_s %>
+                                </div>
+                                <% end %>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>

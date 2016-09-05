@@ -50,9 +50,15 @@ class <%= controller_class_name %>Controller < ApplicationController
     end
   end
 
+  TABS = [:tab1, :tab2].freeze
+
   # GET <%= route_url %>/1
   # GET <%= route_url %>/1.json
   def show
+    @tabs = TABS
+    @current_tab = params[:tab]
+    @current_tab ||= TABS.first.to_s
+    @current_tab = @current_tab.to_sym
   end
 
   # GET <%= route_url %>/new

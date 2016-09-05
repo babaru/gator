@@ -48,9 +48,15 @@ class BanksController < ApplicationController
     end
   end
 
+  TABS = [:tab1, :tab2].freeze
+
   # GET /banks/1
   # GET /banks/1.json
   def show
+    @tabs = TABS
+    @current_tab = params[:tab]
+    @current_tab ||= TABS.first.to_s
+    @current_tab = @current_tab.to_sym
   end
 
   # GET /banks/new
