@@ -8,123 +8,123 @@
 
 seed_users = User.create([{ username: 'sys_admin', email: 'sys_admin@ctpt.io', password: 12345678, password_confirmation: 12345678 }]) if User.count == 0
 
-seed_products = Product.create([
-  { name: "申银万国期货有限公司-嘉诚一号集合资产管理计划", short_name: "嘉诚一号",
-    client_code: "9090000310", code: "S24786", initial_fund: 6000000.00,
-    trustor_name: "招商银行", trustor_bank_name: "交通银行",
-    securities_bank_name: "申万宏源福州鼓屏路", securities_capital_account: "2017033587",
-    valuation_out_sourcing: "招商证券",
-    delegation_started_at: "2015-04-16", delegation_ended_at: "2018-04-14",
-    delegation_duration: 3, fee_calculation_standard: "前一日资产净值",
-    management_fee_ratio: 0.015, year_day_count: "当年天数", trustor_fee_ratio: 0.0015,
-    operation_fee_ratio: 0.0005, bonus: "当期收益的20%", sales_fee_ratio: 0.01,
-    sse_account_code: "8888562270", szse_account_code: "0899075801",
-    cffex_account_code: "00004257", zce_account_code: "99200147",
-    dce_account_code: "02319923", shfe_account_code: "81001734", sales_department: "福州营业部",
-    investment_consultant_reference_department: "浙江发展中心", operation_department: "资产管理业务总部",
-    investment_consultant_name: "福建省嘉诚资产管理有限公司"
-  },
-  { name: "申银万国期货有限公司-肖珊", short_name: "创富一号",
-    client_code: "9090000008", code: "S37470", initial_fund: 1000000.00,
-    trustor_name: "招商银行", trustor_bank_name: "交通银行",
-    securities_bank_name: "申万宏源福州鼓屏路", securities_capital_account: "2017033587",
-    valuation_out_sourcing: "招商证券",
-    delegation_started_at: "2015-04-16", delegation_ended_at: "2018-04-14",
-    delegation_duration: 3, fee_calculation_standard: "前一日资产净值",
-    management_fee_ratio: 0.015, year_day_count: "当年天数", trustor_fee_ratio: 0.0015,
-    operation_fee_ratio: 0.0005, bonus: "当期收益的20%", sales_fee_ratio: 0.01,
-    sse_account_code: "8888562270", szse_account_code: "0899075801",
-    cffex_account_code: "00080271", zce_account_code: "99600255",
-    dce_account_code: "01983336", shfe_account_code: "81000258", sales_department: "证券兰溪路营业部",
-    investment_consultant_reference_department: "无", operation_department: "研究所",
-    investment_consultant_name: ""
-  }
-]) if Product.count == 0
-
-seed_clients = Client.create(
-[
-  {
-    :type => IndividualClient.name,
-    :application_number => "123456780",
-    :id_number_type => 0,
-    :id_number => "123456789123456789",
-    :name => "路人甲",
-    :traded_at => Time.now,
-    :person_in_charge_id_number_type => nil,
-    :person_in_charge_id_number => nil,
-    :person_in_charge_name => nil,
-    :fund_trading_account_number => "12345678",
-    :sales_man_code => "3201",
-    :business_code => "001",
-    :branch_store_number => "001",
-    :fund_account_number => nil
-  },
-  {
-    :type => IndividualClient.name,
-    :application_number => "123456781",
-    :id_number_type => 0,
-    :id_number => "123456789123456788",
-    :name => "张三",
-    :traded_at => Time.now,
-    :person_in_charge_id_number_type => nil,
-    :person_in_charge_id_number => nil,
-    :person_in_charge_name => nil,
-    :fund_trading_account_number => "12345678",
-    :sales_man_code => "3201",
-    :business_code => "001",
-    :branch_store_number => "001",
-    :fund_account_number => nil
-  },
-  {
-    :type => IndividualClient.name,
-    :application_number => "123456782",
-    :id_number_type => 0,
-    :id_number => "123456789123456787",
-    :name => "王国强",
-    :traded_at => Time.now,
-    :person_in_charge_id_number_type => nil,
-    :person_in_charge_id_number => nil,
-    :person_in_charge_name => nil,
-    :fund_trading_account_number => "12345678",
-    :sales_man_code => "3201",
-    :business_code => "001",
-    :branch_store_number => "001",
-    :fund_account_number => nil
-  },
-  {
-    :type => InstitutionClient.name,
-    :application_number => "123456783",
-    :id_number_type => 0,
-    :id_number => "123456789123456789",
-    :name => "光蓝投资",
-    :traded_at => Time.now,
-    :person_in_charge_id_number_type => 0,
-    :person_in_charge_id_number => "123456789123456789",
-    :person_in_charge_name => "路人甲",
-    :fund_trading_account_number => "12345678",
-    :sales_man_code => "3201",
-    :business_code => "001",
-    :branch_store_number => "001",
-    :fund_account_number => nil
-  },
-  {
-    :type => InstitutionClient.name,
-    :application_number => "123456784",
-    :id_number_type => 0,
-    :id_number => "123456789123456789",
-    :name => "鱼永鑫商贸",
-    :traded_at => Time.now,
-    :person_in_charge_id_number_type => 0,
-    :person_in_charge_id_number => "123456789123456786",
-    :person_in_charge_name => "张兰",
-    :fund_trading_account_number => "12345678",
-    :sales_man_code => "3201",
-    :business_code => "001",
-    :branch_store_number => "001",
-    :fund_account_number => nil
-  }
-  ])
-
+# seed_products = Product.create([
+#   { name: "申银万国期货有限公司-嘉诚一号集合资产管理计划", short_name: "嘉诚一号",
+#     client_code: "9090000310", code: "S24786", initial_fund: 6000000.00,
+#     trustor_name: "招商银行", trustor_bank_name: "交通银行",
+#     securities_bank_name: "申万宏源福州鼓屏路", securities_capital_account: "2017033587",
+#     valuation_out_sourcing: "招商证券",
+#     delegation_started_at: "2015-04-16", delegation_ended_at: "2018-04-14",
+#     delegation_duration: 3, fee_calculation_standard: "前一日资产净值",
+#     management_fee_ratio: 0.015, year_day_count: "当年天数", trustor_fee_ratio: 0.0015,
+#     operation_fee_ratio: 0.0005, bonus: "当期收益的20%", sales_fee_ratio: 0.01,
+#     sse_account_code: "8888562270", szse_account_code: "0899075801",
+#     cffex_account_code: "00004257", zce_account_code: "99200147",
+#     dce_account_code: "02319923", shfe_account_code: "81001734", sales_department: "福州营业部",
+#     investment_consultant_reference_department: "浙江发展中心", operation_department: "资产管理业务总部",
+#     investment_consultant_name: "福建省嘉诚资产管理有限公司"
+#   },
+#   { name: "申银万国期货有限公司-肖珊", short_name: "创富一号",
+#     client_code: "9090000008", code: "S37470", initial_fund: 1000000.00,
+#     trustor_name: "招商银行", trustor_bank_name: "交通银行",
+#     securities_bank_name: "申万宏源福州鼓屏路", securities_capital_account: "2017033587",
+#     valuation_out_sourcing: "招商证券",
+#     delegation_started_at: "2015-04-16", delegation_ended_at: "2018-04-14",
+#     delegation_duration: 3, fee_calculation_standard: "前一日资产净值",
+#     management_fee_ratio: 0.015, year_day_count: "当年天数", trustor_fee_ratio: 0.0015,
+#     operation_fee_ratio: 0.0005, bonus: "当期收益的20%", sales_fee_ratio: 0.01,
+#     sse_account_code: "8888562270", szse_account_code: "0899075801",
+#     cffex_account_code: "00080271", zce_account_code: "99600255",
+#     dce_account_code: "01983336", shfe_account_code: "81000258", sales_department: "证券兰溪路营业部",
+#     investment_consultant_reference_department: "无", operation_department: "研究所",
+#     investment_consultant_name: ""
+#   }
+# ]) if Product.count == 0
+#
+# seed_clients = Client.create(
+# [
+#   {
+#     :type => IndividualClient.name,
+#     :application_number => "123456780",
+#     :id_number_type => 0,
+#     :id_number => "123456789123456789",
+#     :name => "路人甲",
+#     :traded_at => Time.now,
+#     :person_in_charge_id_number_type => nil,
+#     :person_in_charge_id_number => nil,
+#     :person_in_charge_name => nil,
+#     :fund_trading_account_number => "12345678",
+#     :sales_man_code => "3201",
+#     :business_code => "001",
+#     :branch_store_number => "001",
+#     :fund_account_number => nil
+#   },
+#   {
+#     :type => IndividualClient.name,
+#     :application_number => "123456781",
+#     :id_number_type => 0,
+#     :id_number => "123456789123456788",
+#     :name => "张三",
+#     :traded_at => Time.now,
+#     :person_in_charge_id_number_type => nil,
+#     :person_in_charge_id_number => nil,
+#     :person_in_charge_name => nil,
+#     :fund_trading_account_number => "12345678",
+#     :sales_man_code => "3201",
+#     :business_code => "001",
+#     :branch_store_number => "001",
+#     :fund_account_number => nil
+#   },
+#   {
+#     :type => IndividualClient.name,
+#     :application_number => "123456782",
+#     :id_number_type => 0,
+#     :id_number => "123456789123456787",
+#     :name => "王国强",
+#     :traded_at => Time.now,
+#     :person_in_charge_id_number_type => nil,
+#     :person_in_charge_id_number => nil,
+#     :person_in_charge_name => nil,
+#     :fund_trading_account_number => "12345678",
+#     :sales_man_code => "3201",
+#     :business_code => "001",
+#     :branch_store_number => "001",
+#     :fund_account_number => nil
+#   },
+#   {
+#     :type => InstitutionClient.name,
+#     :application_number => "123456783",
+#     :id_number_type => 0,
+#     :id_number => "123456789123456789",
+#     :name => "光蓝投资",
+#     :traded_at => Time.now,
+#     :person_in_charge_id_number_type => 0,
+#     :person_in_charge_id_number => "123456789123456789",
+#     :person_in_charge_name => "路人甲",
+#     :fund_trading_account_number => "12345678",
+#     :sales_man_code => "3201",
+#     :business_code => "001",
+#     :branch_store_number => "001",
+#     :fund_account_number => nil
+#   },
+#   {
+#     :type => InstitutionClient.name,
+#     :application_number => "123456784",
+#     :id_number_type => 0,
+#     :id_number => "123456789123456789",
+#     :name => "鱼永鑫商贸",
+#     :traded_at => Time.now,
+#     :person_in_charge_id_number_type => 0,
+#     :person_in_charge_id_number => "123456789123456786",
+#     :person_in_charge_name => "张兰",
+#     :fund_trading_account_number => "12345678",
+#     :sales_man_code => "3201",
+#     :business_code => "001",
+#     :branch_store_number => "001",
+#     :fund_account_number => nil
+#   }
+#   ])
+#
 seed_departments = Department.create(
 [
     { name: "杭州营业部" },
@@ -164,16 +164,16 @@ seed_departments = Department.create(
     { name: "证券基金开发部" }
   ]
 ) if Department.count == 0
-
-seed_product_managers = ProductManager.create(
-[
-  { name: "肖珊" },
-  { name: "王廷璞" },
-  { name: "董海洲" },
-  { name: "强政" }
-]
-) if ProductManager.count == 0
-
+#
+# seed_product_managers = ProductManager.create(
+# [
+#   { name: "肖珊" },
+#   { name: "王廷璞" },
+#   { name: "董海洲" },
+#   { name: "强政" }
+# ]
+# ) if ProductManager.count == 0
+#
 seed_banks = Bank.create([
   { name: "中国工商银行" },
   { name: "中国建设银行" },
@@ -182,12 +182,12 @@ seed_banks = Bank.create([
   { name: "招商银行" },
   { name: "兴业银行" }
 ]) if Bank.count == 0
-
-seed_trustors = Trustor.create([
-  { name: "申银万国证券" },
-  { name: "招商证券" },
-]) if Trustor.count == 0
-
-seed_securities_brokers = SecuritiesBroker.create([
-  { name: "申万宏源福州鼓屏路" }
-]) if SecuritiesBroker.count == 0
+#
+# seed_trustors = Trustor.create([
+#   { name: "申银万国证券" },
+#   { name: "招商证券" },
+# ]) if Trustor.count == 0
+#
+# seed_securities_brokers = SecuritiesBroker.create([
+#   { name: "申万宏源福州鼓屏路" }
+# ]) if SecuritiesBroker.count == 0

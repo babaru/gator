@@ -1,13 +1,50 @@
+
+
 class DepartmentsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_department, only: [:show, :edit, :update, :destroy]
+
+  QUERY_KEYS = [:name].freeze
 
   # GET /departments
   # GET /departments.json
   def index
+    @query_params = {}
+
+    if request.post?
+      build_query_params(params[:department])
+      redirect_to departments_path(@query_params)
+    else
+      build_query_params(params)
+    end
+
+    build_query_department_params
+
+    @conditions = []
+    @conditions << Department.arel_table[:name].matches("%#{@query_params[:name]}%") if @query_params[:name]
+
+    if @conditions.length > 0
+      conditions = @conditions[0]
+      @conditions.each_with_index do |item, index|
+        conditions = conditions.or(item) if index > 0
+      end
+      @conditions = conditions
+    end
+
     respond_to do |format|
-      format.html { set_departments_grid }
-      format.json { render json: Department.all }
+      format.html { set_departments_grid(@conditions) }
+    end
+  end
+
+  def build_query_params(parameters)
+    QUERY_KEYS.each do |key|
+      @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+    end
+  end
+
+  def build_query_department_params
+    @query_department_params = Department.new
+    QUERY_KEYS.each do |key|
+      @query_department_params.send("#{key}=", @query_params[key])
     end
   end
 
@@ -83,7 +120,9 @@ class DepartmentsController < ApplicationController
       )
   end
 
-  def set_departments_grid
-    @departments_grid = initialize_grid(Department)
+  def set_departments_grid(conditions = [])
+    @departments_grid = initialize_grid(Department.where(conditions))
   end
 end
+
+

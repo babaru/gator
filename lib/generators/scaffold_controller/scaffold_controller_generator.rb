@@ -20,6 +20,9 @@ module Rails
         template "../../erb/scaffold/edit.html.erb", File.join('app/views', "#{controller_file_name}/edit.html.erb")
         template "../../erb/scaffold/show.html.erb", File.join('app/views', "#{controller_file_name}/show.html.erb")
         template "../../erb/scaffold/_grid.html.erb", File.join('app/views', "#{controller_file_name}/_#{plural_table_name}_grid.html.erb")
+        template "../../erb/scaffold/_search_form.html.erb", File.join('app/views', "#{controller_file_name}/_search_form.html.erb")
+
+        route "post '#{controller_file_name}/search' => '#{controller_file_name}#index', as: :search_#{controller_file_name}"
       end
 
       hook_for :template_engine, :test_framework, as: :scaffold

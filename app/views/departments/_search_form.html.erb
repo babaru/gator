@@ -1,0 +1,16 @@
+<%= simple_form_for(@query_department_params,
+  url: search_departments_path, as: :department,
+  method: :post, wrapper: :vertical_form) do |f| %>
+
+  <%= f.error_notification %>
+
+  <%= f.input :name, required: false, label: t('activerecord.attributes.department.name') %>
+  <!-- add more query parameter fields here -->
+
+  <div class="form-group">
+      <%= link_to t('buttons.reset'), departments_path,
+        class: 'btn btn-white btn-sm' %>
+      <%= f.submit t('buttons.search'),
+        class: 'btn btn-primary btn-sm pull-right' %>
+  </div>
+<% end %>

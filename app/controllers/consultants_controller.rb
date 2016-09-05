@@ -1,15 +1,50 @@
+
+
 class ConsultantsController < ApplicationController
   before_action :set_consultant, only: [:show, :edit, :update, :destroy]
+
+  QUERY_KEYS = [:name].freeze
 
   # GET /consultants
   # GET /consultants.json
   def index
-    respond_to do |format|
-      format.html do
-        set_consultants_grid
-      end
+    @query_params = {}
 
-      format.json { render json: Consultant.all }
+    if request.post?
+      build_query_params(params[:consultant])
+      redirect_to consultants_path(@query_params)
+    else
+      build_query_params(params)
+    end
+
+    build_query_consultant_params
+
+    @conditions = []
+    @conditions << Consultant.arel_table[:name].matches("%#{@query_params[:name]}%") if @query_params[:name]
+
+    if @conditions.length > 0
+      conditions = @conditions[0]
+      @conditions.each_with_index do |item, index|
+        conditions = conditions.or(item) if index > 0
+      end
+      @conditions = conditions
+    end
+
+    respond_to do |format|
+      format.html { set_consultants_grid(@conditions) }
+    end
+  end
+
+  def build_query_params(parameters)
+    QUERY_KEYS.each do |key|
+      @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+    end
+  end
+
+  def build_query_consultant_params
+    @query_consultant_params = Consultant.new
+    QUERY_KEYS.each do |key|
+      @query_consultant_params.send("#{key}=", @query_params[key])
     end
   end
 
@@ -86,7 +121,9 @@ class ConsultantsController < ApplicationController
       )
   end
 
-  def set_consultants_grid
-    @consultants_grid = initialize_grid(Consultant)
+  def set_consultants_grid(conditions = [])
+    @consultants_grid = initialize_grid(Consultant.where(conditions))
   end
 end
+
+

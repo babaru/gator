@@ -16,6 +16,7 @@ zh-CN:
   labels:
     last_modified_at: 最后编辑于
     all_required: 加上星标 * 的项目为必填项
+    search: 搜索
   product_types:
     futures: 期货类
     mixup: 综合类
@@ -64,11 +65,17 @@ zh-CN:
       client: 客户
       department: 部门
       consultant: 投顾
+      bank: 银行
+      trustor: 托管人
     attributes:
       time_stamp:
         created_at: 创建于
         updated_at: 最后修改于
       department:
+        name: 名称
+      trustor:
+        name: 名称
+      bank:
         name: 名称
       product:
         name: 名称

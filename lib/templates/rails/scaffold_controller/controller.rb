@@ -1,15 +1,53 @@
 <% if namespaced? -%>
 require_dependency "<%= namespaced_path %>/application_controller"
 <% end -%>
-
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
   before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
 
+  QUERY_KEYS = [:name].freeze
+
   # GET <%= route_url %>
   # GET <%= route_url %>.json
   def index
-    set_<%= plural_table_name %>_grid
+    @query_params = {}
+
+    if request.post?
+      build_query_params(params[:<%= singular_table_name %>])
+      redirect_to <%= plural_table_name %>_path(@query_params)
+    else
+      build_query_params(params)
+    end
+
+    build_query_<%= singular_table_name %>_params
+
+    @conditions = []
+    @conditions << <%= class_name.split('::').last %>.arel_table[:name].matches("%#{@query_params[:name]}%") if @query_params[:name]
+
+    if @conditions.length > 0
+      conditions = @conditions[0]
+      @conditions.each_with_index do |item, index|
+        conditions = conditions.or(item) if index > 0
+      end
+      @conditions = conditions
+    end
+
+    respond_to do |format|
+      format.html { set_<%= plural_table_name %>_grid(@conditions) }
+    end
+  end
+
+  def build_query_params(parameters)
+    QUERY_KEYS.each do |key|
+      @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+    end
+  end
+
+  def build_query_<%= singular_table_name %>_params
+    @query_<%= singular_table_name %>_params = <%= class_name.split('::').last %>.new
+    QUERY_KEYS.each do |key|
+      @query_<%= singular_table_name %>_params.send("#{key}=", @query_params[key])
+    end
   end
 
   # GET <%= route_url %>/1
@@ -84,8 +122,8 @@ class <%= controller_class_name %>Controller < ApplicationController
       <% end %><% end %>)
   end
 
-  def set_<%= plural_table_name %>_grid
-    @<%= plural_table_name %>_grid = initialize_grid(<%= class_name.split('::').last %>)
+  def set_<%= plural_table_name %>_grid(conditions = [])
+    @<%= plural_table_name %>_grid = initialize_grid(<%= class_name.split('::').last %>.where(conditions))
   end
 end
 

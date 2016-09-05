@@ -28,7 +28,7 @@
                         <%= render partial: 'products_grid' %>
                     </div>
 
-                    <%= link_to(t('buttons.download_as_excel'), products_path(@query_params.merge(format: :xls)), class: 'btn btn-w-m btn-white btn-sm') if @products_grid.count > 0 %>
+                    <%= link_to(fa_icon('file-excel-o', text: t('buttons.download_as_excel')), products_path(@query_params.merge(format: :xls)), class: 'btn btn-w-m btn-white btn-sm') if @products_grid.count > 0 %>
                 </div>
 
             </div>

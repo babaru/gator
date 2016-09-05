@@ -1,21 +1,18 @@
 <%= grid(@products_grid, :show_filters => :when_filtered) do |g|
   g.column name: '#' do |product|
-    product.id
+    product.code
+  end
+
+  g.column do |product|
+    content_tag(:span, Product.product_running_status_names, class: 'label label-warning')
   end
 
   g.column name: t('activerecord.attributes.product.name'), class: 'project-title' do |product|
-    [
-      link_to(product.name, product_path(product)),
-      content_tag(:div, [
-        content_tag(:span, Product.product_running_status_names, class: 'label label-info'),
-        content_tag(:span, "#{t('activerecord.attributes.product.code')}: "),
-        content_tag(:strong, product.code)
-      ].join(' ').html_safe)
-    ].join('').html_safe
+    link_to(product.name, product_path(product))
   end
 
-  g.column name: t('activerecord.attributes.product.client_code') do |product|
-    product.client_code
+  g.column name: t('activerecord.attributes.product.consultant_name') do |product|
+    product.consultant_name
   end
 
   g.column name: t('activerecord.attributes.product.short_name') do |product|
@@ -40,8 +37,8 @@
 
   g.column html: {class: 'project-actions'} do |product|
     [
-      link_to(fa_icon("pencil"), edit_product_path(product), class: 'btn btn-white btn-sm', data: {toggle: 'tooltip'}, title: t('buttons.edit')),
-      link_to(fa_icon("trash"), product_path(product), class: 'btn btn-danger btn-sm', method: :delete, data: {toggle: 'tooltip', confirm: t('confirms.delete')}, title: t('buttons.delete'))
+      link_to(fa_icon("pencil"), edit_product_path(product), class: 'btn btn-white btn-xs', data: {toggle: 'tooltip'}, title: t('buttons.edit')),
+      link_to(fa_icon("trash"), product_path(product), class: 'btn btn-danger btn-xs', method: :delete, data: {toggle: 'tooltip', confirm: t('confirms.delete')}, title: t('buttons.delete'))
     ].join(' ').html_safe
   end
 end -%>
