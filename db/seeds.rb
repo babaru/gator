@@ -188,6 +188,6 @@ seed_banks = Bank.create([
 #   { name: "招商证券" },
 # ]) if Trustor.count == 0
 #
-# seed_securities_brokers = SecuritiesBroker.create([
-#   { name: "申万宏源福州鼓屏路" }
-# ]) if SecuritiesBroker.count == 0
+seed_securities_brokers = SecuritiesBroker.create([
+  { name: "申万宏源福州鼓屏路" }
+]) if SecuritiesBroker.count == 0

@@ -45,5 +45,6 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :departments, Department.model_name.human, departments_path
     primary.item :trustors, Trustor.model_name.human, trustors_path
     primary.item :banks, Bank.model_name.human, banks_path
+    primary.item :securities_brokers, SecuritiesBroker.model_name.human, securities_brokers_path
   end
 end

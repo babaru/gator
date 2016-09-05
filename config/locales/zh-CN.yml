@@ -67,6 +67,7 @@ zh-CN:
       consultant: 投顾
       bank: 银行
       trustor: 托管人
+      securities_broker: 券商
     attributes:
       time_stamp:
         created_at: 创建于
@@ -141,6 +142,9 @@ zh-CN:
       consultant:
         name: 名称
         department: 推荐部门
+      securities_broker:
+        name: 名称
+        bank_id: 开户银行
   simple_form:
     "yes": '是'
     "no": '不'

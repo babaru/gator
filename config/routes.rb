@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   
   
   
+  
+  
+  post 'securities_brokers/search' => 'securities_brokers#index', as: :search_securities_brokers
   post 'banks/search' => 'banks#index', as: :search_banks
   post 'departments/search' => 'departments#index', as: :search_departments
   post 'consultants/search' => 'consultants#index', as: :search_consultants

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831080215) do
+ActiveRecord::Schema.define(version: 20160905154146) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -129,14 +129,10 @@ ActiveRecord::Schema.define(version: 20160831080215) do
   add_index "securities_broker_accounts", ["securities_broker_id"], name: "index_securities_broker_accounts_on_securities_broker_id", using: :btree
 
   create_table "securities_brokers", force: :cascade do |t|
-    t.string   "name",           limit: 255
-    t.integer  "bank_id",        limit: 4
-    t.string   "account_number", limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
-
-  add_index "securities_brokers", ["bank_id"], name: "index_securities_brokers_on_bank_id", using: :btree
 
   create_table "trustor_bank_accounts", force: :cascade do |t|
     t.integer  "trustor_id", limit: 4
@@ -186,7 +182,6 @@ ActiveRecord::Schema.define(version: 20160831080215) do
   add_foreign_key "products", "securities_broker_accounts"
   add_foreign_key "products", "trustor_bank_accounts"
   add_foreign_key "securities_broker_accounts", "securities_brokers"
-  add_foreign_key "securities_brokers", "banks"
   add_foreign_key "trustor_bank_accounts", "banks"
   add_foreign_key "trustor_bank_accounts", "trustors"
 end
