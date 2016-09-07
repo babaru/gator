@@ -34,6 +34,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     respond_to do |format|
       format.html { set_<%= plural_table_name %>_grid(@conditions) }
+      format.json { render json: <%= class_name.split('::').last %>.where(@conditions) }
     end
   end
 

@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html { set_users_grid(@conditions) }
+      format.json { render json: User.where(@conditions) }
     end
   end
 
@@ -141,3 +142,5 @@ class UsersController < ApplicationController
     @users_grid = initialize_grid(User.where(conditions))
   end
 end
+
+

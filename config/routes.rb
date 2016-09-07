@@ -1,12 +1,20 @@
 Rails.application.routes.draw do
 
-  post 'products/search' => 'products#index', as: :search_products
-  post 'users/search' => 'users#index', as: :search_users
-  post 'securities_brokers/search' => 'securities_brokers#index', as: :search_securities_brokers
-  post 'banks/search' => 'banks#index', as: :search_banks
-  post 'departments/search' => 'departments#index', as: :search_departments
-  post 'consultants/search' => 'consultants#index', as: :search_consultants
+  
+  
   post 'trustors/search' => 'trustors#index', as: :search_trustors
+  post 'users/search' => 'users#index', as: :search_users
+  post 'consultants/search' => 'consultants#index', as: :search_consultants
+  post 'securities_brokers/search' => 'securities_brokers#index', as: :search_securities_brokers
+  post 'departments/search' => 'departments#index', as: :search_departments
+  post 'banks/search' => 'banks#index', as: :search_banks
+  post 'products/search' => 'products#index', as: :search_products
+  
+  
+  
+  
+  
+  
 
   devise_for :users
   root 'products#index'

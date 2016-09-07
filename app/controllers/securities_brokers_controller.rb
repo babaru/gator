@@ -32,6 +32,7 @@ class SecuritiesBrokersController < ApplicationController
 
     respond_to do |format|
       format.html { set_securities_brokers_grid(@conditions) }
+      format.json { render json: SecuritiesBroker.where(@conditions) }
     end
   end
 

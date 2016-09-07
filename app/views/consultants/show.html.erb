@@ -54,7 +54,7 @@
                                     <% else %>
                                     <li class="">
                                     <% end %>
-                                      <%= link_to tab.to_s, consultant_path(@consultant, tab: tab) %>
+                                      <%= link_to t("activerecord.attributes.consultant.tabs.#{tab}"), consultant_path(@consultant, tab: tab) %>
                                     </li>
                                     <% end %>
                                 </ul>
@@ -70,7 +70,7 @@
                                 <% else %>
                                 <div class="tab-pane">
                                 <% end %>
-                                    <%= tab.to_s %>
+                                    <%= render "show_tab_#{tab}" if tab == @current_tab %>
                                 </div>
                                 <% end %>
                             </div>

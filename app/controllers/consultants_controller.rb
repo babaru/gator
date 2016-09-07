@@ -132,3 +132,5 @@ class ConsultantsController < ApplicationController
     @consultants_grid = initialize_grid(Consultant.where(conditions))
   end
 end
+
+

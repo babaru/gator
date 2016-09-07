@@ -32,6 +32,7 @@ class TrustorsController < ApplicationController
 
     respond_to do |format|
       format.html { set_trustors_grid(@conditions) }
+      format.json { render json: Trustor.where(@conditions) }
     end
   end
 

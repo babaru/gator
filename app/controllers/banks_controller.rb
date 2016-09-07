@@ -32,6 +32,7 @@ class BanksController < ApplicationController
 
     respond_to do |format|
       format.html { set_banks_grid(@conditions) }
+      format.json { render json: Bank.where(@conditions) }
     end
   end
 

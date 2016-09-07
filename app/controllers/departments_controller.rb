@@ -131,3 +131,5 @@ class DepartmentsController < ApplicationController
     @departments_grid = initialize_grid(Department.where(conditions))
   end
 end
+
+
