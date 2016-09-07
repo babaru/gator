@@ -132,6 +132,11 @@ zh-CN:
         consultant_reference_department: 投顾引进部门
         operation_department: 产品运作部门
         consultant_name: 投顾名称
+        tabs:
+          trustor: 托管人
+          fee: 费率
+          accounts: 交易账号
+          clients: 投资人
       client:
         type: 投资人类型
         application_number: 申请单编号

@@ -50,10 +50,16 @@ class ProductsController < ApplicationController
     end
   end
 
+  TABS = [:trustor, :fee, :accounts, :clients].freeze
+
   # GET /products/1
   # GET /products/1.json
   def show
-    @clients_grid = initialize_grid(Client)
+    @tabs = TABS
+    @current_tab = params[:tab]
+    @current_tab ||= TABS.first.to_s
+    @current_tab = @current_tab.to_sym
+    @clients_grid = initialize_grid(Client) if @current_tab == :clients
   end
 
   # GET /products/new
@@ -90,7 +96,7 @@ class ProductsController < ApplicationController
       @product.consultant_reference_department =
         Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
       @product.consultant = Consultant.find_or_create_by(name: product_params[:consultant_attributes][:name])
-      @product.consultant.development = @product.consultant_reference_department
+      @product.consultant.department = @product.consultant_reference_department
 
       if @product.save
         set_products_grid

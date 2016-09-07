@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-lg-5">
+        <dl class="dl-horizontal">
+
+            <dt><%= t('activerecord.attributes.product.fee_calculation_standard') %>:</dt>
+            <dd><%= @product.fee_calculation_standard %></dd>
+            <dt><%= t('activerecord.attributes.product.trustor_fee_ratio') %>:</dt>
+            <dd><%= @product.trustor_fee_ratio %></dd>
+            <dt><%= t('activerecord.attributes.product.operation_fee_ratio') %>:</dt>
+            <dd><%= @product.operation_fee_ratio %></dd>
+            <dt><%= t('activerecord.attributes.product.bonus') %>:</dt>
+            <dd><%= @product.bonus %></dd>
+            <dt><%= t('activerecord.attributes.product.sales_fee_ratio') %>:</dt>
+            <dd><%= @product.sales_fee_ratio %></dd>
+
+        </dl>
+    </div>
+    <div class="col-lg-7">
+        <dl class="dl-horizontal">
+
+          <dt><%= t('activerecord.attributes.product.management_fee_ratio') %>:</dt>
+          <dd><%= @product.management_fee_ratio %> </dd>
+          <dt><%= t('activerecord.attributes.product.management_fee_flour') %>:</dt>
+          <dd><%= @product.management_fee_flour %> </dd>
+          <dt><%= t('activerecord.attributes.product.investment_consultant_fee_ratio') %>:</dt>
+          <dd><%= @product.investment_consultant_fee_ratio %> </dd>
+          <dt><%= t('activerecord.attributes.product.investment_consultant_fee_flour') %>:</dt>
+          <dd><%= @product.investment_consultant_fee_flour %> </dd>
+
+        </dl>
+    </div>
+</div>

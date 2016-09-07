@@ -32,6 +32,7 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       format.html { set_departments_grid(@conditions) }
+      format.json { render json: Department.where(@conditions) }
     end
   end
 
@@ -130,5 +131,3 @@ class DepartmentsController < ApplicationController
     @departments_grid = initialize_grid(Department.where(conditions))
   end
 end
-
-

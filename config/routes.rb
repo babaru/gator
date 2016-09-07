@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  post 'products/search' => 'products#index', as: :search_products
   post 'users/search' => 'users#index', as: :search_users
   post 'securities_brokers/search' => 'securities_brokers#index', as: :search_securities_brokers
   post 'banks/search' => 'banks#index', as: :search_banks
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
   post 'clients/search' => 'clients#index', as: :search_clients
   get 'clients/upload_original_document' => 'clients#upload_original_document', as: :upload_client_original_document
 
-  post 'products/search' => 'products#index', as: :search_products
+  
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

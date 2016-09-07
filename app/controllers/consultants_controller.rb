@@ -32,6 +32,7 @@ class ConsultantsController < ApplicationController
 
     respond_to do |format|
       format.html { set_consultants_grid(@conditions) }
+      format.json { render json: Consultant.where(@conditions) }
     end
   end
 
@@ -131,5 +132,3 @@ class ConsultantsController < ApplicationController
     @consultants_grid = initialize_grid(Consultant.where(conditions))
   end
 end
-
-
