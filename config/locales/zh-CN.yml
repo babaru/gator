@@ -68,10 +68,20 @@ zh-CN:
       bank: 银行
       trustor: 托管人
       securities_broker: 券商
+      user: 系统用户
     attributes:
       time_stamp:
         created_at: 创建于
         updated_at: 最后修改于
+      user:
+        username: 帐号
+        name: 姓名
+        email: Email
+        current_sign_in_at: 当前登录于
+        current_sign_in_ip: 当前登录IP
+        last_sign_in_at: 最近登录于
+        last_sign_in_ip: 最近登录IP
+        sign_in_count: 登录次数
       department:
         name: 名称
       trustor:

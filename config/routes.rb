@@ -1,20 +1,12 @@
 Rails.application.routes.draw do
-  
-  
-  
-  
-  
+
+  post 'users/search' => 'users#index', as: :search_users
   post 'securities_brokers/search' => 'securities_brokers#index', as: :search_securities_brokers
   post 'banks/search' => 'banks#index', as: :search_banks
   post 'departments/search' => 'departments#index', as: :search_departments
   post 'consultants/search' => 'consultants#index', as: :search_consultants
   post 'trustors/search' => 'trustors#index', as: :search_trustors
-  
-  
-  
-  
-  
-  
+
   devise_for :users
   root 'products#index'
 
@@ -38,7 +30,8 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :products, :departments, :clients, :consultants, :product_managers, :trustors, :banks, :securities_brokers
+  resources :products, :departments, :clients, :consultants,
+    :product_managers, :trustors, :banks, :securities_brokers, :users
 
   # Example resource route with options:
   #   resources :products do

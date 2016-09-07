@@ -4,12 +4,12 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <span>
-                        <%= image_tag 'a4.jpg', size: "48x48", class: 'img-circle', alt: 'avatar' %>
+                        <%= image_tag 'f3.png', size: "48x48", class: 'img-circle', alt: 'avatar' %>
                     </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
-                                <strong class="font-bold"><%= current_user.full_name if current_user %></strong>
+                                <strong class="font-bold"><%= current_user.name if current_user %></strong>
                             </span> <span class="text-muted text-xs block"> 操作 <b class="caret"></b></span>
                         </span>
                     </a>

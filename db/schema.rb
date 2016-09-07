@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160905154146) do
+ActiveRecord::Schema.define(version: 20160907023737) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -92,10 +92,11 @@ ActiveRecord::Schema.define(version: 20160905154146) do
     t.string   "zce_account_code",                   limit: 255
     t.string   "dce_account_code",                   limit: 255
     t.string   "shfe_account_code",                  limit: 255
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
+    t.string   "consultant_name",                    limit: 255
     t.string   "sse_gateway",                        limit: 255
     t.string   "szse_gateway",                       limit: 255
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
     t.integer  "product_manager_id",                 limit: 4
     t.integer  "trustor_bank_account_id",            limit: 4
     t.integer  "securities_broker_account_id",       limit: 4
@@ -103,7 +104,6 @@ ActiveRecord::Schema.define(version: 20160905154146) do
     t.integer  "operation_department_id",            limit: 4
     t.integer  "consultant_reference_department_id", limit: 4
     t.integer  "consultant_id",                      limit: 4
-    t.string   "consultant_name",                    limit: 255
   end
 
   add_index "products", ["client_code"], name: "index_products_on_client_code", unique: true, using: :btree
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(version: 20160905154146) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "username",               limit: 255
-    t.string   "full_name",              limit: 255
+    t.string   "name",                   limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
