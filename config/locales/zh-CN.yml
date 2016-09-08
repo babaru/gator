@@ -17,6 +17,8 @@ zh-CN:
     last_modified_at: 最后编辑于
     all_required: 加上星标 * 的项目为必填项
     search: 搜索
+    from: 从
+    to: 至
   product_types:
     futures: 期货类
     mixup: 综合类

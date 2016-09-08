@@ -4,6 +4,11 @@
   <%= f.input :name, required: false, label: t('activerecord.attributes.product.name') %>
   <%= f.input :consultant_name, required: false, label: t('activerecord.attributes.product.consultant_name') %>
 
+  <div class="hr-line-dashed"></div>
+
+  <%= f.input :delegation_started_at, required: false, as: :date_picker, label: "托管时间范围 #{t('labels.from')}" %>
+  <%= f.input :delegation_ended_at, required: false, as: :date_picker, label: t('labels.to') %>
+
   <div class="form-group">
       <%= link_to t('buttons.reset'), products_path, class: 'btn btn-white btn-sm' %>
       <%= f.submit t('buttons.search'), class: 'btn btn-primary btn-sm pull-right' %>

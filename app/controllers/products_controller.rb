@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
-  QUERY_KEYS = [:name, :consultant_name].freeze
+  QUERY_KEYS = [:name, :consultant_name,
+    :delegation_started_at, :delegation_ended_at].freeze
 
   # GET /products
   # GET /products.json
@@ -22,6 +23,8 @@ class ProductsController < ApplicationController
     @conditions << Product.arel_table[:name].matches("%#{@query_params[:name]}%") if @query_params[:name]
     @conditions << Product.arel_table[:short_name].matches("%#{@query_params[:name]}%") if @query_params[:name]
     @conditions << Product.arel_table[:consultant_name].matches("%#{@query_params[:consultant_name]}%") if @query_params[:consultant_name]
+    @conditions << Product.arel_table[:delegation_started_at].lteq(Time.parse(@query_params[:delegation_started_at]).beginning_of_day) if @query_params[:delegation_started_at]
+    @conditions << Product.arel_table[:delegation_ended_at].gteq(Time.parse(@query_params[:delegation_ended_at]).beginning_of_day) if @query_params[:delegation_ended_at]
 
     if @conditions.length > 0
       conditions = @conditions[0]
