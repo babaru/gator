@@ -1,34 +1,23 @@
 <%= grid(@consultants_grid, :show_filters => :when_filtered) do |g|
-
-  
   g.column name: '#' do |consultant|
     consultant.id
   end
-  
 
-  
   g.column name: t('activerecord.attributes.consultant.name'), class: 'project-title' do |consultant|
       link_to(consultant.name, consultant_path(consultant))
   end
-  
 
-  
   g.column name: t('activerecord.attributes.consultant.department_id') do |consultant|
-    consultant.department_id
+    consultant.department.name if consultant.department
   end
 
-
-  
   g.column name: t('activerecord.attributes.time_stamp.created_at') do |consultant|
     consultant.created_at.strftime('%Y-%m-%d %H:%M:%S')
   end
-  
 
-  
   g.column name: t('activerecord.attributes.time_stamp.updated_at') do |consultant|
     consultant.updated_at.strftime('%Y-%m-%d %H:%M:%S')
   end
-  
 
   g.column html: {class: 'project-actions'} do |consultant|
     [

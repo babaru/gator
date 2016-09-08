@@ -1,5 +1,3 @@
-
-
 class ConsultantsController < ApplicationController
   before_action :set_consultant, only: [:show, :edit, :update, :destroy]
 
@@ -49,7 +47,7 @@ class ConsultantsController < ApplicationController
     end
   end
 
-  TABS = [:tab1, :tab2].freeze
+  TABS = [:products].freeze
 
   # GET /consultants/1
   # GET /consultants/1.json
@@ -58,6 +56,10 @@ class ConsultantsController < ApplicationController
     @current_tab = params[:tab]
     @current_tab ||= TABS.first.to_s
     @current_tab = @current_tab.to_sym
+
+    if @current_tab == :products
+      @products_grid = initialize_grid(Product.where(consultant_id: @consultant.id))
+    end
   end
 
   # GET /consultants/new
@@ -67,6 +69,7 @@ class ConsultantsController < ApplicationController
 
   # GET /consultants/1/edit
   def edit
+    @consultant.build_department if @consultant.department.nil?
   end
 
   # POST /consultants
@@ -125,6 +128,13 @@ class ConsultantsController < ApplicationController
     params.require(:consultant).permit(
       :name,
       :department_id,
+      :department,
+      :short_name,
+      :institution_type,
+      :capital,
+      :person_in_charge_name,
+      :is_qualified_3rd_party_institution,
+      :company_address
       )
   end
 
@@ -132,5 +142,3 @@ class ConsultantsController < ApplicationController
     @consultants_grid = initialize_grid(Consultant.where(conditions))
   end
 end
-
-

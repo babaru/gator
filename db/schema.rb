@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160907023737) do
+ActiveRecord::Schema.define(version: 20160908065453) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -40,10 +40,16 @@ ActiveRecord::Schema.define(version: 20160907023737) do
   end
 
   create_table "consultants", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.integer  "department_id", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "name",                               limit: 255
+    t.integer  "department_id",                      limit: 4
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+    t.string   "capital",                            limit: 255
+    t.integer  "institution_type",                   limit: 4
+    t.string   "person_in_charge_name",              limit: 255
+    t.boolean  "is_qualified_3rd_party_institution",             default: true
+    t.string   "company_address",                    limit: 255
+    t.string   "short_name",                         limit: 255
   end
 
   add_index "consultants", ["department_id"], name: "index_consultants_on_department_id", using: :btree

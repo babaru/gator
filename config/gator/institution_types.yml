@@ -1,0 +1,17 @@
+defaults: &defaults
+  institution_types:
+    human: 0
+    securities: 1
+    fund: 2
+    trust: 3
+    bank: 4
+    future: 5
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

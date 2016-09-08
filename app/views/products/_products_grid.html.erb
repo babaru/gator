@@ -35,10 +35,12 @@
     product.updated_at.strftime('%Y-%m-%d %H:%M:%S')
   end
 
-  g.column html: {class: 'project-actions'} do |product|
-    [
-      link_to(fa_icon("pencil"), edit_product_path(product), class: 'btn btn-white btn-xs', data: {toggle: 'tooltip'}, title: t('buttons.edit')),
-      link_to(fa_icon("trash"), product_path(product), class: 'btn btn-danger btn-xs', method: :delete, data: {toggle: 'tooltip', confirm: t('confirms.delete')}, title: t('buttons.delete'))
-    ].join(' ').html_safe
+  unless local_assigns[:readonly] == true
+    g.column html: {class: 'project-actions'} do |product|
+      [
+        link_to(fa_icon("pencil"), edit_product_path(product), class: 'btn btn-white btn-xs', data: {toggle: 'tooltip'}, title: t('buttons.edit')),
+        link_to(fa_icon("trash"), product_path(product), class: 'btn btn-danger btn-xs', method: :delete, data: {toggle: 'tooltip', confirm: t('confirms.delete')}, title: t('buttons.delete'))
+      ].join(' ').html_safe
+    end
   end
 end -%>
