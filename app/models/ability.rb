@@ -11,11 +11,15 @@ class Ability
   end
 
   def admin
+    can :manage, User
   end
 
   def product_manager
-    can :manage, Product, :product_manager_id => user.id
-    can :read, Product
+    can :manage, Product
+  end
+
+  def client_manager
+    can :manage, Client
   end
 
   def default_user

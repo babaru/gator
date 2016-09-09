@@ -39,13 +39,13 @@ SimpleNavigation::Configuration.run do |navigation|
 
   # Define the primary navigation
   navigation.items do |primary|
-    primary.item :products, Product.model_name.human, products_path
-    primary.item :clients, Client.model_name.human, clients_path
-    primary.item :consultants, Consultant.model_name.human, consultants_path
-    primary.item :departments, Department.model_name.human, departments_path
-    primary.item :trustors, Trustor.model_name.human, trustors_path
-    primary.item :banks, Bank.model_name.human, banks_path
-    primary.item :securities_brokers, SecuritiesBroker.model_name.human, securities_brokers_path
-    primary.item :users, User.model_name.human, users_path
+    primary.item :products, Product.model_name.human, products_path if can? :read, Product
+    primary.item :clients, Client.model_name.human, clients_path if can? :read, Product
+    primary.item :consultants, Consultant.model_name.human, consultants_path if can? :read, Product
+    primary.item :departments, Department.model_name.human, departments_path if can? :read, Product
+    primary.item :trustors, Trustor.model_name.human, trustors_path if can? :read, Product
+    primary.item :banks, Bank.model_name.human, banks_path if can? :read, Product
+    primary.item :securities_brokers, SecuritiesBroker.model_name.human, securities_brokers_path if can? :read, Product
+    primary.item :users, User.model_name.human, users_path if can? :manage, User
   end
 end

@@ -1,0 +1,33 @@
+<%= grid(@product_managers_grid, :show_filters => :when_filtered) do |g|
+
+  
+  g.column name: '#' do |product_manager|
+    product_manager.id
+  end
+  
+
+  
+  g.column name: t('activerecord.attributes.product_manager.name'), class: 'project-title' do |product_manager|
+      link_to(product_manager.name, product_manager_path(product_manager))
+  end
+  
+
+  
+  g.column name: t('activerecord.attributes.time_stamp.created_at') do |product_manager|
+    product_manager.created_at.strftime('%Y-%m-%d %H:%M:%S')
+  end
+  
+
+  
+  g.column name: t('activerecord.attributes.time_stamp.updated_at') do |product_manager|
+    product_manager.updated_at.strftime('%Y-%m-%d %H:%M:%S')
+  end
+  
+
+  g.column html: {class: 'project-actions'} do |product_manager|
+    [
+      link_to(fa_icon("pencil"), edit_product_manager_path(product_manager), class: 'btn btn-white btn-xs', data: {toggle: 'tooltip'}, title: t('buttons.edit')),
+      link_to(fa_icon("trash"), product_manager_path(product_manager), class: 'btn btn-danger btn-xs', method: :delete, data: {toggle: 'tooltip', confirm: t('confirms.delete')}, title: t('buttons.delete'))
+    ].join(' ').html_safe
+  end
+end -%>

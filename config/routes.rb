@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   
   
+  post 'product_managers/search' => 'product_managers#index', as: :search_product_managers
   post 'trustors/search' => 'trustors#index', as: :search_trustors
   post 'users/search' => 'users#index', as: :search_users
   post 'consultants/search' => 'consultants#index', as: :search_consultants

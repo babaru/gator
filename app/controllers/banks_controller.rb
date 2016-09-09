@@ -1,6 +1,5 @@
-
-
 class BanksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_bank, only: [:show, :edit, :update, :destroy]
 
   QUERY_KEYS = [:name].freeze
@@ -131,5 +130,3 @@ class BanksController < ApplicationController
     @banks_grid = initialize_grid(Bank.where(conditions))
   end
 end
-
-

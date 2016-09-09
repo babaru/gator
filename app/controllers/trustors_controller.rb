@@ -1,6 +1,5 @@
-
-
 class TrustorsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_trustor, only: [:show, :edit, :update, :destroy]
 
   QUERY_KEYS = [:name].freeze
@@ -131,5 +130,3 @@ class TrustorsController < ApplicationController
     @trustors_grid = initialize_grid(Trustor.where(conditions))
   end
 end
-
-

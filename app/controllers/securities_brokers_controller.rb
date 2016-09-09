@@ -1,6 +1,5 @@
-
-
 class SecuritiesBrokersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_securities_broker, only: [:show, :edit, :update, :destroy]
 
   QUERY_KEYS = [:name].freeze
@@ -131,5 +130,3 @@ class SecuritiesBrokersController < ApplicationController
     @securities_brokers_grid = initialize_grid(SecuritiesBroker.where(conditions))
   end
 end
-
-
