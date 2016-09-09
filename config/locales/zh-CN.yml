@@ -78,6 +78,7 @@ zh-CN:
       trustor: 托管人
       securities_broker: 券商
       user: 系统用户
+      product_manager: 产品经理
     attributes:
       time_stamp:
         created_at: 创建于

@@ -4,10 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  before_save :set_product_manager_name
+
   attr_accessor :login
 
   has_many :assignments
   has_many :roles, through: :assignments
+  has_one :product_manager
 
   validates :username,
    :presence => true,
@@ -35,5 +38,11 @@ class User < ActiveRecord::Base
 
   def has_role?(role_sym)
     roles.any? { |r| r.name.to_sym == role_sym }
+  end
+
+  private
+
+  def set_product_manager_name
+    self.product_manager.name = self.name if product_manager
   end
 end

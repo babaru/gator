@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909034013) do
+ActiveRecord::Schema.define(version: 20160909092711) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -73,10 +73,13 @@ ActiveRecord::Schema.define(version: 20160909034013) do
   add_index "departments", ["name"], name: "index_departments_on_name", unique: true, using: :btree
 
   create_table "product_managers", force: :cascade do |t|
-    t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "user_id",    limit: 4
+    t.string   "name",       limit: 255
   end
+
+  add_index "product_managers", ["user_id"], name: "index_product_managers_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "name",                               limit: 255
@@ -199,6 +202,7 @@ ActiveRecord::Schema.define(version: 20160909034013) do
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
   add_foreign_key "consultants", "departments"
+  add_foreign_key "product_managers", "users"
   add_foreign_key "products", "consultants"
   add_foreign_key "products", "departments", column: "consultant_reference_department_id"
   add_foreign_key "products", "departments", column: "operation_department_id"

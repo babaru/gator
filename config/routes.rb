@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  
-  
+
+
   post 'product_managers/search' => 'product_managers#index', as: :search_product_managers
   post 'trustors/search' => 'trustors#index', as: :search_trustors
   post 'users/search' => 'users#index', as: :search_users
@@ -10,12 +10,8 @@ Rails.application.routes.draw do
   post 'departments/search' => 'departments#index', as: :search_departments
   post 'banks/search' => 'banks#index', as: :search_banks
   post 'products/search' => 'products#index', as: :search_products
-  
-  
-  
-  
-  
-  
+
+  post 'users/upgrade_to_product_manager/:id' =>'users#upgrade_to_product_manager', as: :upgrade_to_product_manager
 
   devise_for :users
   root 'products#index'
@@ -29,7 +25,7 @@ Rails.application.routes.draw do
   post 'clients/search' => 'clients#index', as: :search_clients
   get 'clients/upload_original_document' => 'clients#upload_original_document', as: :upload_client_original_document
 
-  
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

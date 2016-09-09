@@ -6,7 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-seed_users = User.create([{ username: 'sys_admin', email: 'sys_admin@ctpt.io', password: 12345678, password_confirmation: 12345678 }]) if User.count == 0
+seed_users = User.create(
+[
+  {
+    username: 'sys_admin', email: 'sys_admin@ctpt.io',
+    password: 12345678, password_confirmation: 12345678, type: 'User'
+  }
+]) if User.count == 0
 
 # seed_products = Product.create([
 #   { name: "申银万国期货有限公司-嘉诚一号集合资产管理计划", short_name: "嘉诚一号",

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :upgrade_to_product_manager]
 
   QUERY_KEYS = [:name].freeze
 
@@ -109,6 +109,17 @@ class UsersController < ApplicationController
       set_users_grid
       format.html { redirect_to users_url, notice: t('activerecord.success.messages.destroyed', model: User.model_name.human) }
       format.js
+    end
+  end
+
+  def upgrade_to_product_manager
+    if request.post?
+      respond_to do |format|
+        @user.build_product_manager if @user.product_manager.nil?
+        @user.product_manager.name = @user.name
+        @user.save
+        format.html { redirect_to users_url }
+      end
     end
   end
 
