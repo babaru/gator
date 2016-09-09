@@ -18,4 +18,18 @@
     <% end %>
     </Table>
   </Worksheet>
+  <Worksheet ss:Name="附表8-资管">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+      </Row>
+    <% @products.each do |product| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= product.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.name %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
 </Workbook>
