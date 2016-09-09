@@ -135,6 +135,7 @@ class UsersController < ApplicationController
       :last_sign_in_ip,
       :username,
       :name,
+      :role_ids => [],
       )
   end
 
@@ -142,5 +143,3 @@ class UsersController < ApplicationController
     @users_grid = initialize_grid(User.where(conditions))
   end
 end
-
-

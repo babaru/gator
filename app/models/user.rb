@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
 
+  has_many :assignments
+  has_many :roles, through: :assignments
+
   validates :username,
    :presence => true,
    :uniqueness => {
@@ -28,5 +31,9 @@ class User < ActiveRecord::Base
      conditions[:email].downcase! if conditions[:email]
      where(conditions.to_h).first
    end
+  end
+
+  def has_role?(role_sym)
+    roles.any? { |r| r.name.to_sym == role_sym }
   end
 end

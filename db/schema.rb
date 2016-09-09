@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908065453) do
+ActiveRecord::Schema.define(version: 20160909034013) do
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "role_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "assignments", ["role_id"], name: "index_assignments_on_role_id", using: :btree
+  add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
 
   create_table "banks", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -124,6 +134,13 @@ ActiveRecord::Schema.define(version: 20160908065453) do
   add_index "products", ["short_name"], name: "index_products_on_short_name", unique: true, using: :btree
   add_index "products", ["trustor_bank_account_id"], name: "index_products_on_trustor_bank_account_id", using: :btree
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
   create_table "securities_broker_accounts", force: :cascade do |t|
     t.integer  "securities_broker_id", limit: 4
     t.string   "name",                 limit: 255
@@ -179,6 +196,8 @@ ActiveRecord::Schema.define(version: 20160908065453) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "assignments", "roles"
+  add_foreign_key "assignments", "users"
   add_foreign_key "consultants", "departments"
   add_foreign_key "products", "consultants"
   add_foreign_key "products", "departments", column: "consultant_reference_department_id"

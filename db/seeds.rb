@@ -191,3 +191,14 @@ seed_banks = Bank.create([
 seed_securities_brokers = SecuritiesBroker.create([
   { name: "申万宏源福州鼓屏路" }
 ]) if SecuritiesBroker.count == 0
+
+roles = Role.create([
+  {
+    name: :admin,
+    description: '系统管理员'
+  },
+  {
+    name: :product_manager,
+    description: '产品经理'
+  }
+]) if Role.count == 0
