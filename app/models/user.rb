@@ -1,16 +1,16 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  before_save :set_product_manager_name
+  # before_save :set_product_manager_name
 
   attr_accessor :login
 
   has_many :assignments
   has_many :roles, through: :assignments
-  has_one :product_manager
+  has_one :staff
 
   validates :username,
    :presence => true,
@@ -19,6 +19,18 @@ class User < ActiveRecord::Base
    }
 
   validate :validate_username
+
+  validates :email, presence: true
+
+  accepts_nested_attributes_for :staff
+
+  def name
+    if staff
+      staff.name
+    else
+      "#{username} (#{email})"
+    end
+  end
 
   def validate_username
    if User.where(email: username).exists?

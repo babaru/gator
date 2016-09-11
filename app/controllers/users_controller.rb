@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :upgrade_to_product_manager]
 
-  QUERY_KEYS = [:name].freeze
+  QUERY_KEYS = [:login].freeze
 
   # GET /users
   # GET /users.json
@@ -19,7 +19,8 @@ class UsersController < ApplicationController
     build_query_user_params
 
     @conditions = []
-    @conditions << User.arel_table[:name].matches("%#{@query_params[:name]}%") if @query_params[:name]
+    @conditions << User.arel_table[:username].matches("%#{@query_params[:login]}%") if @query_params[:login]
+    @conditions << User.arel_table[:email].matches("%#{@query_params[:login]}%") if @query_params[:login]
 
     if @conditions.length > 0
       conditions = @conditions[0]
@@ -62,16 +63,20 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user.build_staff
   end
 
   # GET /users/1/edit
   def edit
+    @user.build_staff if @user.staff.nil?
   end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.except(:staff_attributes))
+    staff = Staff.find(user_params[:staff_attributes][:id])
+    @user.staff = staff if staff
 
     respond_to do |format|
       if @user.save
@@ -89,7 +94,9 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      staff = Staff.find(user_params[:staff_attributes][:id])
+      @user.staff = staff if staff
+      if @user.update(user_params.except(:staff_attributes))
         set_users_grid
         format.html { redirect_to @user, notice: t('activerecord.success.messages.updated', model: User.model_name.human) }
         format.js
@@ -137,6 +144,8 @@ class UsersController < ApplicationController
       :encrypted_password,
       :reset_password_token,
       :reset_password_sent_at,
+      :password,
+      :password_confirmation,
       :remember_created_at,
       :sign_in_count,
       :current_sign_in_at,
@@ -146,6 +155,10 @@ class UsersController < ApplicationController
       :username,
       :name,
       :role_ids => [],
+      :staff_attributes => [
+        :name,
+        :id
+      ]
       )
   end
 

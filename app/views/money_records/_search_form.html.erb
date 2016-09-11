@@ -1,14 +1,14 @@
-<%= simple_form_for(@query_user_params,
-  url: search_users_path, as: :user,
+<%= simple_form_for(@query_money_record_params,
+  url: search_money_records_path, as: :money_record,
   method: :post, wrapper: :vertical_form) do |f| %>
 
   <%= f.error_notification %>
 
-  <%= f.input :login, required: false, label: t('activerecord.attributes.user.login') %>
+  <%= f.input :name, required: false, label: t('activerecord.attributes.money_record.name') %>
   <!-- add more query parameter fields here -->
 
   <div class="form-group">
-      <%= link_to t('buttons.reset'), users_path,
+      <%= link_to t('buttons.reset'), money_records_path,
         class: 'btn btn-white btn-sm' %>
       <%= f.submit t('buttons.search'),
         class: 'btn btn-primary btn-sm pull-right' %>

@@ -1,0 +1,48 @@
+<%= simple_form_for(@staff, html: { class: 'form-horizontal' } ) do |f| %>
+  <%= f.error_notification %>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <%= f.input :name %>
+            <%= f.input :duration %>
+            <%= f.input :office_tel %>
+            <%= f.input :mobile %>
+            <%= f.input :is_investment_manager, as: :radio_buttons %>
+        </div>
+        <div class="col-lg-6">
+            <%= f.simple_fields_for :department do |department| %>
+                <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.staff.department_id') %>
+                <%= department.input :id, as: :hidden %>
+            <% end %>
+            <%= f.input :position %>
+            <%= f.input :certification_id %>
+            <%= f.input :resume %>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="form-group">
+        <div class="pull-right m-r-md">
+            <%= f.submit t('buttons.save'), class: 'btn btn-primary btn-w-m' %>
+        </div>
+        <div class="m-l-md">
+          <%= link_to t('activerecord.text.back_to_list', model: Staff.model_name.human), staffs_path, class: 'btn btn-white' %>
+        </div>
+    </div>
+<% end %>
+
+<script type="text/javascript">
+$.get('/departments.json', function(data) {
+  $('#staff_department_attributes_name').typeahead({
+    source: data
+  }).change(function() {
+    var current = $(this).typeahead("getActive");
+    if (current) {
+      if (current.name == $(this).val()) {
+        $('#staff_department_attributes_id').val(current.id);
+      }
+    }
+  });
+});
+</script>

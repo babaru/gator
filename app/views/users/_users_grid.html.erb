@@ -4,10 +4,10 @@
     user.id
   end
 
-  g.column name: t('activerecord.attributes.user.name'), class: 'project-title' do |user|
+  g.column name: t('activerecord.attributes.user.username'), class: 'project-title' do |user|
     [
-      user.name.nil? || user.name.empty? ? 'N/A' : user.name,
-      "#{user.username} (#{user.email})"
+      link_to(user.username, user_path(user)),
+      user.email
     ].join('<br >').html_safe
   end
 
@@ -29,15 +29,15 @@
     ].join('<br />').html_safe
   end
 
+  g.column name: t('activerecord.attributes.user.staff_name') do |user|
+    user.staff.name if user.staff
+  end
+
   g.column do |user|
     [
       "#{t('activerecord.attributes.time_stamp.created_at')}: #{user.created_at.strftime('%Y-%m-%d %H:%M:%S')}",
       "#{t('activerecord.attributes.time_stamp.updated_at')}: #{user.updated_at.strftime('%Y-%m-%d %H:%M:%S')}"
     ].join('<br />').html_safe
-  end
-
-  g.column html: {class: 'project-actions'} do |user|
-    link_to(fa_icon("briefcase", text: '成为产品经理'), upgrade_to_product_manager_path(user), method: :post, class: 'btn btn-white btn-xs', data: {toggle: 'tooltip', confirm: '确定要将此帐号加入产品经理权限？'}, title: t('buttons.edit')) if user.product_manager.nil?
   end
 
   g.column html: {class: 'project-actions'} do |user|

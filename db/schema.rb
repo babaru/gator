@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909092711) do
+ActiveRecord::Schema.define(version: 20160911163016) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -71,6 +71,19 @@ ActiveRecord::Schema.define(version: 20160909092711) do
   end
 
   add_index "departments", ["name"], name: "index_departments_on_name", unique: true, using: :btree
+
+  create_table "money_records", force: :cascade do |t|
+    t.datetime "done_at"
+    t.string   "type",       limit: 255
+    t.decimal  "amount",                 precision: 10
+    t.integer  "staff_id",   limit: 4
+    t.integer  "product_id", limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "money_records", ["product_id"], name: "index_money_records_on_product_id", using: :btree
+  add_index "money_records", ["staff_id"], name: "index_money_records_on_staff_id", using: :btree
 
   create_table "product_managers", force: :cascade do |t|
     t.datetime "created_at",             null: false
@@ -160,6 +173,24 @@ ActiveRecord::Schema.define(version: 20160909092711) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "staffs", force: :cascade do |t|
+    t.string   "name",                  limit: 255
+    t.integer  "department_id",         limit: 4
+    t.string   "position",              limit: 255
+    t.string   "duration",              limit: 255
+    t.string   "office_tel",            limit: 255
+    t.string   "mobile",                limit: 255
+    t.text     "resume",                limit: 65535
+    t.boolean  "is_investment_manager"
+    t.string   "certification_id",      limit: 255
+    t.integer  "user_id",               limit: 4
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "staffs", ["department_id"], name: "index_staffs_on_department_id", using: :btree
+  add_index "staffs", ["user_id"], name: "index_staffs_on_user_id", using: :btree
+
   create_table "trustor_bank_accounts", force: :cascade do |t|
     t.integer  "trustor_id", limit: 4
     t.integer  "bank_id",    limit: 4
@@ -192,7 +223,6 @@ ActiveRecord::Schema.define(version: 20160909092711) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "username",               limit: 255
-    t.string   "name",                   limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -202,6 +232,8 @@ ActiveRecord::Schema.define(version: 20160909092711) do
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
   add_foreign_key "consultants", "departments"
+  add_foreign_key "money_records", "products"
+  add_foreign_key "money_records", "staffs"
   add_foreign_key "product_managers", "users"
   add_foreign_key "products", "consultants"
   add_foreign_key "products", "departments", column: "consultant_reference_department_id"
@@ -211,6 +243,8 @@ ActiveRecord::Schema.define(version: 20160909092711) do
   add_foreign_key "products", "securities_broker_accounts"
   add_foreign_key "products", "trustor_bank_accounts"
   add_foreign_key "securities_broker_accounts", "securities_brokers"
+  add_foreign_key "staffs", "departments"
+  add_foreign_key "staffs", "users"
   add_foreign_key "trustor_bank_accounts", "banks"
   add_foreign_key "trustor_bank_accounts", "trustors"
 end

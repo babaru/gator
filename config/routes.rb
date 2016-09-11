@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 
 
+  post 'money_records/search' => 'money_records#index', as: :search_money_records
+  post 'staffs/search' => 'staffs#index', as: :search_staffs
   post 'product_managers/search' => 'product_managers#index', as: :search_product_managers
   post 'trustors/search' => 'trustors#index', as: :search_trustors
   post 'users/search' => 'users#index', as: :search_users
@@ -37,7 +39,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :products, :departments, :clients, :consultants,
-    :product_managers, :trustors, :banks, :securities_brokers, :users
+    :product_managers, :trustors, :banks, :securities_brokers, :users, :staffs
 
   # Example resource route with options:
   #   resources :products do

@@ -16,7 +16,9 @@ class Ability
     can :manage, Bank
     can :manage, SecuritiesBroker
     can :manage, Consultant
-    can :manage, ProductManager
+    can :manage, Staff
+
+    default_user
   end
 
   def product_manager
@@ -27,7 +29,9 @@ class Ability
     can :manage, Trustor
     can :manage, Consultant
     can :manage, Client
-    can :update, ProductManager, :id => user.id
+    can :update, Staff, :id => @user.id
+
+    default_user
   end
 
   def client_manager
@@ -35,5 +39,6 @@ class Ability
   end
 
   def default_user
+    can :read, :all
   end
 end

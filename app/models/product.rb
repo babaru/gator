@@ -12,7 +12,6 @@ class Product < ActiveRecord::Base
 
   before_save :update_consultant_name
 
-
   validates :name, :short_name, :code, :client_code, uniqueness: true
 
   # validates :product_manager, presence: true

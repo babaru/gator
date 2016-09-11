@@ -77,8 +77,9 @@ zh-CN:
       bank: 银行
       trustor: 托管人
       securities_broker: 券商
-      user: 系统用户
+      user: 系统帐号
       product_manager: 产品经理
+      staff: 人员
     attributes:
       time_stamp:
         created_at: 创建于
@@ -92,6 +93,7 @@ zh-CN:
         last_sign_in_at: 最近登录于
         last_sign_in_ip: 最近登录IP
         sign_in_count: 登录次数
+        staff_name: 授权予
       department:
         name: 名称
       trustor:
@@ -178,6 +180,17 @@ zh-CN:
       securities_broker:
         name: 名称
         bank_id: 开户银行
+      staff:
+        name: 姓名
+        department_id: 所属部门
+        duration: 从业年限
+        position: 岗位
+        office_tel: 办公电话
+        mobile: 移动电话
+        resume: 最近三年从业经历
+        is_investment_manager: 是否投资经理
+        certification_id: 执业证书号
+        user_id: 系统帐号
   simple_form:
     "yes": '是'
     "no": '不'

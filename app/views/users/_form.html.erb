@@ -3,7 +3,6 @@
 
 <div class="row">
     <div class="col-lg-6">
-        <%= f.input :name %>
         <%= f.input :username %>
         <%= f.input :email %>
         <%= f.input :password %>
@@ -11,6 +10,10 @@
     </div>
     <div class="col-lg-6">
         <%= f.association :roles, collection: Role.all, label_method: :description, as: :check_boxes %>
+        <%= f.simple_fields_for :staff do |sf| %>
+        <%= sf.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.user.staff_name') %>
+        <%= sf.input :id, as: :hidden %>
+        <% end %>
     </div>
 </div>
 
@@ -25,3 +28,18 @@
     </div>
 </div>
 <% end %>
+
+<script type="text/javascript">
+$.get('/staffs.json', function(data) {
+  $('#user_staff_attributes_name').typeahead({
+    source: data
+  }).change(function() {
+    var current = $(this).typeahead("getActive");
+    if (current) {
+      if (current.name == $(this).val()) {
+        $('#user_staff_attributes_id').val(current.id);
+      }
+    }
+  });
+});
+</script>

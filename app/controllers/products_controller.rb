@@ -98,14 +98,16 @@ class ProductsController < ApplicationController
       @product.operation_department = Department.find_or_create_by(name: product_params[:operation_department_attributes][:name])
       @product.consultant_reference_department =
         Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
-      @product.consultant = Consultant.find_or_create_by(name: product_params[:consultant_attributes][:name])
-      @product.consultant.department = @product.consultant_reference_department
+      consultant = Consultant.find_by_name(product_params[:consultant_attributes][:name])
+      @product.consultant = consultant if consultant
+      @product.consultant.department = @product.consultant_reference_department if consultant
 
       if @product.save
         set_products_grid
         format.html { redirect_to @product, notice: t('activerecord.success.messages.created', model: Product.model_name.human) }
         format.js
       else
+        logger.debug @product.errors.full_messages
         format.html { render :new }
         format.js { render :new }
       end
@@ -121,8 +123,9 @@ class ProductsController < ApplicationController
       @product.operation_department = Department.find_or_create_by(name: product_params[:operation_department_attributes][:name])
       @product.consultant_reference_department =
         Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
-      @product.consultant = Consultant.find_or_create_by(name: product_params[:consultant_attributes][:name])
-      @product.consultant.development = @product.consultant_reference_department
+      consultant = Consultant.find_by_name(product_params[:consultant_attributes][:name])
+      @product.consultant = consultant if consultant
+      @product.consultant.department = @product.consultant_reference_department if consultant
 
       if @product.update(product_params.except(:product_manager_attributes,
         :sales_department_attributes,
