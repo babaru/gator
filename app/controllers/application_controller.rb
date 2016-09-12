@@ -6,8 +6,12 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    if resource.is_a?(User) && resource.has_role?(:admin)
-      users_path
+    if resource.is_a?(User)
+      if resource.has_role?(:admin)
+        users_path
+      elsif resource.staff
+        staff_path(resource.staff.id)
+      end
     else
       root_path
     end

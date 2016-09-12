@@ -75,13 +75,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params.except(:staff_attributes))
-    staff = Staff.find(user_params[:staff_attributes][:id])
+    staff = Staff.find(user_params[:staff_attributes][:id]) if user_params[:staff_attributes][:id] && !user_params[:staff_attributes][:id].empty?
     @user.staff = staff if staff
 
     respond_to do |format|
       if @user.save
         set_users_grid
-        format.html { redirect_to @user, notice: t('activerecord.success.messages.created', model: User.model_name.human) }
+        format.html { redirect_to users_path, notice: t('activerecord.success.messages.created', model: User.model_name.human) }
         format.js
       else
         format.html { render :new }
@@ -94,11 +94,13 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      staff = Staff.find(user_params[:staff_attributes][:id])
+      staff = Staff.find(user_params[:staff_attributes][:id]) if user_params[:staff_attributes][:id] && !user_params[:staff_attributes][:id].empty?
       @user.staff = staff if staff
-      if @user.update(user_params.except(:staff_attributes))
+      updating_params = user_params.except(:staff_attributes)
+      updating_params = updating_params.except(:password, :password_confirmation) if user_params[:password].empty?
+      if @user.update(updating_params)
         set_users_grid
-        format.html { redirect_to @user, notice: t('activerecord.success.messages.updated', model: User.model_name.human) }
+        format.html { redirect_to users_path, notice: t('activerecord.success.messages.updated', model: User.model_name.human) }
         format.js
       else
         format.html { render :edit }
