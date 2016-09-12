@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160911163016) do
+ActiveRecord::Schema.define(version: 20160912073327) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -129,13 +129,13 @@ ActiveRecord::Schema.define(version: 20160911163016) do
     t.string   "szse_gateway",                       limit: 255
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
-    t.integer  "product_manager_id",                 limit: 4
     t.integer  "trustor_bank_account_id",            limit: 4
     t.integer  "securities_broker_account_id",       limit: 4
     t.integer  "sales_department_id",                limit: 4
     t.integer  "operation_department_id",            limit: 4
     t.integer  "consultant_reference_department_id", limit: 4
     t.integer  "consultant_id",                      limit: 4
+    t.integer  "staff_id",                           limit: 4
   end
 
   add_index "products", ["client_code"], name: "index_products_on_client_code", unique: true, using: :btree
@@ -144,10 +144,10 @@ ActiveRecord::Schema.define(version: 20160911163016) do
   add_index "products", ["consultant_reference_department_id"], name: "index_products_on_consultant_reference_department_id", using: :btree
   add_index "products", ["name"], name: "index_products_on_name", unique: true, using: :btree
   add_index "products", ["operation_department_id"], name: "index_products_on_operation_department_id", using: :btree
-  add_index "products", ["product_manager_id"], name: "index_products_on_product_manager_id", using: :btree
   add_index "products", ["sales_department_id"], name: "index_products_on_sales_department_id", using: :btree
   add_index "products", ["securities_broker_account_id"], name: "index_products_on_securities_broker_account_id", using: :btree
   add_index "products", ["short_name"], name: "index_products_on_short_name", unique: true, using: :btree
+  add_index "products", ["staff_id"], name: "index_products_on_staff_id", using: :btree
   add_index "products", ["trustor_bank_account_id"], name: "index_products_on_trustor_bank_account_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
@@ -239,8 +239,8 @@ ActiveRecord::Schema.define(version: 20160911163016) do
   add_foreign_key "products", "departments", column: "consultant_reference_department_id"
   add_foreign_key "products", "departments", column: "operation_department_id"
   add_foreign_key "products", "departments", column: "sales_department_id"
-  add_foreign_key "products", "product_managers"
   add_foreign_key "products", "securities_broker_accounts"
+  add_foreign_key "products", "staffs"
   add_foreign_key "products", "trustor_bank_accounts"
   add_foreign_key "securities_broker_accounts", "securities_brokers"
   add_foreign_key "staffs", "departments"

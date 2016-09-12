@@ -1,20 +1,18 @@
 class Product < ActiveRecord::Base
-  belongs_to :product_manager
+  belongs_to :staff
   belongs_to :trustor_bank_account
   belongs_to :securities_broker_account
   belongs_to :sales_department, class_name: 'Department'
   belongs_to :operation_department, class_name: 'Department'
   belongs_to :consultant_reference_department, class_name: 'Department'
   belongs_to :consultant
-  accepts_nested_attributes_for :product_manager, :sales_department,
+  accepts_nested_attributes_for :staff, :sales_department,
     :operation_department, :consultant_reference_department,
     :consultant, reject_if: proc { |attrs| attrs[:name].blank? }
 
   before_save :update_consultant_name
 
   validates :name, :short_name, :code, :client_code, uniqueness: true
-
-  # validates :product_manager, presence: true
 
   validates :name,
     :client_code,
@@ -28,7 +26,7 @@ class Product < ActiveRecord::Base
     # :deposited_at,
     :delegation_started_at,
     :delegation_ended_at,
-    :delegation_duration,
+    # :delegation_duration,
     # :fee_calculation_standard,
     # :management_fee_ratio,
     # :year_day_count,

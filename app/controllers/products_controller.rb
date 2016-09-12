@@ -53,7 +53,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  TABS = [:trustor, :fee, :accounts, :clients].freeze
+  TABS = [:consultant, :trustor, :money_records, :fee, :accounts, :clients].freeze
 
   # GET /products/1
   # GET /products/1.json
@@ -68,39 +68,39 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
-    @product.build_product_manager
+    @product.build_staff
     @product.build_sales_department
     @product.build_operation_department
-    @product.build_consultant_reference_department
-    @product.build_consultant
+    # @product.build_consultant_reference_department
+    # @product.build_consultant
   end
 
   # GET /products/1/edit
   def edit
-    @product.build_product_manager if @product.product_manager.nil?
+    @product.build_staff if @product.staff.nil?
     @product.build_sales_department if @product.sales_department.nil?
     @product.build_operation_department if @product.operation_department.nil?
-    @product.build_consultant_reference_department if @product.consultant_reference_department.nil?
-    @product.build_consultant if @product.consultant.nil?
+    # @product.build_consultant_reference_department if @product.consultant_reference_department.nil?
+    # @product.build_consultant if @product.consultant.nil?
   end
 
   # POST /products
   # POST /products.json
   def create
     respond_to do |format|
-      @product = Product.new(product_params.except(:product_manager_attributes,
+      @product = Product.new(product_params.except(:staff_attributes,
         :sales_department_attributes,
         :operation_department_attributes,
         :consultant_reference_department_attributes,
         :consultant_attributes))
-      @product.product_manager = ProductManager.find_or_create_by(name: product_params[:product_manager_attributes][:name])
+      @product.staff = Staff.find(product_params[:staff_attributes][:id]) if product_params[:staff_attributes][:id] && !product_params[:staff_attributes][:id].empty?
       @product.sales_department = Department.find_or_create_by(name: product_params[:sales_department_attributes][:name])
       @product.operation_department = Department.find_or_create_by(name: product_params[:operation_department_attributes][:name])
-      @product.consultant_reference_department =
-        Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
-      consultant = Consultant.find_by_name(product_params[:consultant_attributes][:name])
-      @product.consultant = consultant if consultant
-      @product.consultant.department = @product.consultant_reference_department if consultant
+      # @product.consultant_reference_department =
+        # Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
+      # consultant = Consultant.find_by_name(product_params[:consultant_attributes][:name])
+      # @product.consultant = consultant if consultant
+      # @product.consultant.department = @product.consultant_reference_department if consultant
 
       if @product.save
         set_products_grid
@@ -118,16 +118,16 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     respond_to do |format|
-      @product.product_manager = ProductManager.find_or_create_by(name: product_params[:product_manager_attributes][:name])
+      @product.staff = Staff.find_or_create_by(name: product_params[:staff_attributes][:name])
       @product.sales_department = Department.find_or_create_by(name: product_params[:sales_department_attributes][:name])
       @product.operation_department = Department.find_or_create_by(name: product_params[:operation_department_attributes][:name])
-      @product.consultant_reference_department =
-        Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
-      consultant = Consultant.find_by_name(product_params[:consultant_attributes][:name])
-      @product.consultant = consultant if consultant
-      @product.consultant.department = @product.consultant_reference_department if consultant
+      # @product.consultant_reference_department =
+      #   Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
+      # consultant = Consultant.find_by_name(product_params[:consultant_attributes][:name])
+      # @product.consultant = consultant if consultant
+      # @product.consultant.department = @product.consultant_reference_department if consultant
 
-      if @product.update(product_params.except(:product_manager_attributes,
+      if @product.update(product_params.except(:staff_attributes,
         :sales_department_attributes,
         :operation_department_attributes,
         :consultant_reference_department_attributes,
@@ -199,7 +199,7 @@ class ProductsController < ApplicationController
       :investment_consultant_name,
       :sse_gateway,
       :szse_gateway,
-      product_manager_attributes: [
+      staff_attributes: [
         :id,
         :name
       ],
