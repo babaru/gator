@@ -53,7 +53,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  TABS = [:consultant, :trustor, :money_records, :fee, :accounts, :clients].freeze
+  TABS = [:trustor, :money_records, :fee, :accounts, :clients].freeze
 
   # GET /products/1
   # GET /products/1.json
@@ -71,8 +71,7 @@ class ProductsController < ApplicationController
     @product.build_staff
     @product.build_sales_department
     @product.build_operation_department
-    # @product.build_consultant_reference_department
-    # @product.build_consultant
+    @product.build_consultant
   end
 
   # GET /products/1/edit
@@ -80,8 +79,7 @@ class ProductsController < ApplicationController
     @product.build_staff if @product.staff.nil?
     @product.build_sales_department if @product.sales_department.nil?
     @product.build_operation_department if @product.operation_department.nil?
-    # @product.build_consultant_reference_department if @product.consultant_reference_department.nil?
-    # @product.build_consultant if @product.consultant.nil?
+    @product.build_consultant if @product.consultant.nil?
   end
 
   # POST /products
@@ -93,14 +91,8 @@ class ProductsController < ApplicationController
         :operation_department_attributes,
         :consultant_reference_department_attributes,
         :consultant_attributes))
-      @product.staff = Staff.find(product_params[:staff_attributes][:id]) if product_params[:staff_attributes][:id] && !product_params[:staff_attributes][:id].empty?
-      @product.sales_department = Department.find_or_create_by(name: product_params[:sales_department_attributes][:name])
-      @product.operation_department = Department.find_or_create_by(name: product_params[:operation_department_attributes][:name])
-      # @product.consultant_reference_department =
-        # Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
-      # consultant = Consultant.find_by_name(product_params[:consultant_attributes][:name])
-      # @product.consultant = consultant if consultant
-      # @product.consultant.department = @product.consultant_reference_department if consultant
+
+      handle_associations(product_params)
 
       if @product.save
         set_products_grid
@@ -118,14 +110,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     respond_to do |format|
-      @product.staff = Staff.find_or_create_by(name: product_params[:staff_attributes][:name])
-      @product.sales_department = Department.find_or_create_by(name: product_params[:sales_department_attributes][:name])
-      @product.operation_department = Department.find_or_create_by(name: product_params[:operation_department_attributes][:name])
-      # @product.consultant_reference_department =
-      #   Department.find_or_create_by(name: product_params[:consultant_reference_department_attributes][:name])
-      # consultant = Consultant.find_by_name(product_params[:consultant_attributes][:name])
-      # @product.consultant = consultant if consultant
-      # @product.consultant.department = @product.consultant_reference_department if consultant
+      handle_associations(product_params)
 
       if @product.update(product_params.except(:staff_attributes,
         :sales_department_attributes,
@@ -140,6 +125,13 @@ class ProductsController < ApplicationController
         format.js { render :edit }
       end
     end
+  end
+
+  def handle_associations(product_params)
+    @product.staff = Staff.find(product_params[:staff_attributes][:id]) if product_params[:staff_attributes] && !product_params[:staff_attributes][:id].empty?
+    @product.sales_department = Department.find(product_params[:sales_department_attributes][:id]) if product_params[:sales_department_attributes] && !product_params[:sales_department_attributes][:id].empty?
+    @product.operation_department = Department.find(product_params[:operation_department_attributes][:id]) if product_params[:operation_department_attributes] && !product_params[:operation_department_attributes][:id].empty?
+    @product.consultant = Consultant.find(product_params[:consultant_attributes][:id]) if product_params[:consultant_attributes] && !product_params[:consultant_attributes][:id].empty?
   end
 
   # DELETE /products/1

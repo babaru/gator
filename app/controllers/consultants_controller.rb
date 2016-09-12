@@ -66,6 +66,7 @@ class ConsultantsController < ApplicationController
   # GET /consultants/new
   def new
     @consultant = Consultant.new
+    @consultant.build_department
   end
 
   # GET /consultants/1/edit
@@ -76,7 +77,8 @@ class ConsultantsController < ApplicationController
   # POST /consultants
   # POST /consultants.json
   def create
-    @consultant = Consultant.new(consultant_params)
+    @consultant = Consultant.new(consultant_params.except(:department_attributes))
+    @consultant.department_id = consultant_params[:department_attributes][:id]
 
     respond_to do |format|
       if @consultant.save
@@ -94,7 +96,8 @@ class ConsultantsController < ApplicationController
   # PATCH/PUT /consultants/1.json
   def update
     respond_to do |format|
-      if @consultant.update(consultant_params)
+      @consultant.department_id = consultant_params[:department_attributes][:id]
+      if @consultant.update(consultant_params.except(:department_attributes))
         set_consultants_grid
         format.html { redirect_to @consultant, notice: t('activerecord.success.messages.updated', model: Consultant.model_name.human) }
         format.js
@@ -135,7 +138,11 @@ class ConsultantsController < ApplicationController
       :capital,
       :person_in_charge_name,
       :is_qualified_3rd_party_institution,
-      :company_address
+      :company_address,
+      :department_attributes => [
+        :name,
+        :id
+      ]
       )
   end
 

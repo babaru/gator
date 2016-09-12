@@ -83,7 +83,7 @@
                         <dt><%= t('activerecord.attributes.product.sales_department') %>:</dt>
                         <dd><%= @product.sales_department.name if @product.sales_department %></dd>
                         <dt><%= t('activerecord.attributes.product.consultant_reference_department') %>:</dt>
-                        <dd><%= @product.consultant_reference_department.name if @product.consultant_reference_department %></dd>
+                        <dd><%= @product.consultant.department.name if @product.consultant && @product.consultant.department %></dd>
 
                     </dl>
                 </div>
@@ -93,7 +93,7 @@
                       <dt><%= t('activerecord.attributes.product.operation_department') %>:</dt>
                       <dd><%= @product.operation_department.name if @product.operation_department %> </dd>
                       <dt><%= t('activerecord.attributes.product.consultant_name') %>:</dt>
-                      <dd><%= @product.consultant.name if @product.consultant %> </dd>
+                      <dd><%= @product.consultant_name if @product.consultant %> </dd>
 
                     </dl>
                 </div>

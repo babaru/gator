@@ -19,8 +19,8 @@
     product.short_name
   end
 
-  g.column name: t('activerecord.attributes.product.product_manager') do |product|
-    product.product_manager.name if product.product_manager
+  g.column name: t('activerecord.attributes.product.staff') do |product|
+    product.staff.name if product.staff
   end
 
   g.column name: t('activerecord.attributes.product.product_type') do |product|
