@@ -86,10 +86,10 @@ ActiveRecord::Schema.define(version: 20160911163016) do
   add_index "money_records", ["staff_id"], name: "index_money_records_on_staff_id", using: :btree
 
   create_table "product_managers", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "user_id",    limit: 4
-    t.string   "name",       limit: 255
   end
 
   add_index "product_managers", ["user_id"], name: "index_product_managers_on_user_id", using: :btree

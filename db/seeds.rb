@@ -10,7 +10,7 @@ seed_users = User.create(
 [
   {
     username: 'sys_admin', email: 'sys_admin@ctpt.io',
-    password: 12345678, password_confirmation: 12345678, type: 'User'
+    password: 12345678, password_confirmation: 12345678
   }
 ]) if User.count == 0
 
@@ -194,11 +194,12 @@ seed_banks = Bank.create([
 #   { name: "招商证券" },
 # ]) if Trustor.count == 0
 #
-seed_securities_brokers = SecuritiesBroker.create([
-  { name: "申万宏源福州鼓屏路" }
-]) if SecuritiesBroker.count == 0
+# seed_securities_brokers = SecuritiesBroker.create([
+#   { name: "申万宏源福州鼓屏路" }
+# ]) if SecuritiesBroker.count == 0
 
-roles = Role.create([
+seed_roles = Role.create(
+[
   {
     name: :admin,
     description: '系统管理员'
@@ -207,4 +208,12 @@ roles = Role.create([
     name: :product_manager,
     description: '产品经理'
   }
-]) if Role.count == 0
+]
+) if Role.count == 0
+
+assignments = Assignment.create(
+[
+  user: seed_users[0],
+  role: seed_roles[0]
+]
+) if Assignment.count == 0
