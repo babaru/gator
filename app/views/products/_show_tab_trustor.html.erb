@@ -22,8 +22,6 @@
           <dd><%= @product.securities_broker_account.securities_broker.name if @product.securities_broker_account %></dd>
           <dt><%= t('activerecord.attributes.product.securities_broker_account_number') %>:</dt>
           <dd><%= @product.securities_broker_account.number if @product.securities_broker_account %> </dd>
-          <dt><%= t('activerecord.attributes.product.deposited_at') %>:</dt>
-          <dd><%= @product.deposited_at.strftime('%Y-%m-%d') if @product.deposited_at %></dd>
 
       </dl>
   </div>
