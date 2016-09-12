@@ -84,7 +84,7 @@ class StaffsController < ApplicationController
     respond_to do |format|
       if @staff.save
         set_staffs_grid
-        format.html { redirect_to @staff, notice: t('activerecord.success.messages.created', model: Staff.model_name.human) }
+        format.html { redirect_to staffs_path, notice: t('activerecord.success.messages.created', model: Staff.model_name.human) }
         format.js
       else
         format.html { render :new }
@@ -100,7 +100,7 @@ class StaffsController < ApplicationController
       @staff.department = Department.find_or_create_by(name: staff_params[:department_attributes][:name])
       if @staff.update(staff_params.except(:department_attributes))
         set_staffs_grid
-        format.html { redirect_to @staff, notice: t('activerecord.success.messages.updated', model: Staff.model_name.human) }
+        format.html { redirect_to staffs_path, notice: t('activerecord.success.messages.updated', model: Staff.model_name.human) }
         format.js
       else
         format.html { render :edit }

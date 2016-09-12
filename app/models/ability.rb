@@ -29,7 +29,7 @@ class Ability
     can :manage, Trustor
     can :manage, Consultant
     can :manage, Client
-    can :update, Staff, :id => @user.id
+    can :update, Staff, :id => @user.staff.id
 
     default_user
   end
