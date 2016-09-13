@@ -11,6 +11,18 @@
     staff.department.name if staff.department
   end
 
+  g.column name: t('activerecord.attributes.staff.office_tel') do |staff|
+    staff.office_tel
+  end
+
+  g.column name: t('activerecord.attributes.staff.mobile') do |staff|
+    staff.mobile
+  end
+
+  g.column name: t('activerecord.attributes.staff.email') do |staff|
+    staff.email
+  end
+
   g.column name: t('activerecord.attributes.staff.position') do |staff|
     staff.position
   end

@@ -136,6 +136,7 @@ class StaffsController < ApplicationController
       :position,
       :duration,
       :office_tel,
+      :email,
       :mobile,
       :resume,
       :is_investment_manager,

@@ -4,9 +4,9 @@
     <div class="row">
         <div class="col-lg-6">
             <%= f.input :name %>
-            <%= f.input :duration %>
             <%= f.input :office_tel %>
             <%= f.input :mobile %>
+            <%= f.input :email %>
             <%= f.input :is_investment_manager, as: :radio_buttons %>
         </div>
         <div class="col-lg-6">
@@ -16,6 +16,7 @@
             <% end %>
             <%= f.input :position %>
             <%= f.input :certification_id %>
+            <%= f.input :duration %>
             <%= f.input :resume %>
         </div>
     </div>
