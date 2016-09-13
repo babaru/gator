@@ -224,7 +224,8 @@ seed_staffs = Staff.create(
     name: '王廷璞',
     email: 'wangtp@sywgqh.com.cn',
     department_id: 5,
-    is_investment_manager: true
+    is_investment_manager: true,
+    user: seed_users[1]
   }
 ]
 ) if Staff.count == 0

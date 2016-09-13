@@ -11,6 +11,7 @@ zh-CN:
     download_as_excel: 下载为Excel文件
     download: 下载
     reset: 重置
+    sign_out: 退出登录
   confirms:
     delete: 确定要删除这一条记录吗？
   labels:
