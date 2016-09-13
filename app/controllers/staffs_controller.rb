@@ -60,7 +60,7 @@ class StaffsController < ApplicationController
     @current_tab = @current_tab.to_sym
 
     if @current_tab == :products
-      @products_grid = initialize_grid(Product.where(product_manager_id: @staff.id))
+      @products_grid = initialize_grid(Product.where(staff_id: @staff.id))
     end
   end
 
