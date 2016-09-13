@@ -11,6 +11,10 @@ seed_users = User.create(
   {
     username: 'sys_admin', email: 'sys_admin@ctpt.io',
     password: 12345678, password_confirmation: 12345678
+  },
+  {
+    username: 'wangtingpu', email: 'wangtp@sywgqh.com.cn',
+    password: 12345678, password_confirmation: 12345678
   }
 ]) if User.count == 0
 
@@ -170,16 +174,7 @@ seed_departments = Department.create(
     { name: "证券基金开发部" }
   ]
 ) if Department.count == 0
-#
-# seed_product_managers = ProductManager.create(
-# [
-#   { name: "肖珊" },
-#   { name: "王廷璞" },
-#   { name: "董海洲" },
-#   { name: "强政" }
-# ]
-# ) if ProductManager.count == 0
-#
+
 seed_banks = Bank.create([
   { name: "中国工商银行" },
   { name: "中国建设银行" },
@@ -188,15 +183,6 @@ seed_banks = Bank.create([
   { name: "招商银行" },
   { name: "兴业银行" }
 ]) if Bank.count == 0
-#
-# seed_trustors = Trustor.create([
-#   { name: "申银万国证券" },
-#   { name: "招商证券" },
-# ]) if Trustor.count == 0
-#
-# seed_securities_brokers = SecuritiesBroker.create([
-#   { name: "申万宏源福州鼓屏路" }
-# ]) if SecuritiesBroker.count == 0
 
 seed_roles = Role.create(
 [
@@ -207,13 +193,37 @@ seed_roles = Role.create(
   {
     name: :product_manager,
     description: '产品经理'
+  },
+  {
+    name: :am_manager,
+    description: '资管部管理员'
   }
 ]
 ) if Role.count == 0
 
-assignments = Assignment.create(
+seed_assignments = Assignment.create(
 [
-  user: seed_users[0],
-  role: seed_roles[0]
+  {
+    user: seed_users[0],
+    role: seed_roles[0]
+  },
+  {
+    user: seed_users[1],
+    role: seed_roles[1]
+  },
+  {
+    user: seed_users[1],
+    role: seed_roles[2]
+  }
 ]
 ) if Assignment.count == 0
+
+seed_staffs = Staff.create(
+[
+  {
+    name: '王廷璞',
+    department_id: 5,
+    is_investment_manager: true
+  }
+]
+) if Staff.count == 0

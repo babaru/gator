@@ -21,6 +21,10 @@ class Ability
     # default_user
   end
 
+  def am_manager
+    can :manage, Staff
+  end
+
   def product_manager
     can :manage, Product
     can :manage, Department
@@ -32,10 +36,6 @@ class Ability
     can :update, Staff, :id => @user.staff.id
 
     default_user
-  end
-
-  def client_manager
-    can :manage, Client
   end
 
   def default_user
