@@ -31,8 +31,12 @@
     Product.product_dev_type_names[product.product_dev_type]
   end
 
-  g.column name: t('activerecord.attributes.time_stamp.updated_at') do |product|
-    product.updated_at.strftime('%Y-%m-%d %H:%M:%S')
+  g.column name: t('activerecord.attributes.product.delegation_started_at') do |product|
+    product.delegation_started_at.strftime('%Y-%m-%d') if product.delegation_started_at
+  end
+
+  g.column name: t('activerecord.attributes.product.delegation_ended_at') do |product|
+    product.delegation_ended_at.strftime('%Y-%m-%d') if product.delegation_ended_at
   end
 
   unless local_assigns[:readonly] == true
