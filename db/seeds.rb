@@ -223,7 +223,7 @@ seed_staffs = Staff.create(
   {
     name: '王廷璞',
     email: 'wangtp@sywgqh.com.cn',
-    department_id: 5,
+    department_id: 6,
     is_investment_manager: true,
     user: seed_users[1]
   }
