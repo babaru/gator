@@ -4,30 +4,88 @@
   xmlns:x="urn:schemas-microsoft-com:office:excel"
   xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
   xmlns:html="http://www.w3.org/TR/REC-html40">
-  <Worksheet ss:Name="Sheet1">
+  <Worksheet ss:Name="<%= Product.model_name.human %>">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">ID</Data></Cell>
-        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">序号</Data></Cell>
+        <Cell><Data ss:Type="String">委托资产名称</Data></Cell>
+        <Cell><Data ss:Type="String">客户编号</Data></Cell>
+        <Cell><Data ss:Type="String">产品简称</Data></Cell>
+        <Cell><Data ss:Type="String">委托人名称</Data></Cell>
+        <Cell><Data ss:Type="String">产品编码</Data></Cell>
+        <Cell><Data ss:Type="String">运行状态</Data></Cell>
+        <Cell><Data ss:Type="String">产品研发类别</Data></Cell>
+        <Cell><Data ss:Type="String">产品类别</Data></Cell>
+        <Cell><Data ss:Type="String">初始委托资产金额</Data></Cell>
+        <Cell><Data ss:Type="String">委托资产托管人</Data></Cell>
+        <Cell><Data ss:Type="String">托管账户开户行</Data></Cell>
+        <Cell><Data ss:Type="String">证券户开户行</Data></Cell>
+        <Cell><Data ss:Type="String">估值外包</Data></Cell>
+        <Cell><Data ss:Type="String">募集户入金日期</Data></Cell>
+        <Cell><Data ss:Type="String">委托资产委托起始日</Data></Cell>
+        <Cell><Data ss:Type="String">委托资产委托终止日</Data></Cell>
+        <Cell><Data ss:Type="String">管理期限（年）</Data></Cell>
+        <Cell><Data ss:Type="String">费用计提基准</Data></Cell>
+        <Cell><Data ss:Type="String">管理费率</Data></Cell>
+        <Cell><Data ss:Type="String">全年天数</Data></Cell>
+        <Cell><Data ss:Type="String">管理费下限</Data></Cell>
+        <Cell><Data ss:Type="String">托管费率</Data></Cell>
+        <Cell><Data ss:Type="String">运营服务费</Data></Cell>
+        <Cell><Data ss:Type="String">投顾费率</Data></Cell>
+        <Cell><Data ss:Type="String">投顾费下限</Data></Cell>
+        <Cell><Data ss:Type="String">业绩报酬</Data></Cell>
+        <Cell><Data ss:Type="String">销售费比例</Data></Cell>
+        <Cell><Data ss:Type="String">上证所股东代码</Data></Cell>
+        <Cell><Data ss:Type="String">深交所股东代码</Data></Cell>
+        <Cell><Data ss:Type="String">中金所交易编码</Data></Cell>
+        <Cell><Data ss:Type="String">郑商所交易编码</Data></Cell>
+        <Cell><Data ss:Type="String">大商所交易编码</Data></Cell>
+        <Cell><Data ss:Type="String">上期所交易编码</Data></Cell>
+        <Cell><Data ss:Type="String">委托资产销售单位</Data></Cell>
+        <Cell><Data ss:Type="String">投顾引进部门</Data></Cell>
+        <Cell><Data ss:Type="String">产品运作部门</Data></Cell>
+        <Cell><Data ss:Type="String">投顾名称</Data></Cell>
       </Row>
-    <% @products.each do |product| %>
+    <% @products.each_with_index do |product, index| %>
       <Row>
-        <Cell><Data ss:Type="Number"><%= product.id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= index + 1 %></Data></Cell>
         <Cell><Data ss:Type="String"><%= product.name %></Data></Cell>
-      </Row>
-    <% end %>
-    </Table>
-  </Worksheet>
-  <Worksheet ss:Name="附表8-资管">
-    <Table>
-      <Row>
-        <Cell><Data ss:Type="String">ID</Data></Cell>
-        <Cell><Data ss:Type="String">Name</Data></Cell>
-      </Row>
-    <% @products.each do |product| %>
-      <Row>
-        <Cell><Data ss:Type="Number"><%= product.id %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= product.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.client_code %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.short_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.staff.name if product.staff %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.code %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.running_status %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Product.product_dev_type_names[product.product_dev_type] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Product.product_type_names[product.product_type] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.initial_fund %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.trustor_bank_account.trustor.name if product.trustor_bank_account && product.trustor_bank_account.trustor %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.trustor_bank_account.bank.name if product.trustor_bank_account && product.trustor_bank_account.bank %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.securities_broker_account.securities_broker.name if product.securities_broker_account && product.securities_broker_account.securities_broker %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.deposited_at.strftime('%Y-%m-%d') if product.deposited_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.delegation_started_at.strftime('%Y-%m-%d') if product.delegation_started_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.delegation_ended_at.strftime('%Y-%m-%d') if product.delegation_ended_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.delegation_duration %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.fee_calculation_standard %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.management_fee_ratio %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.year_day_count %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.management_fee_flour %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.trustor_fee_ratio %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.operation_fee_ratio %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.investment_consultant_fee_ratio %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.investment_consultant_fee_flour %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.bonus %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.sales_fee_ratio %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.sse_account_code %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.szse_account_code %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.cffex_account_code %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.zce_account_code %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.dce_account_code %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.shfe_account_code %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.sales_department.name if product.sales_department %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.consultant.department.name if product.consultant && product.consultant.department %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.operation_department.name if product.operation_department %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= product.consultant.name if product.consultant %></Data></Cell>
       </Row>
     <% end %>
     </Table>
