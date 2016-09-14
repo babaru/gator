@@ -130,6 +130,7 @@ zh-CN:
         securities_broker_account_number: 证券资金账号
         valuation_out_sourcing: 估值外包
         deposited_at: 募集户入金日期
+        put_on_record_at: 产品备案日期
         delegation_started_at: 委托资产委托起始日
         delegation_ended_at: 委托资产委托终止日
         delegation_duration: 管理期限（年）
