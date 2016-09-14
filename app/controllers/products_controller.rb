@@ -156,6 +156,7 @@ class ProductsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
     params.require(:product).permit(
+      :type,
       :name,
       :client_code,
       :short_name,
@@ -163,6 +164,7 @@ class ProductsController < ApplicationController
       :running_status,
       :category,
       :rd_category,
+      :is_structured,
       :initial_fund,
       :valuation_out_sourcing,
       :deposited_at,

@@ -10,11 +10,9 @@ class Product < ActiveRecord::Base
     :operation_department, :consultant_reference_department,
     :consultant, reject_if: proc { |attrs| attrs[:name].blank? }
 
-  before_save :update_consultant_name
-
   validates :name, :short_name, :code, :client_code, uniqueness: true
 
-  validates :name,
+  validates :name, :type,
     :client_code,
     :short_name,
     :code,
@@ -45,6 +43,9 @@ class Product < ActiveRecord::Base
     # :shfe_account_code,
     # :consultant_name,
     presence: true
+
+  # Data Compliance Callbacks
+  before_save :update_consultant_name
 
   def update_consultant_name
     unless self.consultant.nil?

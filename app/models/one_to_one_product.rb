@@ -1,0 +1,2 @@
+class OneToOneProduct < Product
+end

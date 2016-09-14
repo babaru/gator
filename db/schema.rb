@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914063509) do
+ActiveRecord::Schema.define(version: 20160914063940) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -127,8 +127,8 @@ ActiveRecord::Schema.define(version: 20160914063509) do
     t.string   "consultant_name",                    limit: 255
     t.string   "sse_gateway",                        limit: 255
     t.string   "szse_gateway",                       limit: 255
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
+    t.datetime "created_at",                                                                    null: false
+    t.datetime "updated_at",                                                                    null: false
     t.integer  "trustor_bank_account_id",            limit: 4
     t.integer  "securities_broker_account_id",       limit: 4
     t.integer  "sales_department_id",                limit: 4
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 20160914063509) do
     t.integer  "consultant_id",                      limit: 4
     t.integer  "staff_id",                           limit: 4
     t.string   "type",                               limit: 255
+    t.boolean  "is_structured",                                                 default: false
   end
 
   add_index "products", ["client_code"], name: "index_products_on_client_code", unique: true, using: :btree

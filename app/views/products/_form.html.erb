@@ -3,6 +3,7 @@
 
 <div class="row">
   <div class="col-lg-6">
+    <%= f.input :type, collection: [OneToOneProduct, OneToManyProduct].collect {|item| [item.model_name.human, item.name]}, as: :radio_buttons, checked: OneToOneProduct.name %>
     <%= f.input :name, input_html: {autocomplete: 'off'} %>
     <%= f.input :short_name, input_html: {autocomplete: 'off'} %>
     <%= f.input :code, input_html: {autocomplete: 'off'} %>
@@ -16,6 +17,7 @@
     <% end %>
     <%= f.input :category, collection: Product.categories, as: :radio_buttons %>
     <%= f.input :rd_category, collection: Product.rd_categories, as: :radio_buttons %>
+    <%= f.input :is_structured, as: :radio_buttons %>
   </div>
 </div>
 

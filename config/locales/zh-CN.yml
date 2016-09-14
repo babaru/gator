@@ -73,6 +73,8 @@ zh-CN:
         record_invalid: 无效记录
     models:
       product: 资管产品
+      one_to_one_product: 一对一产品
+      one_to_many_product: 一对多产品
       client: 客户
       department: 部门
       consultant: 投顾
@@ -105,6 +107,7 @@ zh-CN:
       bank:
         name: 名称
       product:
+        type: 种类
         name: 名称
         client_code: 客户编号
         short_name: 简称
@@ -113,6 +116,7 @@ zh-CN:
         running_status: 运行状态
         rd_category: 研发类别
         category: 产品类别
+        is_structured: 是否为结构化产品
         initial_fund: 初始委托资产金额
         trustor_name: 托管人
         trustor_bank_account_name: 托管户名称
@@ -200,7 +204,7 @@ zh-CN:
         user_id: 系统帐号
   simple_form:
     "yes": '是'
-    "no": '不'
+    "no": '否'
     required:
       text: '必填'
       mark: '*'
