@@ -19,8 +19,8 @@ class Product < ActiveRecord::Base
     :short_name,
     :code,
     # :running_status,
-    :product_type,
-    :product_dev_type,
+    :category,
+    :rd_category,
     :initial_fund,
     # :valuation_out_sourcing,
     # :deposited_at,
@@ -56,20 +56,20 @@ class Product < ActiveRecord::Base
 
   class << self
 
-    def product_types
-      Gator::ProductTypes.product_types.map{ |k,v| [I18n.t("product_types.#{k}"),v] }
+    def categories
+      Gator::ProductCategory.product_categories.map{ |k,v| [I18n.t("product_categories.#{k}"),v] }
     end
 
-    def product_type_names
-      Gator::ProductTypes.product_types.map{ |k,v| [v, I18n.t("product_types.#{k}")] }.to_h
+    def category_names
+      Gator::ProductCategory.product_categories.map{ |k,v| [v, I18n.t("product_categories.#{k}")] }.to_h
     end
 
-    def product_dev_types
-      Gator::ProductDevTypes.product_dev_types.map{ |k,v| [I18n.t("product_dev_types.#{k}"),v] }
+    def rd_categories
+      Gator::ProductRDCategory.product_rd_categories.map{ |k,v| [I18n.t("product_rd_categories.#{k}"),v] }
     end
 
-    def product_dev_type_names
-      Gator::ProductDevTypes.product_dev_types.map{ |k,v| [v, I18n.t("product_dev_types.#{k}")] }.to_h
+    def rd_category_names
+      Gator::ProductRDCategory.product_rd_categories.map{ |k,v| [v, I18n.t("product_rd_categories.#{k}")] }.to_h
     end
 
     def product_running_status_names

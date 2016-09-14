@@ -1,7 +1,7 @@
 defaults: &defaults
-  product_dev_types:
-    gateway: 2
-    self_management: 1
+  product_categories:
+    futures: 1
+    mixup: 2
 
 development:
   <<: *defaults

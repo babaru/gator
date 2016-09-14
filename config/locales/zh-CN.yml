@@ -20,10 +20,10 @@ zh-CN:
     search: 搜索
     from: 从
     to: 至
-  product_types:
+  product_categories:
     futures: 期货类
     mixup: 综合类
-  product_dev_types:
+  product_rd_categories:
     gateway: 通道类
     self_management: 自主管理类
   id_number_types:
@@ -110,8 +110,8 @@ zh-CN:
         staff: 产品经理
         code: 产品编码
         running_status: 运行状态
-        product_dev_type: 研发类别
-        product_type: 产品类别
+        rd_category: 研发类别
+        category: 产品类别
         initial_fund: 初始委托资产金额
         trustor_name: 托管人
         trustor_bank_account_name: 托管户名称

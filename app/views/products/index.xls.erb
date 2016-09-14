@@ -55,8 +55,8 @@
         <Cell><Data ss:Type="String"><%= product.staff.name if product.staff %></Data></Cell>
         <Cell><Data ss:Type="String"><%= product.code %></Data></Cell>
         <Cell><Data ss:Type="String"><%= product.running_status %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= Product.product_dev_type_names[product.product_dev_type] %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= Product.product_type_names[product.product_type] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Product.rd_category_names[product.rd_category] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Product.category_names[product.category] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= product.initial_fund %></Data></Cell>
         <Cell><Data ss:Type="String"><%= product.trustor_bank_account.trustor.name if product.trustor_bank_account && product.trustor_bank_account.trustor %></Data></Cell>
         <Cell><Data ss:Type="String"><%= product.trustor_bank_account.bank.name if product.trustor_bank_account && product.trustor_bank_account.bank %></Data></Cell>

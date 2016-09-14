@@ -14,8 +14,8 @@
       <%= pm.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.staff') %>
       <%= pm.input :id, as: :hidden %>
     <% end %>
-    <%= f.input :product_type, collection: Product.product_types, as: :radio_buttons %>
-    <%= f.input :product_dev_type, collection: Product.product_dev_types, as: :radio_buttons %>
+    <%= f.input :category, collection: Product.categories, as: :radio_buttons %>
+    <%= f.input :rd_category, collection: Product.rd_categories, as: :radio_buttons %>
   </div>
 </div>
 

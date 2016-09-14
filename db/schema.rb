@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913063156) do
+ActiveRecord::Schema.define(version: 20160914061142) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -100,8 +100,8 @@ ActiveRecord::Schema.define(version: 20160913063156) do
     t.string   "short_name",                         limit: 255
     t.string   "code",                               limit: 255
     t.integer  "running_status",                     limit: 4
-    t.integer  "product_type",                       limit: 4
-    t.integer  "product_dev_type",                   limit: 4
+    t.integer  "category",                           limit: 4
+    t.integer  "rd_category",                        limit: 4
     t.decimal  "initial_fund",                                   precision: 10
     t.string   "valuation_out_sourcing",             limit: 255
     t.datetime "deposited_at"

@@ -23,12 +23,12 @@
     product.staff.name if product.staff
   end
 
-  g.column name: t('activerecord.attributes.product.product_type') do |product|
-    Product.product_type_names[product.product_type]
+  g.column name: t('activerecord.attributes.product.category') do |product|
+    Product.category_names[product.category]
   end
 
-  g.column name: t('activerecord.attributes.product.product_dev_type') do |product|
-    Product.product_dev_type_names[product.product_dev_type]
+  g.column name: t('activerecord.attributes.product.rd_category') do |product|
+    Product.rd_category_names[product.rd_category]
   end
 
   g.column name: t('activerecord.attributes.product.delegation_started_at') do |product|
