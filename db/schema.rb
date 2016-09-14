@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914081152) do
+ActiveRecord::Schema.define(version: 20160914082028) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20160914081152) do
     t.string   "superior_code",                      limit: 255
     t.string   "inferior_code",                      limit: 255
     t.boolean  "is_one_to_many",                                                default: false
+    t.string   "leverage",                           limit: 255
   end
 
   add_index "products", ["client_code"], name: "index_products_on_client_code", unique: true, using: :btree

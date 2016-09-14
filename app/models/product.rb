@@ -12,7 +12,7 @@ class Product < ActiveRecord::Base
   validates :name, :short_name, :code, :client_code, uniqueness: true
   validates :superior_code, uniqueness: true, unless: "superior_code.blank?"
   validates :inferior_code, uniqueness: true, unless: "inferior_code.blank?"
-  validates :superior_code, :inferior_code, presence: true, if: "!!is_structured"
+  validates :superior_code, :inferior_code, :leverage, presence: true, if: "!!is_structured"
 
   validates :name,
     :client_code,
