@@ -1,7 +1,7 @@
 defaults: &defaults
   product_rd_categories:
-    gateway: 2
     self_management: 1
+    gateway: 2
 
 development:
   <<: *defaults
