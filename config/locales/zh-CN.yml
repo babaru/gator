@@ -107,7 +107,6 @@ zh-CN:
       bank:
         name: 名称
       product:
-        type: 种类
         name: 名称
         client_code: 客户编号
         short_name: 简称
@@ -117,6 +116,9 @@ zh-CN:
         rd_category: 研发类别
         category: 产品类别
         is_structured: 是否为结构化产品
+        is_one_to_many: 是否为一对多产品
+        superior_code: 优先级产品编码
+        inferior_code: 劣后级产品编码
         initial_fund: 初始委托资产金额
         trustor_name: 托管人
         trustor_bank_account_name: 托管户名称

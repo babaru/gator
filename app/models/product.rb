@@ -7,12 +7,14 @@ class Product < ActiveRecord::Base
   belongs_to :consultant_reference_department, class_name: 'Department'
   belongs_to :consultant
   accepts_nested_attributes_for :staff, :sales_department,
-    :operation_department, :consultant_reference_department,
-    :consultant, reject_if: proc { |attrs| attrs[:name].blank? }
+    :operation_department, :consultant, reject_if: proc { |attrs| attrs[:name].blank? }
 
   validates :name, :short_name, :code, :client_code, uniqueness: true
+  validates :superior_code, uniqueness: true, unless: "superior_code.blank?"
+  validates :inferior_code, uniqueness: true, unless: "inferior_code.blank?"
+  validates :superior_code, :inferior_code, presence: true, if: "!!is_structured"
 
-  validates :name, :type,
+  validates :name,
     :client_code,
     :short_name,
     :code,
@@ -46,6 +48,23 @@ class Product < ActiveRecord::Base
 
   # Data Compliance Callbacks
   before_save :update_consultant_name
+
+  # def initialize
+  #   super
+  #   build_staff
+  #   build_consultant
+  #   build_sales_department
+  #   build_operation_department
+  #   is_structured = false
+  # end
+
+  # def initialize(attributes = {}, options = {})
+  #   super(attributes, options)
+  #   build_staff if staff_id.nil?
+  #   build_consultant
+  #   build_sales_department if sales_department_id.nil?
+  #   build_operation_department if operation_department_id.nil?
+  # end
 
   def update_consultant_name
     unless self.consultant.nil?

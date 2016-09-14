@@ -1,2 +1,0 @@
-class OneToOneProduct < Product
-end

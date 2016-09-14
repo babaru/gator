@@ -2,34 +2,32 @@
   <%= f.error_notification %>
 
 <div class="row">
-  <div class="col-lg-6">
-    <%= f.input :type, collection: [OneToOneProduct, OneToManyProduct].collect {|item| [item.model_name.human, item.name]}, as: :radio_buttons, checked: OneToOneProduct.name %>
-    <%= f.input :name, input_html: {autocomplete: 'off'} %>
-    <%= f.input :short_name, input_html: {autocomplete: 'off'} %>
-    <%= f.input :code, input_html: {autocomplete: 'off'} %>
-    <%= f.input :client_code, input_html: {autocomplete: 'off'} %>
-    <%= f.input :initial_fund, input_html: {autocomplete: 'off'} %>
-  </div>
-  <div class="col-lg-6">
-    <%= f.simple_fields_for :staff do |pm| %>
-      <%= pm.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.staff') %>
-      <%= pm.input :id, as: :hidden %>
-    <% end %>
-    <%= f.input :category, collection: Product.categories, as: :radio_buttons %>
-    <%= f.input :rd_category, collection: Product.rd_categories, as: :radio_buttons %>
-    <%= f.input :is_structured, as: :radio_buttons %>
-  </div>
+    <div class="col-lg-6">
+        <%= f.input :name, input_html: {autocomplete: 'off'} %>
+        <%= f.input :short_name, input_html: {autocomplete: 'off'} %>
+        <%= f.input :code, input_html: {autocomplete: 'off'} %>
+        <%= f.input :client_code, input_html: {autocomplete: 'off'} %>
+        <%= f.input :initial_fund, input_html: {autocomplete: 'off'} %>
+    </div>
+    <div class="col-lg-6">
+        <%= f.simple_fields_for :staff do |pm| %>
+          <%= pm.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.staff') %>
+          <%= pm.input :id, as: :hidden %>
+        <% end %>
+        <%= f.input :category, collection: Product.categories, as: :radio_buttons %>
+        <%= f.input :rd_category, collection: Product.rd_categories, as: :radio_buttons %>
+    </div>
 </div>
 
 <div class="hr-line-dashed"></div>
 
 <div class="row">
-  <div class="col-lg-6">
-    <%= f.input :delegation_started_at, as: :date_picker %>
-  </div>
-  <div class="col-lg-6">
-    <%= f.input :delegation_ended_at, as: :date_picker %>
-  </div>
+    <div class="col-lg-6">
+      <%= f.input :delegation_started_at, as: :date_picker %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.input :delegation_ended_at, as: :date_picker %>
+    </div>
 </div>
 
 <div class="hr-line-dashed"></div>
@@ -50,6 +48,19 @@
         <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.operation_department') %>
         <%= department.input :id, as: :hidden %>
       <% end %>
+    </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="row">
+    <div class="col-lg-6">
+    <%= f.input :is_one_to_many, as: :radio_buttons %>
+    <%= f.input :is_structured, as: :radio_buttons %>
+    </div>
+    <div class="col-lg-6">
+    <%= f.input :superior_code %>
+    <%= f.input :inferior_code %>
     </div>
 </div>
 

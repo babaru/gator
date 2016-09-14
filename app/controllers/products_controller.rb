@@ -69,17 +69,17 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.build_staff
+    @product.build_consultant
     @product.build_sales_department
     @product.build_operation_department
-    @product.build_consultant
   end
 
   # GET /products/1/edit
   def edit
     @product.build_staff if @product.staff.nil?
+    @product.build_consultant if @product.consultant.nil?
     @product.build_sales_department if @product.sales_department.nil?
     @product.build_operation_department if @product.operation_department.nil?
-    @product.build_consultant if @product.consultant.nil?
   end
 
   # POST /products
@@ -96,7 +96,7 @@ class ProductsController < ApplicationController
 
       if @product.save
         set_products_grid
-        format.html { redirect_to @product, notice: t('activerecord.success.messages.created', model: Product.model_name.human) }
+        format.html { redirect_to product_path(@product), notice: t('activerecord.success.messages.created', model: Product.model_name.human) }
         format.js
       else
         logger.debug @product.errors.full_messages
@@ -118,7 +118,7 @@ class ProductsController < ApplicationController
         :consultant_reference_department_attributes,
         :consultant_attributes))
         set_products_grid
-        format.html { redirect_to @product, notice: t('activerecord.success.messages.updated', model: Product.model_name.human) }
+        format.html { redirect_to product_path(@product), notice: t('activerecord.success.messages.updated', model: Product.model_name.human) }
         format.js
       else
         format.html { render :edit }
@@ -156,7 +156,6 @@ class ProductsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
     params.require(:product).permit(
-      :type,
       :name,
       :client_code,
       :short_name,
@@ -165,6 +164,9 @@ class ProductsController < ApplicationController
       :category,
       :rd_category,
       :is_structured,
+      :is_one_to_many,
+      :superior_code,
+      :inferior_code,
       :initial_fund,
       :valuation_out_sourcing,
       :deposited_at,
