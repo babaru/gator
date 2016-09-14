@@ -18,7 +18,7 @@ class Product < ActiveRecord::Base
     :client_code,
     :short_name,
     :code,
-    # :running_status,
+    :status,
     :category,
     :rd_category,
     :initial_fund,
@@ -92,8 +92,12 @@ class Product < ActiveRecord::Base
       Gator::ProductRDCategory.product_rd_categories.map{ |k,v| [v, I18n.t("product_rd_categories.#{k}")] }.to_h
     end
 
-    def product_running_status_names
-      'Running'
+    def statuses
+      Gator::ProductStatus.product_statuses.map{ |k,v| [I18n.t("product_statuses.#{k}"),v] }
+    end
+
+    def status_names
+      Gator::ProductStatus.product_statuses.map{ |k,v| [v, I18n.t("product_statuses.#{k}")] }.to_h
     end
 
   end

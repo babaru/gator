@@ -27,6 +27,9 @@ zh-CN:
   product_rd_categories:
     gateway: 通道类
     self_management: 自主管理类
+  product_statuses:
+    running: 正在运行
+    liquidated: 已清盘
   id_number_types:
     shenfenzheng: 身份证
     huzhao: 护照
@@ -112,7 +115,7 @@ zh-CN:
         short_name: 简称
         staff: 产品经理
         code: 产品编码
-        running_status: 运行状态
+        status: 运行状态
         rd_category: 研发类别
         category: 产品类别
         is_structured: 是否为结构化产品

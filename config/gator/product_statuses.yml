@@ -1,0 +1,13 @@
+defaults: &defaults
+  product_statuses:
+    running: 0
+    liquidated: 5
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

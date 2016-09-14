@@ -72,6 +72,8 @@ class ProductsController < ApplicationController
     @product.build_consultant
     @product.build_sales_department
     @product.build_operation_department
+    @product.is_structured = false
+    @product.status = Gator::ProductStatus.product_statuses.running
   end
 
   # GET /products/1/edit
@@ -80,6 +82,8 @@ class ProductsController < ApplicationController
     @product.build_consultant if @product.consultant.nil?
     @product.build_sales_department if @product.sales_department.nil?
     @product.build_operation_department if @product.operation_department.nil?
+    @product.is_structured = false if @product.is_structured.nil?
+    @product.status = Gator::ProductStatus.product_statuses.running if @product.status.nil?
   end
 
   # POST /products
