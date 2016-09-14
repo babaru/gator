@@ -23,7 +23,7 @@ class Product < ActiveRecord::Base
     :rd_category,
     :initial_fund,
     # :valuation_out_sourcing,
-    # :deposited_at,
+    :deposited_at,
     :delegation_started_at,
     :delegation_ended_at,
     # :delegation_duration,
