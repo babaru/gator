@@ -1,7 +1,8 @@
 defaults: &defaults
   product_categories:
-    futures: 1
-    mixup: 2
+    equity: 1
+    future: 2
+    mixup: 3
 
 development:
   <<: *defaults

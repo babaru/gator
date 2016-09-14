@@ -21,7 +21,8 @@ zh-CN:
     from: 从
     to: 至
   product_categories:
-    futures: 期货类
+    equity: 权益类
+    future: 期货类
     mixup: 综合类
   product_rd_categories:
     gateway: 通道类
