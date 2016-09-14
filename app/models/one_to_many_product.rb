@@ -1,0 +1,2 @@
+class OneToManyProduct < Product
+end
