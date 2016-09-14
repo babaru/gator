@@ -17,6 +17,7 @@
         <%= f.input :category, collection: Product.categories, as: :radio_buttons %>
         <%= f.input :rd_category, collection: Product.rd_categories, as: :radio_buttons %>
         <%= f.input :status, collection: Product.statuses, as: :radio_buttons %>
+        <%= f.input :liquidated_at, as: :date_picker %>
     </div>
 </div>
 

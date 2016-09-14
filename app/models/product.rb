@@ -13,6 +13,7 @@ class Product < ActiveRecord::Base
   validates :superior_code, uniqueness: true, unless: "superior_code.blank?"
   validates :inferior_code, uniqueness: true, unless: "inferior_code.blank?"
   validates :superior_code, :inferior_code, :leverage, presence: true, if: "!!is_structured"
+  validates :liquidated_at, presence: true, if: :is_liquidated?
 
   validates :name,
     :client_code,
@@ -72,6 +73,10 @@ class Product < ActiveRecord::Base
     else
       self.consultant_name = nil
     end
+  end
+
+  def is_liquidated?
+    status == Gator::ProductStatus.product_statuses.liquidated
   end
 
   class << self

@@ -4,7 +4,7 @@
   end
 
   g.column do |product|
-    content_tag(:span, Product.product_running_status_names, class: 'label label-warning')
+    content_tag(:span, Product.status_names[product.status], class: product_status_label_class(product))
   end
 
   g.column name: t('activerecord.attributes.product.name'), class: 'project-title' do |product|

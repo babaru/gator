@@ -116,6 +116,7 @@ zh-CN:
         staff: 产品经理
         code: 产品编码
         status: 运行状态
+        liquidated_at: 清盘日期
         rd_category: 研发类别
         category: 产品类别
         is_structured: 是否为结构化产品

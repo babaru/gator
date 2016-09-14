@@ -25,8 +25,8 @@
                         <h2><%= @product.name %></h2>
                     </div>
                     <dl class="dl-horizontal">
-                        <dt><%= t('activerecord.attributes.product.running_status') %>:</dt>
-                        <dd><span class="label label-primary"><%= @product.running_status %></span></dd>
+                        <dt><%= t('activerecord.attributes.product.status') %>:</dt>
+                        <dd><span class="<%= product_status_label_class(@product) %>"><%= Product.status_names[@product.status] %></span></dd>
                     </dl>
                 </div>
             </div>
