@@ -162,6 +162,7 @@ zh-CN:
         consultant_name: 投顾名称
         consultant: 投顾
         tabs:
+          summary: 概况
           consultant: 投顾
           trustor: 托管人
           money_records: 出入金记录
