@@ -53,7 +53,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  TABS = [:summary, :money_records, :fee, :accounts, :clients].freeze
+  TABS = [:summary, :fee, :accounts, :clients].freeze
 
   # GET /products/1
   # GET /products/1.json
