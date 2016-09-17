@@ -4,7 +4,6 @@ class Product < ActiveRecord::Base
   belongs_to :securities_broker_account
   belongs_to :sales_department, class_name: 'Department'
   belongs_to :operation_department, class_name: 'Department'
-  belongs_to :consultant_reference_department, class_name: 'Department'
   belongs_to :consultant
   accepts_nested_attributes_for :staff, :sales_department,
     :operation_department, :consultant, reject_if: proc { |attrs| attrs[:name].blank? }

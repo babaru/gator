@@ -24,7 +24,8 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <%= render 'form' %>
+                    <%= render 'form' if @current_tab.nil? || @current_tab == :summary %>
+                    <%= render "form_#{@current_tab}" if !@current_tab.nil? && @current_tab != :summary %>
                 </div>
             </div>
         </div>

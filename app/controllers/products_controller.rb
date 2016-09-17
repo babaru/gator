@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :edit_tab]
 
   QUERY_KEYS = [:name, :consultant_name,
     :delegation_started_at, :delegation_ended_at].freeze
@@ -59,10 +59,14 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @tabs = TABS
+    get_current_tab
+    @clients_grid = initialize_grid(Client) if @current_tab == :clients
+  end
+
+  def get_current_tab
     @current_tab = params[:tab]
     @current_tab ||= TABS.first.to_s
     @current_tab = @current_tab.to_sym
-    @clients_grid = initialize_grid(Client) if @current_tab == :clients
   end
 
   # GET /products/new
@@ -78,6 +82,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    get_current_tab
     @product.build_staff if @product.staff.nil?
     @product.build_consultant if @product.consultant.nil?
     @product.build_sales_department if @product.sales_department.nil?
@@ -186,8 +191,8 @@ class ProductsController < ApplicationController
       :management_fee_flour,
       :trustor_fee_ratio,
       :operation_fee_ratio,
-      :investment_consultant_fee_ratio,
-      :investment_consultant_fee_flour,
+      :consultant_fee_ratio,
+      :consultant_fee_flour,
       :bonus,
       :sales_fee_ratio,
       :sse_account_code,
@@ -197,11 +202,15 @@ class ProductsController < ApplicationController
       :dce_account_code,
       :shfe_account_code,
       :sales_department,
-      :investment_consultant_reference_department,
       :operation_department,
-      :investment_consultant_name,
+      :consultant_name,
       :sse_gateway,
       :szse_gateway,
+      :cffex_gateway,
+      :zce_gateway,
+      :dce_gateway,
+      :shfe_gateway,
+      :sales_department,
       staff_attributes: [
         :id,
         :name
@@ -211,10 +220,6 @@ class ProductsController < ApplicationController
         :name
       ],
       operation_department_attributes: [
-        :id,
-        :name
-      ],
-      consultant_reference_department_attributes: [
         :id,
         :name
       ],

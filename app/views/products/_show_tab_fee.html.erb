@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <div class="m-b-md">
             <div class="">
-                <%= link_to fa_icon('pencil', text: '修改费用信息'), nil, class: 'btn btn-white btn-sm' %>
+                <%= link_to fa_icon('pencil', text: '修改费用信息'), edit_product_path(@product, tab: @current_tab), class: 'btn btn-white btn-sm' %>
             </div>
         </div>
     </div>
@@ -31,10 +31,10 @@
           <dd><%= @product.management_fee_ratio %> </dd>
           <dt><%= t('activerecord.attributes.product.management_fee_flour') %>:</dt>
           <dd><%= @product.management_fee_flour %> </dd>
-          <dt><%= t('activerecord.attributes.product.investment_consultant_fee_ratio') %>:</dt>
-          <dd><%= @product.investment_consultant_fee_ratio %> </dd>
-          <dt><%= t('activerecord.attributes.product.investment_consultant_fee_flour') %>:</dt>
-          <dd><%= @product.investment_consultant_fee_flour %> </dd>
+          <dt><%= t('activerecord.attributes.product.consultant_fee_ratio') %>:</dt>
+          <dd><%= @product.consultant_fee_ratio %> </dd>
+          <dt><%= t('activerecord.attributes.product.consultant_fee_flour') %>:</dt>
+          <dd><%= @product.consultant_fee_flour %> </dd>
 
         </dl>
     </div>

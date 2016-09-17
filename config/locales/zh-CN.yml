@@ -12,6 +12,7 @@ zh-CN:
     download: 下载
     reset: 重置
     sign_out: 退出登录
+    back: 返回
   confirms:
     delete: 确定要删除这一条记录吗？
   labels:
@@ -144,12 +145,16 @@ zh-CN:
         management_fee_flour: 管理费下限
         trustor_fee_ratio: 托管费率
         operation_fee_ratio: 运营服务费
-        investment_consultant_fee_ratio: 投顾费率
-        investment_consultant_fee_flour: 投顾费下限
+        consultant_fee_ratio: 投顾费率
+        consultant_fee_flour: 投顾费下限
         bonus: 业绩报酬
         sales_fee_ratio: 销售费比例
         sse_gateway: 上交所席位
         szse_gateway: 深交所席位
+        cffex_gateway: 中金所席位
+        zce_gateway: 郑商所席位
+        dce_gateway: 大商所席位
+        shfe_gateway: 上期所席位
         sse_account_code: 上证所股东代码
         szse_account_code: 深交所股东代码
         cffex_account_code: 中金所交易编码
