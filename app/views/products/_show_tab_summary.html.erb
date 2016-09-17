@@ -99,6 +99,8 @@
             <dd><%= @product.securities_broker_account.securities_broker.name if @product.securities_broker_account %></dd>
             <dt><%= t('activerecord.attributes.product.securities_broker_account_number') %>:</dt>
             <dd><%= @product.securities_broker_account.number if @product.securities_broker_account %> </dd>
+            <dt><%= t('activerecord.attributes.product.valuation_out_sourcing') %>:</dt>
+            <dd><%= @product.valuation_out_sourcing %> </dd>
 
         </dl>
     </div>
