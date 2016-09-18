@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160918033350) do
   add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
-    t.string   "type",                            limit: 255
+    t.integer  "category",                        limit: 4
     t.string   "application_number",              limit: 255
     t.integer  "id_number_type",                  limit: 4
     t.string   "id_number",                       limit: 255

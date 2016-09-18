@@ -1,49 +1,62 @@
 <%= simple_form_for(@client.becomes(Client), html: { class: 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
 
-  <div class="hr-line-dashed"></div>
-  <%= f.input :application_number %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :id_number_type, required: true, collection: Client.id_number_types, as: :radio_buttons %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :id_number %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :name %>
-  <div class="hr-line-dashed"></div>
+<div class="row">
+    <div class="col-lg-6">
+        <%= f.input :application_number %>
+    </div>
+    <div class="col-lg-6">
+        <%= f.input :category, as: :radio_buttons, collection: Client.categories %>
+    </div>
+</div>
 
-  <%- if @client.institution? %>
-  <%= f.input :person_in_charge_id_number_type, required: true, collection: Client.id_number_types, as: :radio_buttons %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :person_in_charge_id_number, required: true %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :person_in_charge_name, required: true %>
-  <div class="hr-line-dashed"></div>
-  <% end -%>
-  <%= f.input :traded_at, as: :date_time_picker %>
-  <div class="hr-line-dashed"></div>
-  <%= f.input :fund_trading_account_number %>
-  <div class="hr-line-dashed"></div>
+<div class="hr-line-dashed"></div>
 
-  <%= f.input :sales_man_code %>
-  <div class="hr-line-dashed"></div>
+<div class="row">
+    <div class="col-lg-6">
+        <%= f.input :id_number %>
+        <%= f.input :name %>
+        <%= f.input :fund_trading_account_number %>
+        <%= f.input :fund_account_number, hint: '开户时暂不填写' %>
+        <%= f.input :traded_at, as: :date_time_picker %>
+    </div>
+    <div class="col-lg-6">
+        <%= f.input :id_number_type, required: true, collection: Client.id_number_types, as: :radio_buttons %>
+    </div>
+</div>
 
-  <%= f.input :business_code, collection: Client.business_codes, as: :radio_buttons %>
-  <div class="hr-line-dashed"></div>
+<div class="hr-line-dashed"></div>
 
-  <%= f.input :branch_store_number %>
-  <div class="hr-line-dashed"></div>
+<div class="row">
+    <div class="col-lg-6">
+        <%= f.input :person_in_charge_id_number %>
+        <%= f.input :person_in_charge_name %>
+    </div>
+    <div class="col-lg-6">
+        <%= f.input :person_in_charge_id_number_type, required: true, collection: Client.id_number_types, as: :radio_buttons %>
+    </div>
+</div>
 
-  <%= f.input :fund_account_number, hint: '开户时暂不填写' %>
-  <div class="hr-line-dashed"></div>
+<div class="hr-line-dashed"></div>
 
-  <%= f.input :type, as: :hidden %>
+<div class="row">
+    <div class="col-lg-6">
+        <%= f.input :sales_man_code %>
+        <%= f.input :branch_store_number %>
+    </div>
+    <div class="col-lg-6">
+        <%= f.input :business_code, collection: Client.business_codes, as: :radio_buttons %>
+    </div>
+</div>
 
-  <div class="form-group">
-      <div class="col-sm-4 col-sm-offset-2">
-          <%= f.submit t('buttons.save'), class: 'btn btn-primary btn-sm', id: 'client-save-btn' %>
-          or
-          <%= link_to t('activerecord.text.back_to_list', model: Client.model_name.human),
-          clients_path %>
-      </div>
-  </div>
+<div class="hr-line-dashed"></div>
+
+<div class="form-group">
+    <div class="pull-right m-r-md">
+        <%= f.submit t('buttons.save'), class: 'btn btn-primary btn-w-m' %>
+    </div>
+    <div class="m-l-md">
+      <%= link_to t('buttons.back'), @client.new_record? ? clients_path : client_path(@client), class: 'btn btn-white' %>
+    </div>
+</div>
 <% end %>

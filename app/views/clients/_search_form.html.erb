@@ -4,7 +4,7 @@
   <%= f.input :application_number, label: t('activerecord.attributes.client.application_number') %>
   <%= f.input :name, label: t('activerecord.attributes.client.name') %>
   <%= f.input :id_number, label: t('activerecord.attributes.client.id_number') %>
-  <%= f.input :type, label: t('activerecord.attributes.client.type'), collection: [['个人', IndividualClient.name], ['机构', InstitutionClient.name]] %>
+  <%= f.input :category, label: t('activerecord.attributes.client.category'), collection: Client.category_names, as: :radio_buttons %>
 
   <div class="form-group">
       <%= f.submit t('buttons.search'), class: 'btn btn-white btn-sm' %>

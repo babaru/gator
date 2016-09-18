@@ -60,6 +60,9 @@ zh-CN:
     trust: 信托（或其子公司）
     bank: 银行（或其子公司）
     future: 期货（或其子公司）
+  client_categories:
+    individual: 个人
+    institution: 机构
   activerecord:
     text:
       back_to_list: '回到%{model}列表'
@@ -170,7 +173,7 @@ zh-CN:
           summary: 概况
           clients: 投资人
       client:
-        type: 投资人类型
+        category: 投资人类型
         application_number: 申请单编号
         id_number_type: 投资人证件类型
         id_number: 投资人证件号码

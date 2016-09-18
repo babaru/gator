@@ -1,0 +1,13 @@
+defaults: &defaults
+  client_categories:
+    individual: 1
+    institution: 2
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

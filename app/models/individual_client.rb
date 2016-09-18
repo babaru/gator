@@ -1,3 +1,0 @@
-class IndividualClient < Client
-
-end

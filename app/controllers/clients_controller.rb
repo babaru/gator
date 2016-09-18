@@ -10,14 +10,14 @@ class ClientsController < ApplicationController
       @query_params[:application_number] = params[:client][:application_number] if params[:client][:application_number] && !params[:client][:application_number].empty?
       @query_params[:id_number] = params[:client][:id_number] if params[:client][:id_number] && !params[:client][:id_number].empty?
       @query_params[:name] = params[:client][:name] if params[:client][:name] && !params[:client][:name].empty?
-      @query_params[:type] = params[:client][:type] if params[:client][:type] && !params[:client][:type].empty?
+      # @query_params[:type] = params[:client][:type] if params[:client][:type] && !params[:client][:type].empty?
     end
 
     @query_client_params = Client.new
     @query_client_params.application_number = @query_params[:application_number]
     @query_client_params.id_number = @query_params[:id_number]
     @query_client_params.name = @query_params[:name]
-    @query_client_params.type = @query_params[:type]
+    # @query_client_params.type = @query_params[:type]
 
     @conditions = []
     @conditions << Client.arel_table[:application_number].matches("%#{@query_params[:application_number]}%") if @query_params[:application_number]
@@ -30,9 +30,9 @@ class ClientsController < ApplicationController
         conditions = conditions.or(item) if index > 0
       end
       @conditions = conditions
-      @conditions = @conditions.and(Client.arel_table[:type].eq(@query_params[:type])) if @query_params[:type]
+      # @conditions = @conditions.and(Client.arel_table[:type].eq(@query_params[:type])) if @query_params[:type]
     else
-      @conditions = Client.arel_table[:type].eq(@query_params[:type]) if @query_params[:type]
+      # @conditions = Client.arel_table[:type].eq(@query_params[:type]) if @query_params[:type]
     end
 
     set_clients_grid(@conditions)
@@ -45,11 +45,7 @@ class ClientsController < ApplicationController
 
   # GET /clients/new
   def new
-    if !!params[:individual]
-      @client = IndividualClient.new
-    else
-      @client = InstitutionClient.new
-    end
+    @client = Client.new
   end
 
   # GET /clients/1/edit
@@ -110,7 +106,7 @@ class ClientsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def client_params
     params.require(:client).permit(
-      :type,
+      :category,
       :application_number,
       :id_number_type,
       :id_number,

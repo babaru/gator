@@ -1,6 +1,5 @@
 class Client < ActiveRecord::Base
-
-  validates :type, presence: true
+  validates :category, presence: true
   validates :application_number, presence: true
   validates :id_number_type, presence: true
   validates :id_number, presence: true
@@ -20,11 +19,11 @@ class Client < ActiveRecord::Base
   end
 
   def individual?
-    self.type == IndividualClient.name
+    self.category == Gator::ClientCategory.client_categories.individual
   end
 
   def institution?
-    self.type == InstitutionClient.name
+    self.category == Gator::ClientCategory.client_categories.institution
   end
 
   class << self
@@ -43,6 +42,14 @@ class Client < ActiveRecord::Base
 
     def business_codes
       Gator::BusinessCodes.business_codes.map{ |k,v| [I18n.t("business_codes.#{k}"),v] }
+    end
+
+    def categories
+      Gator::ClientCategory.client_categories.map { |k,v| [I18n.t("client_categories.#{k}"), v]}
+    end
+
+    def category_names
+      Gator::ClientCategory.client_categories.map{ |k,v| [v, I18n.t("client_categories.#{k}")] }.to_h
     end
 
   end
