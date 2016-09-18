@@ -218,7 +218,7 @@ zh-CN:
       product_share:
         product_id: 资管产品
         client_id: 客户
-        share: 购买份额
+        share: 份额
   simple_form:
     "yes": '是'
     "no": '否'

@@ -35,12 +35,26 @@ class ClientsController < ApplicationController
       # @conditions = Client.arel_table[:type].eq(@query_params[:type]) if @query_params[:type]
     end
 
-    set_clients_grid(@conditions)
+    respond_to do |format|
+      format.html { set_clients_grid(@conditions) }
+      format.json { render json: Client.where(@conditions) }
+    end
   end
+
+  TABS = [:summary, :extra_information, :original_materials, :products].freeze
 
   # GET /clients/1
   # GET /clients/1.json
   def show
+    @tabs = TABS
+    get_current_tab
+    @product_shares_grid = initialize_grid(ProductShare.where(client_id: @client.id)) if @current_tab == :products
+  end
+
+  def get_current_tab
+    @current_tab = params[:tab]
+    @current_tab ||= TABS.first.to_s
+    @current_tab = @current_tab.to_sym
   end
 
   # GET /clients/new
@@ -123,7 +137,7 @@ class ClientsController < ApplicationController
       )
   end
 
-  def set_clients_grid(conditions)
+  def set_clients_grid(conditions = [])
     @clients_grid = initialize_grid(Client.where(conditions))
   end
 end

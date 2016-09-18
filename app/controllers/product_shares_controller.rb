@@ -76,12 +76,14 @@ class ProductSharesController < ApplicationController
   # POST /product_shares
   # POST /product_shares.json
   def create
-    @product_share = ProductShare.new(product_share_params)
+    @product_share = ProductShare.new(product_share_params.except(:product_attributes, :client_attributes))
+    @product_share.client_id = product_share_params[:client_attributes][:id]
+    @product_share.product_id = product_share_params[:product_attributes][:id]
 
     respond_to do |format|
       if @product_share.save
-        set_product_shares_grid
-        format.html { redirect_to @product_share, notice: t('activerecord.success.messages.created', model: ProductShare.model_name.human) }
+        # set_product_shares_grid
+        format.html { redirect_to product_path(id: @product_share.product_id, tab: :clients), notice: t('activerecord.success.messages.created', model: ProductShare.model_name.human) }
         format.js
       else
         format.html { render :new }
@@ -94,9 +96,11 @@ class ProductSharesController < ApplicationController
   # PATCH/PUT /product_shares/1.json
   def update
     respond_to do |format|
-      if @product_share.update(product_share_params)
-        set_product_shares_grid
-        format.html { redirect_to @product_share, notice: t('activerecord.success.messages.updated', model: ProductShare.model_name.human) }
+      @product_share.client_id = product_share_params[:client_attributes][:id]
+      @product_share.product_id = product_share_params[:product_attributes][:id]
+      if @product_share.update(product_share_params.except(:product_attributes, :client_attributes))
+        # set_product_shares_grid
+        format.html { redirect_to product_path(id: @product_share.product_id, tab: :clients), notice: t('activerecord.success.messages.updated', model: ProductShare.model_name.human) }
         format.js
       else
         format.html { render :edit }
@@ -108,11 +112,12 @@ class ProductSharesController < ApplicationController
   # DELETE /product_shares/1
   # DELETE /product_shares/1.json
   def destroy
+    product_id = @product_share.product_id
     @product_share.destroy
 
     respond_to do |format|
       set_product_shares_grid
-      format.html { redirect_to product_shares_url, notice: t('activerecord.success.messages.destroyed', model: ProductShare.model_name.human) }
+      format.html { redirect_to product_path(id: product_id, tab: :clients), notice: t('activerecord.success.messages.destroyed', model: ProductShare.model_name.human) }
       format.js
     end
   end

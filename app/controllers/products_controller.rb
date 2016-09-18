@@ -37,6 +37,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { set_products_grid(@conditions) }
       format.xls { @products = Product.where(@conditions) }
+      format.json { render json: Product.where(@conditions) }
     end
   end
 
