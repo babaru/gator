@@ -25,38 +25,6 @@
 
 <div class="row">
     <div class="col-lg-6">
-      <%= f.input :delegation_started_at, as: :date_picker %>
-    </div>
-    <div class="col-lg-6">
-      <%= f.input :delegation_ended_at, as: :date_picker %>
-    </div>
-</div>
-
-<div class="hr-line-dashed"></div>
-
-<div class="row">
-    <div class="col-lg-6">
-      <%= f.simple_fields_for :sales_department do |department| %>
-        <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.sales_department') %>
-        <%= department.input :id, as: :hidden %>
-      <% end %>
-      <%= f.simple_fields_for :consultant do |consultant| %>
-        <%= consultant.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.consultant') %>
-        <%= consultant.input :id, as: :hidden %>
-      <% end %>
-    </div>
-    <div class="col-lg-6">
-      <%= f.simple_fields_for :operation_department do |department| %>
-        <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.operation_department') %>
-        <%= department.input :id, as: :hidden %>
-      <% end %>
-    </div>
-</div>
-
-<div class="hr-line-dashed"></div>
-
-<div class="row">
-    <div class="col-lg-6">
     <%= f.input :is_one_to_many, as: :radio_buttons %>
     <%= f.input :is_structured, as: :radio_buttons %>
     </div>
@@ -80,12 +48,96 @@
 
 <div class="hr-line-dashed"></div>
 
+
+<div class="row">
+    <div class="col-lg-6">
+        <%= f.input :delegation_started_at, as: :date_picker %>
+        <%= f.input :trustor_name, input_html: {autocomplete: 'off'} %>
+        <%= f.input :trustor_bank_name, input_html: {autocomplete: 'off'} %>
+        <%= f.input :trustor_bank_account_name, input_html: {autocomplete: 'off'} %>
+        <%= f.input :trustor_bank_account_number, input_html: {autocomplete: 'off'} %>
+    </div>
+    <div class="col-lg-6">
+        <%= f.input :delegation_ended_at, as: :date_picker %>
+        <%= f.input :delegation_duration %>
+        <%= f.input :securities_broker_name, input_html: {autocomplete: 'off'} %>
+        <%= f.input :securities_broker_account_name, input_html: {autocomplete: 'off'} %>
+        <%= f.input :securities_broker_account_number, input_html: {autocomplete: 'off'} %>
+        <%= f.input :valuation_out_sourcing, input_html: {autocomplete: 'off'} %>
+    </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <%= f.input :fee_calculation_standard, input_html: {autocomplete: 'off'} %>
+        <%= f.input :trustor_fee_ratio, input_html: {autocomplete: 'off'} %>
+        <%= f.input :operation_fee_ratio, input_html: {autocomplete: 'off'} %>
+        <%= f.input :bonus, input_html: {autocomplete: 'off'} %>
+        <%= f.input :sales_fee_ratio, input_html: {autocomplete: 'off'} %>
+    </div>
+    <div class="col-lg-6">
+        <%= f.input :year_day_count, input_html: {autocomplete: 'off'} %>
+        <%= f.input :management_fee_ratio, input_html: {autocomplete: 'off'} %>
+        <%= f.input :management_fee_flour, input_html: {autocomplete: 'off'} %>
+        <%= f.input :consultant_fee_ratio, input_html: {autocomplete: 'off'} %>
+        <%= f.input :consultant_fee_flour, input_html: {autocomplete: 'off'} %>
+    </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <%= f.input :szse_gateway, input_html: {autocomplete: 'off'} %>
+    </div>
+    <div class="col-lg-6">
+        <%= f.input :dce_gateway, input_html: {autocomplete: 'off'} %>
+    </div>
+</div>
+<div class="hr-line-dashed"></div>
+<div class="row">
+    <div class="col-lg-6">
+        <%= f.input :sse_account_code, input_html: {autocomplete: 'off'} %>
+        <%= f.input :szse_account_code, input_html: {autocomplete: 'off'} %>
+        <%= f.input :cffex_account_code, input_html: {autocomplete: 'off'} %>
+    </div>
+    <div class="col-lg-6">
+        <%= f.input :zce_account_code, input_html: {autocomplete: 'off'} %>
+        <%= f.input :dce_account_code, input_html: {autocomplete: 'off'} %>
+        <%= f.input :shfe_account_code, input_html: {autocomplete: 'off'} %>
+    </div>
+</div>
+<div class="hr-line-dashed"></div>
+
+<div class="row">
+    <div class="col-lg-6">
+      <%= f.simple_fields_for :sales_department do |department| %>
+        <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.sales_department') %>
+        <%= department.input :id, as: :hidden %>
+      <% end %>
+      <%= f.simple_fields_for :consultant do |consultant| %>
+        <%= consultant.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.consultant') %>
+        <%= consultant.input :id, as: :hidden %>
+      <% end %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.simple_fields_for :operation_department do |department| %>
+        <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.operation_department') %>
+        <%= department.input :id, as: :hidden %>
+      <% end %>
+    </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
   <div class="form-group">
       <div class="pull-right m-r-md">
           <%= f.submit t('buttons.save'), class: 'btn btn-primary btn-w-m' %>
       </div>
       <div class="m-l-md">
-        <%= link_to t('activerecord.text.back_to_list', model: Product.model_name.human), products_path, class: 'btn btn-white' %>
+        <%= link_to t('buttons.back'), product_path(@product), class: 'btn btn-white' %>
       </div>
   </div>
 <% end %>

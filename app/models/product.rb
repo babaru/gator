@@ -1,7 +1,5 @@
 class Product < ActiveRecord::Base
   belongs_to :staff
-  belongs_to :trustor_bank_account
-  belongs_to :securities_broker_account
   belongs_to :sales_department, class_name: 'Department'
   belongs_to :operation_department, class_name: 'Department'
   belongs_to :consultant
@@ -48,23 +46,6 @@ class Product < ActiveRecord::Base
 
   # Data Compliance Callbacks
   before_save :update_consultant_name
-
-  # def initialize
-  #   super
-  #   build_staff
-  #   build_consultant
-  #   build_sales_department
-  #   build_operation_department
-  #   is_structured = false
-  # end
-
-  # def initialize(attributes = {}, options = {})
-  #   super(attributes, options)
-  #   build_staff if staff_id.nil?
-  #   build_consultant
-  #   build_sales_department if sales_department_id.nil?
-  #   build_operation_department if operation_department_id.nil?
-  # end
 
   def update_consultant_name
     unless self.consultant.nil?

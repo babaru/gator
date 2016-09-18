@@ -53,7 +53,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  TABS = [:summary, :fee, :accounts, :clients].freeze
+  TABS = [:summary, :clients].freeze
 
   # GET /products/1
   # GET /products/1.json
@@ -195,6 +195,13 @@ class ProductsController < ApplicationController
       :consultant_fee_flour,
       :bonus,
       :sales_fee_ratio,
+      :trustor_name,
+      :trustor_bank_name,
+      :trustor_bank_account_name,
+      :trustor_bank_account_number,
+      :securities_broker_name,
+      :securities_broker_account_name,
+      :securities_broker_account_number,
       :sse_account_code,
       :szse_account_code,
       :cffex_account_code,
@@ -226,23 +233,6 @@ class ProductsController < ApplicationController
       consultant_attributes: [
         :id,
         :name
-      ],
-      trustor_bank_account_attributes: [
-        :number, :name,
-        trustor_attributes: [
-          :id,
-          :name
-        ],
-        bank_attributes: [
-          :id,
-          :name
-        ]
-      ],
-      securities_broker_account_attributes: [
-        :number, :name,
-        securities_broker_attributes: [
-          :name
-        ]
       ]
       )
   end
