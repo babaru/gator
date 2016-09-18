@@ -58,15 +58,6 @@ seed_departments = Department.create(
   ]
 ) if Department.count == 0
 
-seed_banks = Bank.create([
-  { name: "中国工商银行" },
-  { name: "中国建设银行" },
-  { name: "中国农业银行" },
-  { name: "中国银行" },
-  { name: "招商银行" },
-  { name: "兴业银行" }
-]) if Bank.count == 0
-
 seed_roles = Role.create(
 [
   {
