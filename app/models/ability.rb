@@ -28,9 +28,6 @@ class Ability
   def product_manager
     can :manage, Product
     can :manage, Department
-    can :manage, Bank
-    can :manage, SecuritiesBroker
-    can :manage, Trustor
     can :manage, Consultant
     can :manage, Client
     can :update, Staff, :id => @user.staff.id
