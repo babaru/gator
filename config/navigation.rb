@@ -45,8 +45,6 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :clients, Client.model_name.human, clients_path if can? :read, Client
     primary.item :consultants, Consultant.model_name.human, consultants_path if can? :read, Consultant
     primary.item :departments, Department.model_name.human, departments_path if can? :read, Department
-    primary.item :trustors, Trustor.model_name.human, trustors_path if can? :read, Trustor
     primary.item :banks, Bank.model_name.human, banks_path if can? :read, Bank
-    primary.item :securities_brokers, SecuritiesBroker.model_name.human, securities_brokers_path if can? :read, SecuritiesBroker
   end
 end
