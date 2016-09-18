@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918023134) do
+ActiveRecord::Schema.define(version: 20160918033350) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -248,8 +248,6 @@ ActiveRecord::Schema.define(version: 20160918023134) do
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
   add_foreign_key "consultants", "departments"
-  add_foreign_key "money_records", "products"
-  add_foreign_key "money_records", "staffs"
   add_foreign_key "product_managers", "users"
   add_foreign_key "products", "consultants"
   add_foreign_key "products", "departments", column: "operation_department_id"
