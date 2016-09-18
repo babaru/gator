@@ -10,12 +10,6 @@ class InitialSchema < ActiveRecord::Migration
     add_index "assignments", ["role_id"], name: "index_assignments_on_role_id", using: :btree
     add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
 
-    create_table "banks", force: :cascade do |t|
-      t.string   "name",       limit: 255
-      t.datetime "created_at",             null: false
-      t.datetime "updated_at",             null: false
-    end
-
     create_table "clients", force: :cascade do |t|
       t.string   "type",                            limit: 255
       t.string   "application_number",              limit: 255
@@ -58,28 +52,6 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     add_index "departments", ["name"], name: "index_departments_on_name", unique: true, using: :btree
-
-    create_table "money_records", force: :cascade do |t|
-      t.datetime "done_at"
-      t.string   "type",       limit: 255
-      t.decimal  "amount",                 precision: 10
-      t.integer  "staff_id",   limit: 4
-      t.integer  "product_id", limit: 4
-      t.datetime "created_at",                            null: false
-      t.datetime "updated_at",                            null: false
-    end
-
-    add_index "money_records", ["product_id"], name: "index_money_records_on_product_id", using: :btree
-    add_index "money_records", ["staff_id"], name: "index_money_records_on_staff_id", using: :btree
-
-    create_table "product_managers", force: :cascade do |t|
-      t.string   "name",       limit: 255
-      t.datetime "created_at",             null: false
-      t.datetime "updated_at",             null: false
-      t.integer  "user_id",    limit: 4
-    end
-
-    add_index "product_managers", ["user_id"], name: "index_product_managers_on_user_id", using: :btree
 
     create_table "products", force: :cascade do |t|
       t.string   "name",                             limit: 255
@@ -158,22 +130,6 @@ class InitialSchema < ActiveRecord::Migration
       t.datetime "updated_at",              null: false
     end
 
-    create_table "securities_broker_accounts", force: :cascade do |t|
-      t.integer  "securities_broker_id", limit: 4
-      t.string   "name",                 limit: 255
-      t.string   "number",               limit: 255
-      t.datetime "created_at",                       null: false
-      t.datetime "updated_at",                       null: false
-    end
-
-    add_index "securities_broker_accounts", ["securities_broker_id"], name: "index_securities_broker_accounts_on_securities_broker_id", using: :btree
-
-    create_table "securities_brokers", force: :cascade do |t|
-      t.string   "name",       limit: 255
-      t.datetime "created_at",             null: false
-      t.datetime "updated_at",             null: false
-    end
-
     create_table "staffs", force: :cascade do |t|
       t.string   "name",                  limit: 255
       t.integer  "department_id",         limit: 4
@@ -193,24 +149,6 @@ class InitialSchema < ActiveRecord::Migration
     add_index "staffs", ["department_id"], name: "index_staffs_on_department_id", using: :btree
     add_index "staffs", ["email"], name: "index_staffs_on_email", unique: true, using: :btree
     add_index "staffs", ["user_id"], name: "index_staffs_on_user_id", using: :btree
-
-    create_table "trustor_bank_accounts", force: :cascade do |t|
-      t.integer  "trustor_id", limit: 4
-      t.integer  "bank_id",    limit: 4
-      t.string   "name",       limit: 255
-      t.string   "number",     limit: 255
-      t.datetime "created_at",             null: false
-      t.datetime "updated_at",             null: false
-    end
-
-    add_index "trustor_bank_accounts", ["bank_id"], name: "index_trustor_bank_accounts_on_bank_id", using: :btree
-    add_index "trustor_bank_accounts", ["trustor_id"], name: "index_trustor_bank_accounts_on_trustor_id", using: :btree
-
-    create_table "trustors", force: :cascade do |t|
-      t.string   "name",       limit: 255
-      t.datetime "created_at",             null: false
-      t.datetime "updated_at",             null: false
-    end
 
     create_table "users", force: :cascade do |t|
       t.string   "email",                  limit: 255, default: "", null: false
@@ -235,15 +173,11 @@ class InitialSchema < ActiveRecord::Migration
     add_foreign_key "assignments", "roles"
     add_foreign_key "assignments", "users"
     add_foreign_key "consultants", "departments"
-    add_foreign_key "product_managers", "users"
     add_foreign_key "products", "consultants"
     add_foreign_key "products", "departments", column: "operation_department_id"
     add_foreign_key "products", "departments", column: "sales_department_id"
     add_foreign_key "products", "staffs"
-    add_foreign_key "securities_broker_accounts", "securities_brokers"
     add_foreign_key "staffs", "departments"
     add_foreign_key "staffs", "users"
-    add_foreign_key "trustor_bank_accounts", "banks"
-    add_foreign_key "trustor_bank_accounts", "trustors"
   end
 end

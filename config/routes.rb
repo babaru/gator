@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
 
   post 'staffs/search' => 'staffs#index', as: :search_staffs
-  post 'product_managers/search' => 'product_managers#index', as: :search_product_managers
-  post 'trustors/search' => 'trustors#index', as: :search_trustors
   post 'users/search' => 'users#index', as: :search_users
   post 'consultants/search' => 'consultants#index', as: :search_consultants
-  post 'securities_brokers/search' => 'securities_brokers#index', as: :search_securities_brokers
   post 'departments/search' => 'departments#index', as: :search_departments
-  post 'banks/search' => 'banks#index', as: :search_banks
   post 'products/search' => 'products#index', as: :search_products
 
   post 'users/upgrade_to_product_manager/:id' =>'users#upgrade_to_product_manager', as: :upgrade_to_product_manager

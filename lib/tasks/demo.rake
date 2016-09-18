@@ -3,15 +3,21 @@ namespace :demo do
 
     consultants = Consultant.create([
       {
-        name: '测试外部投顾2',
+        name: '深圳市道合投资管理有限公司',
         institution_type: 0,
         department_id: 10,
         is_qualified_3rd_party_institution: true
       },
       {
-        name: '测试外部投顾3',
+        name: '盈峰资本管理有限公司',
         institution_type: 0,
         department_id: 8,
+        is_qualified_3rd_party_institution: true
+      },
+      {
+        name: '深圳市盛世资产管理有限公司',
+        institution_type: 0,
+        department_id: 2,
         is_qualified_3rd_party_institution: true
       }
     ])
@@ -29,6 +35,7 @@ namespace :demo do
         delegation_started_at: '2015-07-01',
         delegation_ended_at: '2017-06-30',
         delegation_duration: 2,
+        deposited_at: '2015-07-01',
         sales_department_id: 5,
         operation_department_id: 2,
         consultant_id: consultants[0].id
@@ -43,6 +50,7 @@ namespace :demo do
         category: 2,
         rd_category: 1,
         delegation_started_at: '2014-02-15',
+        deposited_at: '2014-02-15',
         delegation_ended_at: '2016-02-14',
         delegation_duration: 2,
         sales_department_id: 7,
@@ -59,6 +67,7 @@ namespace :demo do
         category: 1,
         rd_category: 1,
         delegation_started_at: '2013-01-01',
+        deposited_at: '2013-01-01',
         delegation_ended_at: '2015-12-31',
         delegation_duration: 3,
         sales_department_id: 2,
@@ -75,6 +84,7 @@ namespace :demo do
         category: 1,
         rd_category: 2,
         delegation_started_at: '2016-07-01',
+        deposited_at: '2016-07-01',
         delegation_ended_at: '2019-06-30',
         delegation_duration: 3,
         sales_department_id: 4,
@@ -91,6 +101,7 @@ namespace :demo do
         category: 1,
         rd_category: 2,
         delegation_started_at: '2015-07-01',
+        deposited_at: '2015-07-01',
         delegation_ended_at: '2018-06-30',
         delegation_duration: 3,
         sales_department_id: 9,
