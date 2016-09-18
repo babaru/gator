@@ -90,6 +90,7 @@ zh-CN:
       securities_broker: 券商
       user: 系统帐号
       staff: 人员
+      product_share: 资管产品购买份额
     attributes:
       time_stamp:
         created_at: 创建于
@@ -214,6 +215,10 @@ zh-CN:
         is_investment_manager: 是否投资经理
         certification_id: 执业证书号
         user_id: 系统帐号
+      product_share:
+        product_id: 资管产品
+        client_id: 客户
+        share: 购买份额
   simple_form:
     "yes": '是'
     "no": '否'

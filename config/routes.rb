@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  post 'product_shares/search' => 'product_shares#index', as: :search_product_shares
   post 'staffs/search' => 'staffs#index', as: :search_staffs
   post 'users/search' => 'users#index', as: :search_users
   post 'consultants/search' => 'consultants#index', as: :search_consultants
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :products, :departments, :clients, :consultants, :users, :staffs
+  resources :products, :departments, :clients, :consultants, :users, :staffs, :product_shares
 
   # Example resource route with options:
   #   resources :products do

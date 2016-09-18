@@ -6,6 +6,8 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :staff, :sales_department,
     :operation_department, :consultant, reject_if: proc { |attrs| attrs[:name].blank? }
 
+  has_many :product_shares
+
   validates :name, :short_name, :code, :client_code, uniqueness: true
   validates :superior_code, uniqueness: true, unless: "superior_code.blank?"
   validates :inferior_code, uniqueness: true, unless: "inferior_code.blank?"

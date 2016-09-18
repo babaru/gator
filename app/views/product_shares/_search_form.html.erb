@@ -1,0 +1,16 @@
+<%= simple_form_for(@query_product_share_params,
+  url: search_product_shares_path, as: :product_share,
+  method: :post, wrapper: :vertical_form) do |f| %>
+
+  <%= f.error_notification %>
+
+  <%= f.input :name, required: false, label: t('activerecord.attributes.product_share.name') %>
+  <!-- add more query parameter fields here -->
+
+  <div class="form-group">
+      <%= link_to t('buttons.reset'), product_shares_path,
+        class: 'btn btn-white btn-sm' %>
+      <%= f.submit t('buttons.search'),
+        class: 'btn btn-primary btn-sm pull-right' %>
+  </div>
+<% end %>

@@ -60,7 +60,7 @@ class ProductsController < ApplicationController
   def show
     @tabs = TABS
     get_current_tab
-    @clients_grid = initialize_grid(Client) if @current_tab == :clients
+    @product_shares_grid = initialize_grid(ProductShare.where(product_id: @product.id)) if @current_tab == :clients
   end
 
   def get_current_tab

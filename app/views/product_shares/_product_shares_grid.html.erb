@@ -1,0 +1,31 @@
+<%= grid(@product_shares_grid, :show_filters => :when_filtered) do |g|
+
+  g.column name: '#' do |product_share|
+    product_share.id
+  end
+
+  if local_assigns[:client] == true || (local_assigns[:product].nil? && local_assigns[:client].nil?)
+    g.column name: t('activerecord.attributes.product_share.product_id') do |product_share|
+      product_share.product.name if product_share.product
+    end
+  end
+
+  if local_assigns[:product] == true || (local_assigns[:product].nil? && local_assigns[:client].nil?)
+    g.column name: t('activerecord.attributes.product_share.client_id') do |product_share|
+      product_share.client.name if product_share.client
+    end
+  end
+
+  g.column name: t('activerecord.attributes.product_share.share') do |product_share|
+    product_share.share
+  end
+
+  unless local_assigns[:readonly] == true
+    g.column html: {class: 'project-actions'} do |product_share|
+      [
+        link_to(fa_icon("pencil"), edit_product_share_path(product_share), class: 'btn btn-white btn-xs', data: {toggle: 'tooltip'}, title: t('buttons.edit')),
+        link_to(fa_icon("trash"), product_share_path(product_share), class: 'btn btn-danger btn-xs', method: :delete, data: {toggle: 'tooltip', confirm: t('confirms.delete')}, title: t('buttons.delete'))
+      ].join(' ').html_safe
+    end
+  end
+end -%>

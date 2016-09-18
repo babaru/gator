@@ -1,17 +1,13 @@
 class Client < ActiveRecord::Base
-  validates :category, presence: true
-  validates :application_number, presence: true
-  validates :id_number_type, presence: true
-  validates :id_number, presence: true
-  validates :name, presence: true
-  validates :traded_at, presence: true
+  has_many :product_shares
+
+  validates :category, :application_number, :id_number_type, :id_number,
+    :name, :traded_at, :sales_man_code, :business_code, :branch_store_number, presence: true
+
   validates :person_in_charge_id_number_type, presence: true, if: :institution?
   validates :person_in_charge_id_number, presence: true, if: :institution?
   validates :person_in_charge_name, presence: true, if: :institution?
   validates :fund_trading_account_number, presence: true
-  validates :sales_man_code, presence: true
-  validates :business_code, presence: true
-  validates :branch_store_number, presence: true
   validates :fund_account_number, presence: true, unless: :new_record?
 
   def active?
