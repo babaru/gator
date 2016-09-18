@@ -168,11 +168,6 @@ zh-CN:
         consultant: 投顾
         tabs:
           summary: 概况
-          consultant: 投顾
-          trustor: 托管人
-          money_records: 出入金记录
-          fee: 费率
-          accounts: 交易账号
           clients: 投资人
       client:
         type: 投资人类型
