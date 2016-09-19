@@ -124,6 +124,7 @@ zh-CN:
         liquidated_at: 清盘日期
         rd_category: 研发类别
         category: 产品类别
+        investment_scope: 投资范围
         is_structured: 是否为结构化产品
         is_one_to_many: 是否为一对多产品
         superior_code: 优先级产品编码

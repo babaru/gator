@@ -307,6 +307,7 @@ class ProductsController < ApplicationController
       :rd_category,
       :is_structured,
       :is_one_to_many,
+      :investment_scope,
       :superior_code,
       :inferior_code,
       :leverage,
