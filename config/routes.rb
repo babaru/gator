@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'consultants/search' => 'consultants#index', as: :search_consultants
   post 'departments/search' => 'departments#index', as: :search_departments
   post 'products/search' => 'products#index', as: :search_products
+  match 'products/import' => 'products#import_from_excel', as: :import_products, via: [:post, :get]
 
   post 'users/upgrade_to_product_manager/:id' =>'users#upgrade_to_product_manager', as: :upgrade_to_product_manager
 

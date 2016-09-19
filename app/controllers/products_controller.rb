@@ -54,6 +54,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def import_from_excel
+    @product = Product.new
+  end
+
   TABS = [:summary, :clients].freeze
 
   # GET /products/1
