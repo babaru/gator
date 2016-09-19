@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918063132) do
+ActiveRecord::Schema.define(version: 20160919075903) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(version: 20160918063132) do
   end
 
   add_index "departments", ["name"], name: "index_departments_on_name", unique: true, using: :btree
+
+  create_table "product_import_excel_files", force: :cascade do |t|
+    t.string   "file_file_name",          limit: 255
+    t.string   "file_content_type",       limit: 255
+    t.integer  "file_file_size",          limit: 4
+    t.datetime "file_updated_at"
+    t.string   "attachment_access_token", limit: 255
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
 
   create_table "product_shares", force: :cascade do |t|
     t.integer  "product_id", limit: 4
@@ -134,6 +144,8 @@ ActiveRecord::Schema.define(version: 20160918063132) do
     t.string   "securities_broker_name",           limit: 255
     t.string   "securities_broker_account_number", limit: 255
     t.string   "securities_broker_account_name",   limit: 255
+    t.string   "contract_profit_ratio",            limit: 255
+    t.string   "spec_profit_ratio",                limit: 255
   end
 
   add_index "products", ["client_code"], name: "index_products_on_client_code", unique: true, using: :btree

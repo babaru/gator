@@ -143,6 +143,8 @@ zh-CN:
         delegation_started_at: 委托资产委托起始日
         delegation_ended_at: 委托资产委托终止日
         delegation_duration: 管理期限（年）
+        contract_profit_ratio: 合同中的预期收益率
+        spec_profit_ratio: 产品说明书中的预期收益率
         fee_calculation_standard: 费用计提基准
         management_fee_ratio: 管理费率（年）
         year_day_count: 全年天数

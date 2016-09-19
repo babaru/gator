@@ -55,7 +55,134 @@ class ProductsController < ApplicationController
   end
 
   def import_from_excel
-    @product = Product.new
+    if request.post?
+      @product_import_excel_file = ProductImportExcelFile.new(product_import_excel_file_params)
+      if @product_import_excel_file.save
+        products_data = Gator::ProductsExcelImporter.parse(@product_import_excel_file.file.path)
+        sheet_data = products_data[0] # one to one
+        sheet_data[:data].each do |product_data|
+          product_name = product_data[1]
+          product = Product.find_by_name(product_name) if product_name
+          next if product
+          staff_name = product_data[4]
+          staff = nil
+          if staff_name
+            staff = Staff.find_by_name(staff_name)
+            staff = Staff.create(name: staff_name) if staff.nil?
+          end
+          if staff.nil?
+            logger.debug "Staff is nil, passed"
+            next
+          end
+
+          Product.create({
+            name: product_name,
+            client_code: product_data[2],
+            short_name: product_data[3],
+            staff: staff,
+            code: product_data[5] ,
+            status: Gator::ProductStatus.product_statuses.running,
+            category: Gator::ProductCategory.product_categories.future,
+            rd_category: Gator::ProductRDCategory.product_rd_categories.self_management,
+            is_structured: false,
+            is_one_to_many: false,
+            initial_fund: product_data[9],
+            trustor_name: product_data[10],
+            trustor_bank_name: product_data[11],
+            securities_broker_name: product_data[12],
+            valuation_out_sourcing: product_data[13],
+            deposited_at: product_data[14],
+            delegation_started_at: product_data[15],
+            delegation_ended_at: product_data[16],
+            delegation_duration: product_data[17],
+            contract_profit_ratio: product_data[18],
+            spec_profit_ratio: product_data[19],
+            fee_calculation_standard: product_data[20],
+            management_fee_ratio: product_data[21],
+            year_day_count: product_data[22],
+            management_fee_flour: product_data[23],
+            trustor_fee_ratio: product_data[24],
+            operation_fee_ratio: product_data[25],
+            consultant_fee_ratio: product_data[26],
+            consultant_fee_flour: product_data[27],
+            bonus: product_data[28],
+            sales_fee_ratio: product_data[29],
+            sse_account_code: product_data[30],
+            szse_account_code: product_data[31],
+            cffex_account_code: product_data[32],
+            zce_account_code: product_data[33],
+            dce_account_code: product_data[34],
+            shfe_account_code: product_data[35]
+          })
+        end
+
+        sheet_data = products_data[1] # one to many
+        sheet_data[:data].each do |product_data|
+          product_name = product_data[1]
+          product = Product.find_by_name(product_name) if product_name
+          next if product
+
+          staff_name = product_data[6]
+          staff = nil
+          if staff_name
+            staff = Staff.find_by_name(staff_name)
+            staff = Staff.create(name: staff_name) if staff.nil?
+          end
+          if staff.nil?
+            logger.debug "Staff is nil, passed"
+            next
+          end
+          Product.create({
+            name: product_name,
+            client_code: product_data[2],
+            short_name: product_data[3],
+            staff: staff,
+            code: product_data[7] ,
+            status: Gator::ProductStatus.product_statuses.running,
+            category: Gator::ProductCategory.product_categories.future,
+            rd_category: Gator::ProductRDCategory.product_rd_categories.self_management,
+            is_structured: (product_data[4].nil? || product_data[4].blank? || product_data[4] == '否') ? false : true,
+            is_one_to_many: true,
+            leverage: product_data[5],
+            initial_fund: product_data[11],
+            trustor_name: product_data[12],
+            trustor_bank_name: product_data[14],
+            trustor_bank_account_name: product_data[13],
+            trustor_bank_account_number: product_data[15],
+            securities_broker_name: product_data[17],
+            securities_broker_account_name: product_data[16],
+            securities_broker_account_number: product_data[18],
+            valuation_out_sourcing: product_data[19],
+            deposited_at: product_data[20],
+            delegation_started_at: product_data[21],
+            delegation_ended_at: product_data[22],
+            delegation_duration: product_data[23],
+            fee_calculation_standard: product_data[24],
+            management_fee_ratio: product_data[25],
+            year_day_count: product_data[26],
+            management_fee_flour: product_data[27],
+            trustor_fee_ratio: product_data[28],
+            operation_fee_ratio: product_data[29],
+            consultant_fee_ratio: product_data[30],
+            consultant_fee_flour: product_data[31],
+            bonus: product_data[32],
+            sales_fee_ratio: product_data[33],
+            sse_gateway: product_data[34],
+            szse_gateway: product_data[35],
+            sse_account_code: product_data[36],
+            szse_account_code: product_data[37],
+            cffex_account_code: product_data[38],
+            zce_account_code: product_data[39],
+            dce_account_code: product_data[40],
+            shfe_account_code: product_data[41]
+          })
+        end
+      end
+
+      redirect_to products_path
+    else
+      @product_import_excel_file = ProductImportExcelFile.new
+    end
   end
 
   TABS = [:summary, :clients].freeze
@@ -190,6 +317,8 @@ class ProductsController < ApplicationController
       :delegation_started_at,
       :delegation_ended_at,
       :delegation_duration,
+      :contract_profit_ratio,
+      :spec_profit_ratio,
       :fee_calculation_standard,
       :management_fee_ratio,
       :year_day_count,
@@ -240,6 +369,10 @@ class ProductsController < ApplicationController
         :name
       ]
       )
+  end
+
+  def product_import_excel_file_params
+    params.require(:product_import_excel_file).permit(:file)
   end
 
   def set_products_grid(conditions = [])
