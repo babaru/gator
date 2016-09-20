@@ -6,18 +6,9 @@ class ClientsController < ApplicationController
   # GET /clients.json
   def index
     @query_params = {}
-    if request.post?
-      @query_params[:application_number] = params[:client][:application_number] if params[:client][:application_number] && !params[:client][:application_number].empty?
-      @query_params[:id_number] = params[:client][:id_number] if params[:client][:id_number] && !params[:client][:id_number].empty?
-      @query_params[:name] = params[:client][:name] if params[:client][:name] && !params[:client][:name].empty?
-      # @query_params[:type] = params[:client][:type] if params[:client][:type] && !params[:client][:type].empty?
-    end
 
-    @query_client_params = Client.new
-    @query_client_params.application_number = @query_params[:application_number]
-    @query_client_params.id_number = @query_params[:id_number]
-    @query_client_params.name = @query_params[:name]
-    # @query_client_params.type = @query_params[:type]
+    build_query_params(params)
+    build_query_client_params
 
     @conditions = []
     @conditions << Client.arel_table[:application_number].matches("%#{@query_params[:application_number]}%") if @query_params[:application_number]
@@ -38,6 +29,29 @@ class ClientsController < ApplicationController
     respond_to do |format|
       format.html { set_clients_grid(@conditions) }
       format.json { render json: Client.where(@conditions) }
+    end
+  end
+
+  QUERY_KEYS = [:name, :application_number, :id_number, :category].freeze
+
+  def build_query_params(parameters)
+    QUERY_KEYS.each do |key|
+      @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+    end
+  end
+
+  def build_query_client_params
+    @query_client_params = Client.new
+    QUERY_KEYS.each do |key|
+      @query_client_params.send("#{key}=", @query_params[key])
+    end
+  end
+
+  def search
+    @query_params = {}
+    if request.post?
+      build_query_params(params[:client])
+      redirect_to clients_path(@query_params)
     end
   end
 

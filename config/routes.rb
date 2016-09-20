@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'query_products' => 'products#search', as: :query_products
   post 'query_staffs' => 'staffs#search', as: :query_staffs
   post 'query_users' => 'users#search', as: :query_users
+  post 'query_clients' => 'clients#search', as: :query_clients
 
   match 'products/import' => 'products#import_from_excel', as: :import_products, via: [:post, :get]
 
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  post 'clients/search' => 'clients#index', as: :search_clients
   get 'clients/upload_original_document' => 'clients#upload_original_document', as: :upload_client_original_document
 
   # Example of regular route:

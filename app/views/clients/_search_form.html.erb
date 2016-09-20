@@ -1,4 +1,4 @@
-<%= simple_form_for(@query_client_params, url: search_clients_path, as: :client, wrapper: :vertical_form) do |f| %>
+<%= simple_form_for(@query_client_params, url: query_clients_path, as: :client, wrapper: :vertical_form) do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :application_number, label: t('activerecord.attributes.client.application_number') %>
