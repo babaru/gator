@@ -218,6 +218,8 @@ zh-CN:
         is_investment_manager: 是否投资经理
         certification_id: 执业证书号
         user_id: 系统帐号
+        tabs:
+          products: 资管产品
       product_share:
         product_id: 资管产品
         client_id: 客户

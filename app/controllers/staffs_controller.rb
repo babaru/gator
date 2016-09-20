@@ -142,7 +142,7 @@ class StaffsController < ApplicationController
       :mobile,
       :resume,
       :is_investment_manager,
-      :certfication_id,
+      :certification_id,
       :user_id,
       :department_attributes => [
         :name,

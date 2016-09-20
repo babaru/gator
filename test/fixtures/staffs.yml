@@ -2,24 +2,24 @@
 
 one:
   name: MyString
-  department_id: 
+  department_id:
   position: MyString
   duration: MyString
   office_tel: MyString
   mobile: MyString
   resume: MyText
   is_investment_manager: false
-  certfication_id: MyString
-  user_id: 
+  certification_id: MyString
+  user_id:
 
 two:
   name: MyString
-  department_id: 
+  department_id:
   position: MyString
   duration: MyString
   office_tel: MyString
   mobile: MyString
   resume: MyText
   is_investment_manager: false
-  certfication_id: MyString
-  user_id: 
+  certification_id: MyString
+  user_id:
