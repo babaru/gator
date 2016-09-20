@@ -12,20 +12,14 @@ class Ability
 
   def admin
     can :manage, User
-    # can :manage, Department
-    # can :manage, Bank
-    # can :manage, SecuritiesBroker
-    # can :manage, Consultant
-    can :manage, Staff
-
-    # default_user
-  end
-
-  def am_manager
     can :manage, Staff
   end
 
-  def product_manager
+  def manager
+    can :manage, Staff
+  end
+
+  def staff
     can :manage, Product
     can :manage, Department
     can :manage, Consultant

@@ -1,4 +1,4 @@
-<%= simple_form_for(@query_product_params, url: search_products_path, as: :product, wrapper: :vertical_form) do |f| %>
+<%= simple_form_for(@query_product_params, url: query_products_path, as: :product, wrapper: :vertical_form) do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :name, required: false, label: t('activerecord.attributes.product.name') %>

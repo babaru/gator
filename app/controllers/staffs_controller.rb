@@ -10,13 +10,7 @@ class StaffsController < ApplicationController
   def index
     @query_params = {}
 
-    if request.post?
-      build_query_params(params[:staff])
-      redirect_to staffs_path(@query_params)
-    else
-      build_query_params(params)
-    end
-
+    build_query_params(params)
     build_query_staff_params
 
     @conditions = []
@@ -46,6 +40,14 @@ class StaffsController < ApplicationController
     @query_staff_params = Staff.new
     QUERY_KEYS.each do |key|
       @query_staff_params.send("#{key}=", @query_params[key])
+    end
+  end
+
+  def search
+    @query_params = {}
+    if request.post?
+      build_query_params(params[:staff])
+      redirect_to staffs_path(@query_params)
     end
   end
 

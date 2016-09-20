@@ -9,13 +9,7 @@ class ConsultantsController < ApplicationController
   def index
     @query_params = {}
 
-    if request.post?
-      build_query_params(params[:consultant])
-      redirect_to consultants_path(@query_params)
-    else
-      build_query_params(params)
-    end
-
+    build_query_params(params)
     build_query_consultant_params
 
     @conditions = []
@@ -45,6 +39,14 @@ class ConsultantsController < ApplicationController
     @query_consultant_params = Consultant.new
     QUERY_KEYS.each do |key|
       @query_consultant_params.send("#{key}=", @query_params[key])
+    end
+  end
+
+  def search
+    @query_params = {}
+    if request.post?
+      build_query_params(params[:consultant])
+      redirect_to consultants_path(@query_params)
     end
   end
 

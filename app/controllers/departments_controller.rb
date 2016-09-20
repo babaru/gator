@@ -9,13 +9,7 @@ class DepartmentsController < ApplicationController
   def index
     @query_params = {}
 
-    if request.post?
-      build_query_params(params[:department])
-      redirect_to departments_path(@query_params)
-    else
-      build_query_params(params)
-    end
-
+    build_query_params(params)
     build_query_department_params
 
     @conditions = []
@@ -45,6 +39,14 @@ class DepartmentsController < ApplicationController
     @query_department_params = Department.new
     QUERY_KEYS.each do |key|
       @query_department_params.send("#{key}=", @query_params[key])
+    end
+  end
+
+  def search
+    @query_params = {}
+    if request.post?
+      build_query_params(params[:department])
+      redirect_to departments_path(@query_params)
     end
   end
 

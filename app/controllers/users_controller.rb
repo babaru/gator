@@ -9,13 +9,7 @@ class UsersController < ApplicationController
   def index
     @query_params = {}
 
-    if request.post?
-      build_query_params(params[:user])
-      redirect_to users_path(@query_params)
-    else
-      build_query_params(params)
-    end
-
+    build_query_params(params)
     build_query_user_params
 
     @conditions = []
@@ -46,6 +40,14 @@ class UsersController < ApplicationController
     @query_user_params = User.new
     QUERY_KEYS.each do |key|
       @query_user_params.send("#{key}=", @query_params[key])
+    end
+  end
+
+  def search
+    @query_params = {}
+    if request.post?
+      build_query_params(params[:user])
+      redirect_to users_path(@query_params)
     end
   end
 

@@ -10,13 +10,7 @@ class ProductsController < ApplicationController
   def index
     @query_params = {}
 
-    if request.post?
-      build_query_params(params[:product])
-      redirect_to products_path(@query_params)
-    else
-      build_query_params(params)
-    end
-
+    build_query_params(params)
     build_query_product_params
 
     @conditions = []
@@ -38,6 +32,14 @@ class ProductsController < ApplicationController
       format.html { set_products_grid(@conditions) }
       format.xls { @products = Product.where(@conditions) }
       format.json { render json: Product.where(@conditions) }
+    end
+  end
+
+  def search
+    @query_params = {}
+    if request.post?
+      build_query_params(params[:product])
+      redirect_to products_path(@query_params)
     end
   end
 
