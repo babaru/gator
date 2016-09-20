@@ -61,26 +61,18 @@ class ProductsController < ApplicationController
       @product_import_excel_file = ProductImportExcelFile.new(product_import_excel_file_params)
       if @product_import_excel_file.save
         products_data = Gator::ProductsExcelImporter.parse(@product_import_excel_file.file.path)
+        logger.debug products_data
         sheet_data = products_data[0] # one to one
         sheet_data[:data].each do |product_data|
           product_name = product_data[1]
           product = Product.find_by_name(product_name) if product_name
           next if product
-          staff_name = product_data[4]
-          staff = nil
-          if staff_name
-            staff = Staff.find_by_name(staff_name)
-            staff = Staff.create(name: staff_name) if staff.nil?
-          end
-          if staff.nil?
-            logger.debug "Staff is nil, passed"
-            next
-          end
+          staff = Staff.find_by_name(product_data[4]) if product_data[4]
 
-          Product.create({
+          product = Product.new({
             name: product_name,
             client_code: product_data[2],
-            short_name: product_data[3],
+            short_name: product_data[3].nil? ? product_name : product_data[3],
             staff: staff,
             code: product_data[5] ,
             status: Gator::ProductStatus.product_statuses.running,
@@ -88,14 +80,14 @@ class ProductsController < ApplicationController
             rd_category: Gator::ProductRDCategory.product_rd_categories.self_management,
             is_structured: false,
             is_one_to_many: false,
-            initial_fund: product_data[9],
+            initial_fund: product_data[9].nil? ? 0: product_data[9],
             trustor_name: product_data[10],
             trustor_bank_name: product_data[11],
             securities_broker_name: product_data[12],
             valuation_out_sourcing: product_data[13],
-            deposited_at: product_data[14],
-            delegation_started_at: product_data[15],
-            delegation_ended_at: product_data[16],
+            deposited_at: product_data[14].is_a?(DateTime) ? product_data[14] : DateTime.new(2000,1,1),
+            delegation_started_at: product_data[15].is_a?(DateTime) ? product_data[15] : DateTime.new(2000,1,1),
+            delegation_ended_at: product_data[16].is_a?(DateTime) ? product_data[16] : DateTime.new(2000,1,1),
             delegation_duration: product_data[17],
             contract_profit_ratio: product_data[18],
             spec_profit_ratio: product_data[19],
@@ -116,6 +108,7 @@ class ProductsController < ApplicationController
             dce_account_code: product_data[34],
             shfe_account_code: product_data[35]
           })
+          logger.debug product.errors.full_messages unless product.save
         end
 
         sheet_data = products_data[1] # one to many
@@ -124,29 +117,21 @@ class ProductsController < ApplicationController
           product = Product.find_by_name(product_name) if product_name
           next if product
 
-          staff_name = product_data[6]
-          staff = nil
-          if staff_name
-            staff = Staff.find_by_name(staff_name)
-            staff = Staff.create(name: staff_name) if staff.nil?
-          end
-          if staff.nil?
-            logger.debug "Staff is nil, passed"
-            next
-          end
-          Product.create({
+          staff = Staff.find_by_name(product_data[6]) if product_data[6]
+
+          product = Product.new({
             name: product_name,
             client_code: product_data[2],
-            short_name: product_data[3],
+            short_name: product_data[3].nil? ? product_name : product_data[3],
             staff: staff,
-            code: product_data[7] ,
+            code: product_data[7],
             status: Gator::ProductStatus.product_statuses.running,
             category: Gator::ProductCategory.product_categories.future,
             rd_category: Gator::ProductRDCategory.product_rd_categories.self_management,
             is_structured: (product_data[4].nil? || product_data[4].blank? || product_data[4] == '否') ? false : true,
             is_one_to_many: true,
             leverage: product_data[5],
-            initial_fund: product_data[11],
+            initial_fund: product_data[11].nil? ? 0 : product_data[11],
             trustor_name: product_data[12],
             trustor_bank_name: product_data[14],
             trustor_bank_account_name: product_data[13],
@@ -155,9 +140,9 @@ class ProductsController < ApplicationController
             securities_broker_account_name: product_data[16],
             securities_broker_account_number: product_data[18],
             valuation_out_sourcing: product_data[19],
-            deposited_at: product_data[20],
-            delegation_started_at: product_data[21],
-            delegation_ended_at: product_data[22],
+            deposited_at: product_data[20].is_a?(DateTime) ? product_data[20] : DateTime.new(2000,1,1),
+            delegation_started_at: product_data[21].is_a?(DateTime) ? product_data[21] : DateTime.new(2000,1,1),
+            delegation_ended_at: product_data[22].is_a?(DateTime) ? product_data[22] : DateTime.new(2000,1,1),
             delegation_duration: product_data[23],
             fee_calculation_standard: product_data[24],
             management_fee_ratio: product_data[25],
@@ -178,6 +163,7 @@ class ProductsController < ApplicationController
             dce_account_code: product_data[40],
             shfe_account_code: product_data[41]
           })
+          logger.debug product.errors.full_messages unless product.save
         end
       end
 

@@ -82,7 +82,7 @@ zh-CN:
       product: 资管产品
       one_to_one_product: 一对一产品
       one_to_many_product: 一对多产品
-      client: 客户
+      client: 投资人
       department: 部门
       consultant: 投顾
       bank: 银行
@@ -116,7 +116,7 @@ zh-CN:
         name: 名称
       product:
         name: 名称
-        client_code: 客户编号
+        client_code: 投资人编号
         short_name: 简称
         staff: 产品经理
         code: 产品编码
@@ -222,7 +222,7 @@ zh-CN:
           products: 资管产品
       product_share:
         product_id: 资管产品
-        client_id: 客户
+        client_id: 投资人
         share: 份额
   simple_form:
     "yes": '是'
