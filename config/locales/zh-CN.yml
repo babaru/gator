@@ -1,5 +1,5 @@
 zh-CN:
-  welcome: '欢迎来到 PMS'
+  welcome: '资产管理产品TA信息管理系统'
   copyright: 版权所有
   app_name: PMS
   company_name: CTPT
@@ -12,6 +12,7 @@ zh-CN:
     download: 下载
     reset: 重置
     sign_out: 退出登录
+    sign_in: 登录
     back: 返回
   confirms:
     delete: 确定要删除这一条记录吗？
@@ -21,6 +22,7 @@ zh-CN:
     search: 搜索
     from: 从
     to: 至
+    remember_me: 下次免登录
   product_categories:
     equity: 权益类
     future: 期货类
