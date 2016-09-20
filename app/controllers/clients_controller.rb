@@ -21,9 +21,6 @@ class ClientsController < ApplicationController
         conditions = conditions.or(item) if index > 0
       end
       @conditions = conditions
-      # @conditions = @conditions.and(Client.arel_table[:type].eq(@query_params[:type])) if @query_params[:type]
-    else
-      # @conditions = Client.arel_table[:type].eq(@query_params[:type]) if @query_params[:type]
     end
 
     respond_to do |format|
