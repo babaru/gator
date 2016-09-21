@@ -14,6 +14,8 @@ class Product < ActiveRecord::Base
   validates :superior_code, :inferior_code, :leverage, presence: true, if: "!!is_structured"
   validates :liquidated_at, presence: true, if: :is_liquidated?
 
+  attr_accessor :categories
+
   validates :name,
     :client_code,
     :short_name,
@@ -64,7 +66,7 @@ class Product < ActiveRecord::Base
   class << self
 
     def categories
-      Gator::ProductCategory.product_categories.map{ |k,v| [I18n.t("product_categories.#{k}"),v] }
+      Gator::ProductCategory.product_categories.map{ |k,v| [I18n.t("product_categories.#{k}"), v.to_s] }
     end
 
     def category_names

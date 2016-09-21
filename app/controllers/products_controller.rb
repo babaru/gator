@@ -3,7 +3,11 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :edit_tab]
 
   QUERY_KEYS = [:name, :consultant_name,
-    :delegation_started_at, :delegation_ended_at].freeze
+    :delegation_started_at, :delegation_ended_at, :categories].freeze
+  TABS = [:summary, :clients].freeze
+
+  ARRAY_SP = ","
+  ARRAY_HEADER = "a_"
 
   # GET /products
   # GET /products.json
@@ -19,6 +23,9 @@ class ProductsController < ApplicationController
     @conditions << Product.arel_table[:consultant_name].matches("%#{@query_params[:consultant_name]}%") if @query_params[:consultant_name]
     @conditions << Product.arel_table[:delegation_started_at].lteq(Time.parse(@query_params[:delegation_started_at]).beginning_of_day) if @query_params[:delegation_started_at]
     @conditions << Product.arel_table[:delegation_ended_at].gteq(Time.parse(@query_params[:delegation_ended_at]).beginning_of_day) if @query_params[:delegation_ended_at]
+    @query_params[:categories] && @query_params[:categories].gsub(ARRAY_HEADER, "").split(ARRAY_SP).each do |category|
+      @conditions << Product.arel_table[:category].eq(category) unless category.empty?
+    end
 
     if @conditions.length > 0
       conditions = @conditions[0]
@@ -45,14 +52,22 @@ class ProductsController < ApplicationController
 
   def build_query_params(parameters)
     QUERY_KEYS.each do |key|
-      @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+      if parameters[key].is_a?(Array)
+        @query_params[key] = "a_#{parameters[key].join(ARRAY_SP)}"
+      else
+        @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+      end
     end
   end
 
   def build_query_product_params
     @query_product_params = Product.new
     QUERY_KEYS.each do |key|
-      @query_product_params.send("#{key}=", @query_params[key])
+      if @query_params[key] && @query_params[key].start_with?(ARRAY_HEADER)
+        @query_product_params.send("#{key}=", @query_params[key].gsub(ARRAY_HEADER, "").split(ARRAY_SP))
+      else
+        @query_product_params.send("#{key}=", @query_params[key])
+      end
     end
   end
 
@@ -172,8 +187,6 @@ class ProductsController < ApplicationController
       @product_import_excel_file = ProductImportExcelFile.new
     end
   end
-
-  TABS = [:summary, :clients].freeze
 
   # GET /products/1
   # GET /products/1.json
