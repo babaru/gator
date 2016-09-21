@@ -1,12 +1,13 @@
-<%= simple_form_for(@query_client_params, url: query_clients_path, as: :client, wrapper: :vertical_form) do |f| %>
+<%= simple_form_for(@query_entity_params, url: query_clients_path, as: :client, wrapper: :vertical_form) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :application_number, label: t('activerecord.attributes.client.application_number') %>
-  <%= f.input :name, label: t('activerecord.attributes.client.name') %>
-  <%= f.input :id_number, label: t('activerecord.attributes.client.id_number') %>
-  <%= f.input :category, label: t('activerecord.attributes.client.category'), collection: Client.category_names, as: :radio_buttons %>
+  <%= f.input :application_number, required: false, label: t('activerecord.attributes.client.application_number') %>
+  <%= f.input :name, required: false, label: t('activerecord.attributes.client.name') %>
+  <%= f.input :id_number, required: false, label: t('activerecord.attributes.client.id_number') %>
+  <%= f.input :categories, required: false, label: t('activerecord.attributes.client.category'), collection: Client.categories, as: :check_boxes, wrapper: :vertical_radio_and_checkboxes %>
 
   <div class="form-group">
-      <%= f.submit t('buttons.search'), class: 'btn btn-white btn-sm' %>
+      <%= link_to t('buttons.reset'), clients_path, class: 'btn btn-white btn-sm' %>
+      <%= f.submit t('buttons.search'), class: 'btn btn-primary btn-sm pull-right' %>
   </div>
 <% end %>

@@ -10,6 +10,8 @@ class Client < ActiveRecord::Base
   validates :fund_trading_account_number, presence: true
   validates :fund_account_number, presence: true, unless: :new_record?
 
+  attr_accessor :categories
+
   def active?
     status == 'active'
   end
@@ -41,7 +43,7 @@ class Client < ActiveRecord::Base
     end
 
     def categories
-      Gator::ClientCategory.client_categories.map { |k,v| [I18n.t("client_categories.#{k}"), v]}
+      Gator::ClientCategory.client_categories.map { |k,v| [I18n.t("client_categories.#{k}"), v.to_s]}
     end
 
     def category_names

@@ -2,18 +2,27 @@ class ClientsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
+  ARRAY_SP = ","
+  ARRAY_HEADER = "a_"
+
+  QUERY_KEYS = [:name, :application_number, :id_number, :categories].freeze
+  TABS = [:summary, :extra_information, :original_materials, :products].freeze
+
   # GET /clients
   # GET /clients.json
   def index
     @query_params = {}
 
     build_query_params(params)
-    build_query_client_params
+    build_query_entity_params
 
     @conditions = []
     @conditions << Client.arel_table[:application_number].matches("%#{@query_params[:application_number]}%") if @query_params[:application_number]
     @conditions << Client.arel_table[:name].matches("%#{@query_params[:name]}%") if @query_params[:name]
     @conditions << Client.arel_table[:id_number].matches("%#{@query_params[:id_number]}%") if @query_params[:id_number]
+    @query_params[:categories] && @query_params[:categories].gsub(ARRAY_HEADER, "").split(ARRAY_SP).each do |category|
+      @conditions << Client.arel_table[:category].eq(category) unless category.empty?
+    end
 
     if @conditions.length > 0
       conditions = @conditions[0]
@@ -29,18 +38,24 @@ class ClientsController < ApplicationController
     end
   end
 
-  QUERY_KEYS = [:name, :application_number, :id_number, :category].freeze
-
   def build_query_params(parameters)
     QUERY_KEYS.each do |key|
-      @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+      if parameters[key].is_a?(Array)
+        @query_params[key] = "a_#{parameters[key].join(ARRAY_SP)}"
+      else
+        @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+      end
     end
   end
 
-  def build_query_client_params
-    @query_client_params = Client.new
+  def build_query_entity_params
+    @query_entity_params = Client.new
     QUERY_KEYS.each do |key|
-      @query_client_params.send("#{key}=", @query_params[key])
+      if @query_params[key] && @query_params[key].start_with?(ARRAY_HEADER)
+        @query_entity_params.send("#{key}=", @query_params[key].gsub(ARRAY_HEADER, "").split(ARRAY_SP))
+      else
+        @query_entity_params.send("#{key}=", @query_params[key])
+      end
     end
   end
 
@@ -51,8 +66,6 @@ class ClientsController < ApplicationController
       redirect_to clients_path(@query_params)
     end
   end
-
-  TABS = [:summary, :extra_information, :original_materials, :products].freeze
 
   # GET /clients/1
   # GET /clients/1.json

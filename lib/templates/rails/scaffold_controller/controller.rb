@@ -6,6 +6,10 @@ class <%= controller_class_name %>Controller < ApplicationController
   before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
 
   QUERY_KEYS = [:name].freeze
+  ARRAY_SP = ","
+  ARRAY_HEADER = "a_"
+
+  TABS = [:tab1, :tab2].freeze
 
   # GET <%= route_url %>
   # GET <%= route_url %>.json
@@ -40,18 +44,24 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def build_query_params(parameters)
     QUERY_KEYS.each do |key|
-      @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+      if parameters[key].is_a?(Array)
+        @query_params[key] = "a_#{parameters[key].join(ARRAY_SP)}"
+      else
+        @query_params[key] = parameters[key] if parameters[key] && !parameters[key].empty?
+      end
     end
   end
 
   def build_query_<%= singular_table_name %>_params
     @query_<%= singular_table_name %>_params = <%= class_name.split('::').last %>.new
     QUERY_KEYS.each do |key|
-      @query_<%= singular_table_name %>_params.send("#{key}=", @query_params[key])
+      if @query_params[key] && @query_params[key].start_with?(ARRAY_HEADER)
+        @query_<%= singular_table_name %>_params.send("#{key}=", @query_params[key].gsub(ARRAY_HEADER, "").split(ARRAY_SP))
+      else
+        @query_<%= singular_table_name %>_params.send("#{key}=", @query_params[key])
+      end
     end
   end
-
-  TABS = [:tab1, :tab2].freeze
 
   # GET <%= route_url %>/1
   # GET <%= route_url %>/1.json
