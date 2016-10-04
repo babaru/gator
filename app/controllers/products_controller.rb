@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :edit_tab]
 
   QUERY_KEYS = [:name, :consultant_name,
-    :delegation_started_at, :delegation_ended_at, :categories].freeze
+    :delegation_started_at, :delegation_ended_at, :categories, :tag_names].freeze
   TABS = [:summary, :clients].freeze
 
   ARRAY_SP = ","
@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
     @query_params[:categories] && @query_params[:categories].gsub(ARRAY_HEADER, "").split(ARRAY_SP).each do |category|
       @conditions << Product.arel_table[:category].eq(category) unless category.empty?
     end
+    @conditions << Product.arel_table[:tag_names].matches("%#{@query_params[:tag_names]}%") if @query_params[:tag_names]
 
     if @conditions.length > 0
       conditions = @conditions[0]
@@ -274,6 +275,11 @@ class ProductsController < ApplicationController
     @product.sales_department = Department.find(product_params[:sales_department_attributes][:id]) if product_params[:sales_department_attributes] && !product_params[:sales_department_attributes][:id].empty?
     @product.operation_department = Department.find(product_params[:operation_department_attributes][:id]) if product_params[:operation_department_attributes] && !product_params[:operation_department_attributes][:id].empty?
     @product.consultant = Consultant.find(product_params[:consultant_attributes][:id]) if product_params[:consultant_attributes] && !product_params[:consultant_attributes][:id].empty?
+    @product.tags.clear
+    product_params[:tag_names].split(',').each do |tag_name|
+      tag = Tag.find_or_create_by({name: tag_name})
+      @product.tags << tag
+    end
   end
 
   # DELETE /products/1
@@ -354,6 +360,7 @@ class ProductsController < ApplicationController
       :dce_gateway,
       :shfe_gateway,
       :sales_department,
+      :tag_names,
       staff_attributes: [
         :id,
         :name

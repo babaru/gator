@@ -32,6 +32,10 @@
                         <dt><%= t('activerecord.attributes.product.status') %>:</dt>
                         <dd><span class="<%= product_status_label_class(@product) %>"><%= Product.status_names[@product.status] %></span></dd>
                     </dl>
+                    <dl class="dl-horizontal">
+                        <dt><%= t('activerecord.attributes.product.tags') %>:</dt>
+                        <dd><%= @product.tags.inject([]) { |list, tag| list << content_tag(:span, tag.name, class: 'label label-info') }.join(' ').html_safe %></dd>
+                    </dl>
                 </div>
                 <div class="col-lg-7">
                     <dl class="dl-horizontal">

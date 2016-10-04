@@ -135,6 +135,17 @@
 
 <div class="hr-line-dashed"></div>
 
+<div class="row">
+    <div class="col-lg-6">
+      <%= f.input :tag_names, input_html: { data: { role: 'tagsinput' } } %>
+    </div>
+    <div class="col-lg-6">
+
+    </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
 <div class="form-group">
     <div class="pull-right m-r-md">
         <%= f.submit t('buttons.save'), class: 'btn btn-primary btn-w-m' %>
@@ -144,6 +155,8 @@
     </div>
 </div>
 <% end %>
+
+<%= javascript_include_tag 'bootstrap-tagsinput/bootstrap-tagsinput', 'data-turbolinks-track' => true %>
 
 <script type="text/javascript">
 

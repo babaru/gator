@@ -176,6 +176,8 @@ zh-CN:
         operation_department: 产品运作部门
         consultant_name: 投顾名称
         consultant: 投顾
+        tag_names: 标签
+        tags: 标签
         tabs:
           summary: 概况
           clients: 投资人

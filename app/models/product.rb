@@ -7,6 +7,8 @@ class Product < ActiveRecord::Base
     :operation_department, :consultant, reject_if: proc { |attrs| attrs[:name].blank? }
 
   has_many :product_shares
+  has_many :product_tags
+  has_many :tags, through: :product_tags
 
   validates :name, :short_name, :code, :client_code, uniqueness: true
   validates :superior_code, uniqueness: true, unless: "superior_code.blank?"
@@ -15,6 +17,8 @@ class Product < ActiveRecord::Base
   validates :liquidated_at, presence: true, if: :is_liquidated?
 
   attr_accessor :categories
+
+  # serialize :tag_names, Array
 
   validates :name,
     :client_code,

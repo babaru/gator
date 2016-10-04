@@ -21,6 +21,7 @@
 //= require moment
 //= require bootstrap-datetimepicker.min
 //= require bootstrap3-typeahead/bootstrap3-typeahead
+//= require bootstrap-tagsinput/bootstrap-tagsinput
 //= require_tree .
 
 $(document).ready(function() {
