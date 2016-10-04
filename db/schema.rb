@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004070120) do
+ActiveRecord::Schema.define(version: 20161004073224) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 20161004070120) do
     t.string   "client_code",                      limit: 255
     t.string   "short_name",                       limit: 255
     t.string   "code",                             limit: 255
-    t.integer  "status",                           limit: 4,   default: 0
+    t.integer  "status",                           limit: 4,     default: 0
     t.integer  "category",                         limit: 4
     t.integer  "rd_category",                      limit: 4
     t.string   "initial_fund",                     limit: 255
@@ -130,16 +130,16 @@ ActiveRecord::Schema.define(version: 20161004070120) do
     t.string   "consultant_name",                  limit: 255
     t.string   "sse_gateway",                      limit: 255
     t.string   "szse_gateway",                     limit: 255
-    t.datetime "created_at",                                                   null: false
-    t.datetime "updated_at",                                                   null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
     t.integer  "sales_department_id",              limit: 4
     t.integer  "operation_department_id",          limit: 4
     t.integer  "consultant_id",                    limit: 4
     t.integer  "staff_id",                         limit: 4
-    t.boolean  "is_structured",                                default: false
+    t.boolean  "is_structured",                                  default: false
     t.string   "superior_code",                    limit: 255
     t.string   "inferior_code",                    limit: 255
-    t.boolean  "is_one_to_many",                               default: false
+    t.boolean  "is_one_to_many",                                 default: false
     t.string   "leverage",                         limit: 255
     t.datetime "put_on_record_at"
     t.datetime "liquidated_at"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20161004070120) do
     t.string   "spec_profit_ratio",                limit: 255
     t.string   "investment_scope",                 limit: 255
     t.string   "tag_names",                        limit: 255
+    t.text     "remarks",                          limit: 65535
   end
 
   add_index "products", ["client_code"], name: "index_products_on_client_code", unique: true, using: :btree

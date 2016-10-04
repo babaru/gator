@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :edit_tab]
 
   QUERY_KEYS = [:name, :consultant_name,
-    :delegation_started_at, :delegation_ended_at, :categories, :tag_names].freeze
+    :delegation_started_at, :delegation_ended_at, :categories, :tag_names, :remarks].freeze
   TABS = [:summary, :clients].freeze
 
   ARRAY_SP = ","
@@ -27,6 +27,7 @@ class ProductsController < ApplicationController
       @conditions << Product.arel_table[:category].eq(category) unless category.empty?
     end
     @conditions << Product.arel_table[:tag_names].matches("%#{@query_params[:tag_names]}%") if @query_params[:tag_names]
+    @conditions << Product.arel_table[:remarks].matches("%#{@query_params[:remarks]}%") if @query_params[:remarks]
 
     if @conditions.length > 0
       conditions = @conditions[0]
@@ -361,6 +362,7 @@ class ProductsController < ApplicationController
       :shfe_gateway,
       :sales_department,
       :tag_names,
+      :remarks,
       staff_attributes: [
         :id,
         :name
