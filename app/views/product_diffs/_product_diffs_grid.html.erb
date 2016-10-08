@@ -1,0 +1,38 @@
+<%= grid(@product_diffs_grid, :show_filters => :when_filtered) do |g|
+  g.column name: t('activerecord.attributes.product_diff.diff_by_id') do |product_diff|
+    product_diff.diff_by.name if product_diff.diff_by
+  end
+
+  g.column name: t('activerecord.attributes.product_diff.diff_at') do |product_diff|
+    product_diff.diff_at.strftime("%Y-%m-%d %H:%M:%S") if product_diff.diff_at
+  end
+
+  g.column name: t('activerecord.attributes.product_diff.diff') do |product_diff|
+    product_diff.diff
+  end
+
+  g.column name: t('activerecord.attributes.product_diff.is_committed') do |product_diff|
+    product_diff.is_committed
+  end
+
+  g.column name: t('activerecord.attributes.product_diff.committed_by_id') do |product_diff|
+    product_diff.committed_by.name if product_diff.committed_by
+  end
+
+  g.column name: t('activerecord.attributes.product_diff.committed_at') do |product_diff|
+    product_diff.committed_at.strftime("%Y-%m-%d %H:%M:%S") if product_diff.committed_at
+  end
+
+  g.column name: t('activerecord.attributes.time_stamp.updated_at') do |product_diff|
+    product_diff.updated_at.strftime('%Y-%m-%d %H:%M:%S')
+  end
+
+  g.column html: {class: 'project-actions'} do |product_diff|
+    [
+      link_to(fa_icon("pencil"), edit_product_diff_path(product_diff),
+        class: 'btn btn-white btn-xs', data: {toggle: 'tooltip'}, title: t('buttons.edit')),
+      link_to(fa_icon("trash"), product_diff_path(product_diff),
+        class: 'btn btn-danger btn-xs', method: :delete, data: {toggle: 'tooltip', confirm: t('confirms.delete')}, title: t('buttons.delete'))
+    ].join(' ').html_safe
+  end
+end -%>

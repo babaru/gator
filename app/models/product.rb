@@ -67,11 +67,13 @@ class Product < ActiveRecord::Base
     status == Gator::ProductStatus.product_statuses.liquidated
   end
 
-  def diff(other_product)
+  def diff(data)
     result = {}
     Product.column_names.each do |column_name|
-      val = self.send(column_name)
-      result[column_name] = val unless val == other_product.send(column_name) || column_name == 'id'
+      key = column_name.to_sym
+      if data.key?(key) && key != :id && self.send(column_name) != data[key]
+        result[key] = data[key]
+      end
     end
     result
   end
@@ -80,8 +82,12 @@ class Product < ActiveRecord::Base
     update(diff.diff) && diff.update(is_committed: true, committed_by: staff, committed_at: Time.now)
   end
 
-  def create_diff(other_product, staff)
-    Diff.create(diff_by: staff, diff_at: Time.now, diff: diff(other_product))
+  def create_diff(data, staff)
+    ProductDiff.create(diff_by: staff, diff_at: Time.now, diff: diff(data), product_id: self.id)
+  end
+
+  def uncommit_diffs
+    ProductDiff.uncommitted.where(product_id: self.id)
   end
 
   class << self

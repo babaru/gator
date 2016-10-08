@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   QUERY_KEYS = [:name, :consultant_name,
     :delegation_started_at, :delegation_ended_at, :categories, :tag_names, :remarks].freeze
-  TABS = [:summary, :clients].freeze
+  TABS = [:summary, :clients, :diffs].freeze
 
   ARRAY_SP = ","
   ARRAY_HEADER = "a_"
@@ -196,6 +196,7 @@ class ProductsController < ApplicationController
     @tabs = TABS
     get_current_tab
     @product_shares_grid = initialize_grid(ProductShare.where(product_id: @product.id)) if @current_tab == :clients
+    @product_diffs_grid = initialize_grid(ProductDiff.where(product_id: @product.id).order(:updated_at)) if @current_tab == :diffs
   end
 
   def get_current_tab
@@ -254,20 +255,22 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     respond_to do |format|
-      handle_associations(product_params)
 
-      if @product.update(product_params.except(:staff_attributes,
-        :sales_department_attributes,
-        :operation_department_attributes,
-        :consultant_reference_department_attributes,
-        :consultant_attributes))
-        set_products_grid
+      @product.create_diff(product_params, current_user.staff)
+      # handle_associations(product_params)
+      #
+      # if @product.update(product_params.except(:staff_attributes,
+      #   :sales_department_attributes,
+      #   :operation_department_attributes,
+      #   :consultant_reference_department_attributes,
+      #   :consultant_attributes))
+        # set_products_grid
         format.html { redirect_to product_path(@product), notice: t('activerecord.success.messages.updated', model: Product.model_name.human) }
         format.js
-      else
-        format.html { render :edit }
-        format.js { render :edit }
-      end
+      # else
+        # format.html { render :edit }
+        # format.js { render :edit }
+      # end
     end
   end
 

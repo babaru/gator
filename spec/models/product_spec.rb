@@ -4,19 +4,19 @@ RSpec.describe Product, type: :model do
   context :diff do
     it 'finds difference from other product instance' do
       product1 = build(:test_product_1)
-      product2 = build(:test_product_2)
+      data = { name: product1.name, short_name: product1.short_name, code: 'code',
+        client_code: 'client_code' }
 
-      result = product1.diff(product2)
+      result = product1.diff(data)
 
       expect(result).to be_a(Hash)
-      expect(result.keys.count).to eq(7)
-      expect(result['name']).to eq(product1.name)
-      expect(result['short_name']).to eq(product1.short_name)
-      expect(result['code']).to eq(product1.code)
-      expect(result['client_code']).to eq(product1.client_code)
-      expect(result['deposited_at']).to eq(product1.deposited_at)
-      expect(result['delegation_started_at']).to eq(product1.delegation_started_at)
-      expect(result['delegation_ended_at']).to eq(product1.delegation_ended_at)
+      expect(result.keys.length).to eq(2)
+      expect(result.key?(:code)).to be(true)
+      expect(result.key?(:client_code)).to be(true)
+      expect(result.key?(:deposited_at)).to be(false)
+      expect(result[:code]).to eq('code')
+      expect(result[:client_code]).to eq('client_code')
+      expect(result[:deposited_at]).to eq(nil)
     end
   end
 
