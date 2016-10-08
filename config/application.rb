@@ -28,7 +28,7 @@ module Gator
     config.generators do |g|
       g.assets            false
       g.helper            false
-      # g.test_framework    :rspec
+      g.test_framework    :rspec, view_specs: false, controller_specs: false, model_specs: false, request_specs: false, routing_specs: false
       g.jbuilder          false
       g.factory_girl      false
     end

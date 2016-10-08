@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  
+  
+  
   post 'product_diffs/search' => 'product_diffs#index', as: :search_product_diffs
   post 'query_consultants' => 'consultants#search', as: :query_consultants
   post 'query_departments' => 'departments#search', as: :query_departments
