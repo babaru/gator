@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_id: 
+  revision: 1
+  diff_by_id: 
+  diff: MyText
+  is_committed: false
+  committed_by_id: 
+  diff_at: 2016-10-08 10:20:21
+  committed_at: 2016-10-08 10:20:21
+
+two:
+  product_id: 
+  revision: 1
+  diff_by_id: 
+  diff: MyText
+  is_committed: false
+  committed_by_id: 
+  diff_at: 2016-10-08 10:20:21
+  committed_at: 2016-10-08 10:20:21

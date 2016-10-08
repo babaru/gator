@@ -5,4 +5,12 @@ class Staff < ActiveRecord::Base
 
   validates :name, presence: true
   validates :email, uniqueness: true, unless: "email.nil?"
+
+  def committed_product_diffs
+    ProductDiff.where(committed_by_id: self)
+  end
+
+  def product_diffs
+    ProductDiff.where(diff_by_id: self.id)
+  end
 end

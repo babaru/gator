@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004073224) do
+ActiveRecord::Schema.define(version: 20161008022021) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -65,6 +65,23 @@ ActiveRecord::Schema.define(version: 20161004073224) do
   end
 
   add_index "departments", ["name"], name: "index_departments_on_name", unique: true, using: :btree
+
+  create_table "product_diffs", force: :cascade do |t|
+    t.integer  "product_id",      limit: 4
+    t.integer  "revision",        limit: 4
+    t.integer  "diff_by_id",      limit: 4
+    t.text     "diff",            limit: 65535
+    t.boolean  "is_committed"
+    t.integer  "committed_by_id", limit: 4
+    t.datetime "diff_at"
+    t.datetime "committed_at"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "product_diffs", ["committed_by_id"], name: "index_product_diffs_on_committed_by_id", using: :btree
+  add_index "product_diffs", ["diff_by_id"], name: "index_product_diffs_on_diff_by_id", using: :btree
+  add_index "product_diffs", ["product_id"], name: "index_product_diffs_on_product_id", using: :btree
 
   create_table "product_import_excel_files", force: :cascade do |t|
     t.string   "file_file_name",          limit: 255
@@ -226,6 +243,9 @@ ActiveRecord::Schema.define(version: 20161004073224) do
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
   add_foreign_key "consultants", "departments"
+  add_foreign_key "product_diffs", "products"
+  add_foreign_key "product_diffs", "staffs", column: "committed_by_id"
+  add_foreign_key "product_diffs", "staffs", column: "diff_by_id"
   add_foreign_key "product_shares", "clients"
   add_foreign_key "product_shares", "products"
   add_foreign_key "product_tags", "products"
