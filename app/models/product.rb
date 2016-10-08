@@ -67,6 +67,23 @@ class Product < ActiveRecord::Base
     status == Gator::ProductStatus.product_statuses.liquidated
   end
 
+  def diff(other_product)
+    result = {}
+    Product.column_names.each do |column_name|
+      val = self.send(column_name)
+      result[column_name] = val unless val == other_product.send(column_name) || column_name == 'id'
+    end
+    result
+  end
+
+  def commit_diff(diff, staff)
+    update(diff.diff) && diff.update(is_committed: true, committed_by: staff, committed_at: Time.now)
+  end
+
+  def create_diff(other_product, staff)
+    Diff.create(diff_by: staff, diff_at: Time.now, diff: diff(other_product))
+  end
+
   class << self
 
     def categories

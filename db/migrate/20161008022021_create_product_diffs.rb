@@ -2,12 +2,11 @@ class CreateProductDiffs < ActiveRecord::Migration
   def change
     create_table :product_diffs do |t|
       t.references :product, index: true, foreign_key: true
-      t.integer :revision
       t.integer :diff_by_id
-      t.text :diff
-      t.boolean :is_committed
-      t.integer :committed_by_id
       t.datetime :diff_at
+      t.text :diff
+      t.boolean :is_committed, default: false
+      t.integer :committed_by_id
       t.datetime :committed_at
 
       t.timestamps null: false

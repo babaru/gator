@@ -70,6 +70,12 @@ group :development, :test do
 
   # Disable assets log
   gem 'quiet_assets'
+
+  # Unit test
+  gem 'rspec-rails'
+
+  # Fixture
+  gem 'factory_girl_rails'
 end
 
 group :development do

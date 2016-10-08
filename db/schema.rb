@@ -68,15 +68,14 @@ ActiveRecord::Schema.define(version: 20161008022021) do
 
   create_table "product_diffs", force: :cascade do |t|
     t.integer  "product_id",      limit: 4
-    t.integer  "revision",        limit: 4
     t.integer  "diff_by_id",      limit: 4
-    t.text     "diff",            limit: 65535
-    t.boolean  "is_committed"
-    t.integer  "committed_by_id", limit: 4
     t.datetime "diff_at"
+    t.text     "diff",            limit: 65535
+    t.boolean  "is_committed",                  default: false
+    t.integer  "committed_by_id", limit: 4
     t.datetime "committed_at"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   add_index "product_diffs", ["committed_by_id"], name: "index_product_diffs_on_committed_by_id", using: :btree
