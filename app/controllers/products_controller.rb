@@ -256,21 +256,22 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
 
-      @product.create_diff(product_params, current_user.staff)
-      # handle_associations(product_params)
+      # @product.create_diff(product_params, current_user.staff)
+      handle_associations(product_params)
       #
-      # if @product.update(product_params.except(:staff_attributes,
-      #   :sales_department_attributes,
-      #   :operation_department_attributes,
-      #   :consultant_reference_department_attributes,
-      #   :consultant_attributes))
-        # set_products_grid
+      if @product.update(product_params.except(:staff_attributes,
+        :sales_department_attributes,
+        :operation_department_attributes,
+        :consultant_reference_department_attributes,
+        :consultant_attributes))
+        set_products_grid
         format.html { redirect_to product_path(@product), notice: t('activerecord.success.messages.updated', model: Product.model_name.human) }
         format.js
-      # else
-        # format.html { render :edit }
-        # format.js { render :edit }
-      # end
+      else
+        logger.debug @product.errors.full_messages
+        format.html { render :edit }
+        format.js { render :edit }
+      end
     end
   end
 

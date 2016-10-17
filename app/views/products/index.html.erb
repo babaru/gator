@@ -16,7 +16,7 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-12 m-b-md">
-              <%= link_to fa_icon('plus', text: t('activerecord.text.new_instance', model: Product.model_name.human)), new_product_path, class: 'btn btn-primary btn-w-m', method: :get %>
+              <%= link_to fa_icon('plus', text: t('activerecord.text.new_instance', model: Product.model_name.human)), new_product_path, class: 'btn btn-primary btn-w-m', method: :get if can? :manage_customer_service_info, Product %>
               <%= link_to fa_icon('upload', text: t('从 Excel 批量导入')), import_products_path, class: 'btn btn-white', method: :get %>
         </div>
     </div>

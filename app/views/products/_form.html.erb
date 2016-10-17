@@ -1,6 +1,8 @@
 <%= simple_form_for(@product, html: { class: 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
 
+<% if can? :manage_customer_service_info, Product %>
+
 <div class="row">
     <div class="col-lg-6">
       <%= f.simple_fields_for :staff do |pm| %>
@@ -63,9 +65,6 @@
         <%= f.input :delegation_ended_at, as: :date_picker %>
         <%= f.input :delegation_duration %>
         <%= f.input :spec_profit_ratio %>
-        <%= f.input :securities_broker_name, input_html: {autocomplete: 'off'} %>
-        <%= f.input :securities_broker_account_name, input_html: {autocomplete: 'off'} %>
-        <%= f.input :securities_broker_account_number, input_html: {autocomplete: 'off'} %>
         <%= f.input :valuation_out_sourcing, input_html: {autocomplete: 'off'} %>
     </div>
 </div>
@@ -93,29 +92,6 @@
 
 <div class="row">
     <div class="col-lg-6">
-        <%= f.input :szse_gateway, input_html: {autocomplete: 'off'} %>
-    </div>
-    <div class="col-lg-6">
-        <%= f.input :dce_gateway, input_html: {autocomplete: 'off'} %>
-    </div>
-</div>
-<div class="hr-line-dashed"></div>
-<div class="row">
-    <div class="col-lg-6">
-        <%= f.input :sse_account_code, input_html: {autocomplete: 'off'} %>
-        <%= f.input :szse_account_code, input_html: {autocomplete: 'off'} %>
-        <%= f.input :cffex_account_code, input_html: {autocomplete: 'off'} %>
-    </div>
-    <div class="col-lg-6">
-        <%= f.input :zce_account_code, input_html: {autocomplete: 'off'} %>
-        <%= f.input :dce_account_code, input_html: {autocomplete: 'off'} %>
-        <%= f.input :shfe_account_code, input_html: {autocomplete: 'off'} %>
-    </div>
-</div>
-<div class="hr-line-dashed"></div>
-
-<div class="row">
-    <div class="col-lg-6">
       <%= f.simple_fields_for :sales_department do |department| %>
         <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.sales_department') %>
         <%= department.input :id, as: :hidden %>
@@ -134,6 +110,33 @@
 </div>
 
 <div class="hr-line-dashed"></div>
+
+<% end %>
+
+<% if can? :manage_asset_management_info, Product %>
+
+<div class="row">
+    <div class="col-lg-6">
+        <%= f.input :securities_broker_name, input_html: {autocomplete: 'off'} %>
+        <%= f.input :securities_broker_account_name, input_html: {autocomplete: 'off'} %>
+        <%= f.input :securities_broker_account_number, input_html: {autocomplete: 'off'} %>
+        <%= f.input :szse_gateway, input_html: {autocomplete: 'off'} %>
+        <%= f.input :dce_gateway, input_html: {autocomplete: 'off'} %>
+
+    </div>
+    <div class="col-lg-6">
+      <%= f.input :sse_account_code, input_html: {autocomplete: 'off'} %>
+      <%= f.input :szse_account_code, input_html: {autocomplete: 'off'} %>
+      <%= f.input :cffex_account_code, input_html: {autocomplete: 'off'} %>
+      <%= f.input :zce_account_code, input_html: {autocomplete: 'off'} %>
+      <%= f.input :dce_account_code, input_html: {autocomplete: 'off'} %>
+      <%= f.input :shfe_account_code, input_html: {autocomplete: 'off'} %>
+    </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% end %>
 
 <div class="row">
     <div class="col-lg-6">

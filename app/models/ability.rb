@@ -19,8 +19,16 @@ class Ability
     can :manage, Staff
   end
 
+  def asset_manager
+    can :manage_asset_management_info, Product
+  end
+
+  def customer_service
+    can :manage_customer_service_info, Product
+  end
+
   def staff
-    can :manage, Product
+    can :read, Product
     can :manage, Department
     can :manage, Consultant
     can :manage, Client

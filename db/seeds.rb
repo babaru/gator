@@ -159,6 +159,14 @@ seed_roles = Role.create(
   {
     name: :manager,
     description: '部门管理员'
+  },
+  {
+    name: :customer_service,
+    description: '客服部成员'
+  },
+  {
+    name: :asset_manager,
+    description: '资管部成员'
   }
 ]
 ) if Role.count == 0
@@ -371,6 +379,18 @@ seed_assignments = Assignment.create(
     role: seed_roles[1]
   },
   {
+    user: seed_users[3],
+    role: seed_roles[3]
+  },
+  {
+    user: seed_users[4],
+    role: seed_roles[3]
+  },
+  {
+    user: seed_users[5],
+    role: seed_roles[3]
+  },
+  {
     user: seed_users[6],
     role: seed_roles[1]
   },
@@ -417,6 +437,42 @@ seed_assignments = Assignment.create(
   {
     user: seed_users[17],
     role: seed_roles[1]
+  },
+  {
+    user: seed_users[9],
+    role: seed_roles[4]
+  },
+  {
+    user: seed_users[10],
+    role: seed_roles[4]
+  },
+  {
+    user: seed_users[11],
+    role: seed_roles[4]
+  },
+  {
+    user: seed_users[12],
+    role: seed_roles[4]
+  },
+  {
+    user: seed_users[13],
+    role: seed_roles[4]
+  },
+  {
+    user: seed_users[14],
+    role: seed_roles[4]
+  },
+  {
+    user: seed_users[15],
+    role: seed_roles[4]
+  },
+  {
+    user: seed_users[16],
+    role: seed_roles[4]
+  },
+  {
+    user: seed_users[17],
+    role: seed_roles[4]
   },
   {
     user: seed_users[18],
