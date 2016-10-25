@@ -1,40 +1,24 @@
 <%= simple_form_for(@product, html: { class: 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
 
-<% if can? :manage_customer_service_info, Product %>
-
 <div class="row">
     <div class="col-lg-6">
       <%= f.simple_fields_for :staff do |pm| %>
-        <%= pm.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.staff') %>
+        <%= pm.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.staff'), disabled: !can?(:manage_customer_service_info, Product) %>
         <%= pm.input :id, as: :hidden %>
       <% end %>
-        <%= f.input :name, input_html: {autocomplete: 'off'} %>
-        <%= f.input :short_name, input_html: {autocomplete: 'off'} %>
-        <%= f.input :code, input_html: {autocomplete: 'off'} %>
-        <%= f.input :client_code, input_html: {autocomplete: 'off'} %>
-        <%= f.input :initial_fund, input_html: {autocomplete: 'off'} %>
-        <%= f.input :investment_scope, input_html: {autocomplete: 'off'}%>
+        <%= f.input :name, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :short_name, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :code, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :client_code, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :initial_fund, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :investment_scope, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
     </div>
     <div class="col-lg-6">
-        <%= f.input :category, collection: Product.categories, as: :radio_buttons %>
-        <%= f.input :rd_category, collection: Product.rd_categories, as: :radio_buttons %>
-        <%= f.input :status, collection: Product.statuses, as: :radio_buttons %>
-        <%= f.input :liquidated_at, as: :date_picker %>
-    </div>
-</div>
-
-<div class="hr-line-dashed"></div>
-
-<div class="row">
-    <div class="col-lg-6">
-    <%= f.input :is_one_to_many, as: :radio_buttons %>
-    <%= f.input :is_structured, as: :radio_buttons %>
-    </div>
-    <div class="col-lg-6">
-    <%= f.input :leverage %>
-    <%= f.input :superior_code %>
-    <%= f.input :inferior_code %>
+        <%= f.input :category, collection: Product.categories, as: :radio_buttons, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :rd_category, collection: Product.rd_categories, as: :radio_buttons, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :status, collection: Product.statuses, as: :radio_buttons, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :liquidated_at, as: :date_picker, disabled: !can?(:manage_customer_service_info, Product) %>
     </div>
 </div>
 
@@ -42,10 +26,24 @@
 
 <div class="row">
     <div class="col-lg-6">
-      <%= f.input :deposited_at, as: :date_picker %>
+    <%= f.input :is_one_to_many, as: :radio_buttons, disabled: !can?(:manage_customer_service_info, Product) %>
+    <%= f.input :is_structured, as: :radio_buttons, disabled: !can?(:manage_customer_service_info, Product) %>
     </div>
     <div class="col-lg-6">
-      <%= f.input :put_on_record_at, as: :date_picker %>
+    <%= f.input :leverage, disabled: !can?(:manage_customer_service_info, Product) %>
+    <%= f.input :superior_code, disabled: !can?(:manage_customer_service_info, Product) %>
+    <%= f.input :inferior_code, disabled: !can?(:manage_customer_service_info, Product) %>
+    </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="row">
+    <div class="col-lg-6">
+      <%= f.input :deposited_at, as: :date_picker, disabled: !can?(:manage_customer_service_info, Product) %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.input :put_on_record_at, as: :date_picker, disabled: !can?(:manage_customer_service_info, Product) %>
     </div>
 </div>
 
@@ -54,18 +52,18 @@
 
 <div class="row">
     <div class="col-lg-6">
-        <%= f.input :delegation_started_at, as: :date_picker %>
-        <%= f.input :contract_profit_ratio %>
-        <%= f.input :trustor_name, input_html: {autocomplete: 'off'} %>
-        <%= f.input :trustor_bank_name, input_html: {autocomplete: 'off'} %>
-        <%= f.input :trustor_bank_account_name, input_html: {autocomplete: 'off'} %>
-        <%= f.input :trustor_bank_account_number, input_html: {autocomplete: 'off'} %>
+        <%= f.input :delegation_started_at, as: :date_picker, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :contract_profit_ratio, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :trustor_name, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :trustor_bank_name, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :trustor_bank_account_name, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :trustor_bank_account_number, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
     </div>
     <div class="col-lg-6">
-        <%= f.input :delegation_ended_at, as: :date_picker %>
-        <%= f.input :delegation_duration %>
-        <%= f.input :spec_profit_ratio %>
-        <%= f.input :valuation_out_sourcing, input_html: {autocomplete: 'off'} %>
+        <%= f.input :delegation_ended_at, as: :date_picker, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :delegation_duration, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :spec_profit_ratio, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :valuation_out_sourcing, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
     </div>
 </div>
 
@@ -73,18 +71,18 @@
 
 <div class="row">
     <div class="col-lg-6">
-        <%= f.input :fee_calculation_standard, input_html: {autocomplete: 'off'} %>
-        <%= f.input :trustor_fee_ratio, input_html: {autocomplete: 'off'} %>
-        <%= f.input :operation_fee_ratio, input_html: {autocomplete: 'off'} %>
-        <%= f.input :bonus, input_html: {autocomplete: 'off'} %>
-        <%= f.input :sales_fee_ratio, input_html: {autocomplete: 'off'} %>
+        <%= f.input :fee_calculation_standard, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :trustor_fee_ratio, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :operation_fee_ratio, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :bonus, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :sales_fee_ratio, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
     </div>
     <div class="col-lg-6">
-        <%= f.input :year_day_count, input_html: {autocomplete: 'off'} %>
-        <%= f.input :management_fee_ratio, input_html: {autocomplete: 'off'} %>
-        <%= f.input :management_fee_flour, input_html: {autocomplete: 'off'} %>
-        <%= f.input :consultant_fee_ratio, input_html: {autocomplete: 'off'} %>
-        <%= f.input :consultant_fee_flour, input_html: {autocomplete: 'off'} %>
+        <%= f.input :year_day_count, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :management_fee_ratio, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :management_fee_flour, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :consultant_fee_ratio, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
+        <%= f.input :consultant_fee_flour, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_customer_service_info, Product) %>
     </div>
 </div>
 
@@ -93,17 +91,17 @@
 <div class="row">
     <div class="col-lg-6">
       <%= f.simple_fields_for :sales_department do |department| %>
-        <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.sales_department') %>
+        <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.sales_department'), disabled: !can?(:manage_customer_service_info, Product) %>
         <%= department.input :id, as: :hidden %>
       <% end %>
       <%= f.simple_fields_for :consultant do |consultant| %>
-        <%= consultant.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.consultant') %>
+        <%= consultant.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.consultant'), disabled: !can?(:manage_customer_service_info, Product) %>
         <%= consultant.input :id, as: :hidden %>
       <% end %>
     </div>
     <div class="col-lg-6">
       <%= f.simple_fields_for :operation_department do |department| %>
-        <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.operation_department') %>
+        <%= department.input :name, input_html: {autocomplete: 'off'}, label: t('activerecord.attributes.product.operation_department'), disabled: !can?(:manage_customer_service_info, Product) %>
         <%= department.input :id, as: :hidden %>
       <% end %>
     </div>
@@ -111,32 +109,26 @@
 
 <div class="hr-line-dashed"></div>
 
-<% end %>
-
-<% if can? :manage_asset_management_info, Product %>
-
 <div class="row">
     <div class="col-lg-6">
-        <%= f.input :securities_broker_name, input_html: {autocomplete: 'off'} %>
-        <%= f.input :securities_broker_account_name, input_html: {autocomplete: 'off'} %>
-        <%= f.input :securities_broker_account_number, input_html: {autocomplete: 'off'} %>
-        <%= f.input :szse_gateway, input_html: {autocomplete: 'off'} %>
-        <%= f.input :dce_gateway, input_html: {autocomplete: 'off'} %>
+        <%= f.input :securities_broker_name, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
+        <%= f.input :securities_broker_account_name, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
+        <%= f.input :securities_broker_account_number, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
+        <%= f.input :szse_gateway, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
+        <%= f.input :dce_gateway, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
 
     </div>
     <div class="col-lg-6">
-      <%= f.input :sse_account_code, input_html: {autocomplete: 'off'} %>
-      <%= f.input :szse_account_code, input_html: {autocomplete: 'off'} %>
-      <%= f.input :cffex_account_code, input_html: {autocomplete: 'off'} %>
-      <%= f.input :zce_account_code, input_html: {autocomplete: 'off'} %>
-      <%= f.input :dce_account_code, input_html: {autocomplete: 'off'} %>
-      <%= f.input :shfe_account_code, input_html: {autocomplete: 'off'} %>
+      <%= f.input :sse_account_code, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
+      <%= f.input :szse_account_code, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
+      <%= f.input :cffex_account_code, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
+      <%= f.input :zce_account_code, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
+      <%= f.input :dce_account_code, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
+      <%= f.input :shfe_account_code, input_html: {autocomplete: 'off'}, disabled: !can?(:manage_asset_management_info, Product) %>
     </div>
 </div>
 
 <div class="hr-line-dashed"></div>
-
-<% end %>
 
 <div class="row">
     <div class="col-lg-6">
